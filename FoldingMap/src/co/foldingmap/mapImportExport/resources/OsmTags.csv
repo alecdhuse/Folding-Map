@@ -1,0 +1,497 @@
+amenity,bar,"node, area"
+admin_level,*,area
+amenity,cafe,"node, area"
+amenity,drinking_water,node
+amenity,fast_food,"node, area"
+amenity,food_court,"node, area"
+amenity,ice_cream,"node, area"
+amenity,pub,"node, area"
+amenity,restaurant,"node, area"
+amenity,college,"node, area"
+amenity,library,"node, area"
+amenity,school,"node, area"
+amenity,university,"node, area"
+amenity,bicycle_parking,"node, area"
+amenity,bus_station,"node, area"
+amenity,car_rental,"node, area"
+amenity,car_wash,"node, area"
+amenity,ev_charging,node
+amenity,ferry_terminal,"node, area"
+amenity,fuel,"node, area"
+amenity,parking,"node, area"
+amenity,parking_space,"node, area"
+amenity,taxi,"node, area"
+amenity,atm,node
+amenity,bank,"node, area"
+amenity,bureau_de_change,node
+amenity,clinic,"node, area"
+amenity,dentist,"node, area"
+amenity,hospital,"node, area"
+amenity,mursing_home,"node, area"
+amenity,pharmacy,"node, area"
+amenity,social_facility,"node, area"
+amenity,veterinary,"node, area"
+amenity,arts_centre,"node, area"
+amenity,cinema,"node, area"
+amenity,community_centre,"node, area"
+amenity,fountain,"node, area"
+amenity,nightclub,"node, area"
+amenity,studio,"node, area"
+amenity,theatre,"node, area"
+amenity,bench,"node, area"
+amenity,brothel,"node, area"
+amenity,clock,"node, area"
+amenity,courthouse,"node, area"
+amenity,embassy,"node, area"
+amenity,fire_station,"node, area"
+amenity,grave_yard,"node, area"
+amenity,marketplace,"way, area"
+amenity,place_of_worship,"node, area"
+amenity,police,"node, area"
+amenity,post_box,node
+amenity,post_office,"node, area"
+amenity,prison,"node, area"
+amenity,recycling,"node, area"
+amenity,shelter,"node, area"
+amenity,shower,"node, area"
+amenity,telephone,node
+amenity,toilets,node
+amenity,townhall,"node, area"
+amenity,waste_basket,node
+area,yes,area
+attribution,*,"node, way, area, relation"
+barrier,city_wall,"way, area"
+barrier,ditch,"way, area"
+barrier,fence,"way, area"
+barrier,guard_rail,way
+barrier,hedge,"way, area"
+barrier,retaining_wall,"way, area"
+barrier,border_control,node
+barrier,cattle_grid,node
+barrier,chain,node
+barrier,cycle_barrier,node
+barrier,gate,"node, way"
+barrier,log,"node, way"
+barrier,rope,"node, way"
+barrier,spikes,"node, way, area"
+barrier,toll_booth,node
+barrier,turnstile,node
+boundary,administrative,"way, area"
+boundary,any,"way, area"
+boundary,civil,"way, area"
+boundary,maritime,"way, area"
+boundary,national_park,"way, area"
+boundary,political,"way, area"
+boundary,protected_area,"way, area"
+bridge,yes,way
+bridge,yes,"node, way"
+bridge,aqueduct,"node, way"
+bridge,viaduct,"node, way"
+bridge,swing,"node, way"
+building,apartments,area
+building,dormitory,area
+building,hotel,area
+building,house,area
+building,residential,area
+building,terrace,area
+building,commercial,area
+building,industrial,area
+building,retail,area
+building,warehouse,area
+building,cathedral,area
+building,chapel,area
+building,church,area
+building,hospital,area
+building,school,area
+building,train_station,area
+building,transportation,area
+building,university,area
+building,bridge,area
+building,bunker,area
+building,cabin,area
+building,farm_auxillary,area
+building,garage,area
+building,garages,area
+building,greenhouse,area
+building,hut,area
+building,shed,area
+building,yes,area
+covered,yes,"node, way, area"
+cycleway,lane,way
+cycleway,opposite,way
+cycleway,opposite_lane,way
+cycleway,opposite_track,way
+cycleway,shared,way
+cycleway,share_busway,way
+cycleway,shared_lane,way
+cycleway,track,way
+description,*,"node, way, area, relation"
+electrified,contact_line,way
+electrified,rail,way
+electrified,yes,way
+electrified,no,way
+email,*,"node, way, area, relation"
+emergency,ambulance_station,"node, area"
+emergency,fire_extinguisher,node
+emergency,fire_hose,node
+emergency,fire_hydrant,node
+emergency,phone,node
+emergency,siren,node
+fixme,*,"node, way, area, relation"
+geological,outcrop,"node, area"
+geological,palaeontological_site,"node, area"
+geological,erratic_block,"node, area"
+geological,rock,"node, area"
+highway,motorway,way
+highway,motorway_link,way
+highway,trunk,way
+highway,trunk_link,way
+highway,primary,way
+highway,primary_link,way
+highway,secondary,way
+highway,secondary_link,way
+highway,tertiary,way
+highway,tertiary_link,way
+highway,pedestrian,"way, area"
+highway,residential,way
+highway,unclassified,way
+highway,sevice,way
+highway,track,way
+highway,bus_guideway,way
+highway,raceway,way
+highway,road,way
+highway,path,way
+highway,footway,way
+highway,cycleway,way
+highway,bridleway,way
+highway,steps,way
+highway,proposed,way
+highway,construction,way
+highway,bus_stop,node
+highway,crossing,node
+highway,mini_roundabout,node
+highway,rest_area,"node, area"
+highway,speed_camera,node
+highway,street_lamp,node
+highway,services,"node, area"
+highway,stop,node
+highway,traffic_signals,node
+historic,archaeological_site,"node, area"
+historic,battlefield,"node, area"
+historic,boundary_stone,node
+historic,castle,"node, area"
+historic,city_gate,"node, area"
+historic,fort,"node, area"
+historic,memorial,"node, area"
+historic,monument,"node, area"
+historic,ruins,"node, area"
+historic,wayside_shrine,"node, area"
+historic,wreck,"node, area"
+intermittent,yes,way
+internet_access,public,node
+internet_access,service,node
+internet_access,terminal,node
+internet_access,wired,node
+internet_access,wlan,node
+landuse,allotments,"node, area"
+landuse,basin,"node, area"
+landuse,brownfield,"node, area"
+landuse,cemetery,area
+landuse,commercial,"node, area"
+landuse,construction,"node, area"
+landuse,farm,area
+landuse,farmland,area
+landuse,farmyard,area
+landuse,forest,"node, area"
+landuse,grass,area
+landuse,industrial,"node, area"
+landuse,landfill,"node, area"
+landuse,meadow,"node, area"
+landuse,military,"node, area"
+landuse,orchard,"node, area"
+landuse,plant_nursery,area
+landuse,quarry,"node, area"
+landuse,railway,area
+landuse,recreation_ground,"node, area"
+landuse,reservoir,"node, area"
+landuse,residential,"node, area"
+landuse,retail,"node, area"
+landuse,salt_pond,area
+landuse,village_green,"node, area"
+landuse,vineyard,"node, area"
+landuse,railway,area
+layer,*,way
+leisure,common,"node, area"
+leisure,dance,"node, area"
+leisure,dog_park,"node, area"
+leisure,fishing,"node, area"
+leisure,garden,"node, area"
+leisure,golf_course,"node, area"
+leisure,ice_rink,"node, area"
+leisure,marina,"node, area"
+leisure,miniature_golf,"node, area"
+leisure,nature_reserve,"node, area"
+leisure,park,"node, area"
+leisure,pitch,"node, area"
+leisure,playground,"node, area"
+leisure,slipway,node
+leisure,sports_centre,"node, area"
+leisure,stadium,"node, area"
+leisure,swimming_pool,"node, area"
+leisure,track,"node, way, area"
+leisure,waterpark,"node, area"
+lock,yes,"node, way"
+man_made,beacon,node
+man_made,breakwater,"way, area"
+man_made,crane,"node, area"
+man_made,cutline,way
+man_made,flagpole,node
+man_made,lighthouse,node
+man_made,mineshaft,"node, area"
+man_made,monitoring_station,"node, area"
+man_made,petroleum_well,node
+man_made,pier,"way, area"
+man_made,pipeline,way
+man_made,storage_tank,"node, area"
+man_made,surveillance,"node, area"
+man_made,survey_point,node
+man_made,tower,"node, area"
+man_made,wastewater_plant,"node, area"
+man_made,watermill,"node, area"
+man_made,water_tower,"node, area"
+man_made,water_works,"node, area"
+man_made,water_well,"node, area"
+man_made,well,node
+man_made,works,"node, area"
+maxheight,*,way
+maxlength,*,way
+maxspeed,*,way
+maxwidth,*,way
+military,airfield,"node, area"
+military,bunker,"node, area"
+military,barracks,"node, area"
+military,danger_area,"node, area"
+military,naval_base,"node, area"
+military,range,"node, area"
+military,checkpoint,"node, area"
+minspeed,*,way
+mooring,yes,way
+mooring,private,way
+mooring,no,way
+mountain_pass,yes,node
+name,*,"node, way, area, relation"
+narrow,yes,way
+natural,bay,"node, area"
+natural,beach,"node, area"
+natural,cave_entrance,"node, area"
+natural,cliff,"node, way, area"
+natural,coastline,way
+natural,grassland,area
+natural,glacier,"node, area"
+natural,mud,"node, area"
+natural,peak,node
+natural,sand,"node, area"
+natural,scree,"node, area"
+natural,scrub,"node, area"
+natural,spring,node
+natural,stone,node
+natural,tree,node
+natural,tree_row,way
+natural,volcano,node
+natural,water,"node, area"
+natural,wetland,"node, area"
+natural,wood,"node, area"
+oneway,yes,way
+oneway,no,way
+opening_hours,*,"node, way, area"
+operator,*,"node, way, area"
+phone,*,"node, way, area, relation"
+place,city,"node, area"
+place,town,"node, area"
+place,village,"node, area"
+place,hamlet,"node, area"
+place,farm,"node, area"
+place,suburb,"node, area"
+place,neighbourhood,"node, area"
+place,continent,"node, area"
+place,country,node
+place,county,"node, area"
+place,island,"node, area"
+place,locality,"node, area"
+place,region,"node, area"
+place,state,"node, area"
+population,*,"node, area"
+power,cable_distribution_cabinet,node
+power,generator,"node, area"
+power,line,way
+power,minor_line,way
+power,pole,node
+power,station,"node, area"
+power,sub_station,"node, area"
+power,tower,node
+public_transport,platform,"node, way, area"
+public_transport,station,area
+public_transport,stop_position,node
+public_transport,platform,"node, way, area"
+railway,abandoned,way
+railway,construction,way
+railway,discused,way
+railway,funicular,way
+railway,light_rail,way
+railway,miniature,way
+railway,monorail,way
+railway,narrow_guage,way
+railway,preserved,way
+railway,rail,way
+railway,subway,way
+railway,tram,way
+railway,halt,node
+railway,station,"node, area"
+railway,tram_stop,node
+route,bicycle,"way, relation"
+route,bus,"way, relation"
+route,detour,way
+route,ferry,"way, relation"
+route,hiking,"way, relation"
+route,mtb,way
+route,pipeline,way
+route,power,way
+route,railway,"way, relation"
+route,road,"way, relation"
+route,ski,way
+route,train,"way, relation"
+route,tram,"way, relation"
+shop,alcohol,"node, area"
+shop,appliance,"node, area"
+shop,art,"node, area"
+shop,bakery,"node, area"
+shop,beauty,"node, area"
+shop,bed,"node, area"
+shop,beverages,"node, area"
+shop,bicycle,"node, area"
+shop,books,"node, area"
+shop,boutique,"node, area"
+shop,butcher,"node, area"
+shop,car,"node, area"
+shop,car_repair,"node, area"
+shop,car_parts,"node, area"
+shop,clothes,"node, area"
+shop,computer,"node, area"
+shop,deli,"node, area"
+shop,department_store,"node, area"
+shop,dive,"node, area"
+shop,dry_cleaning,"node, area"
+shop,electronics,"node, area"
+shop,erotic,"node, area"
+shop,fabric,"node, area"
+shop,farm,"node, area"
+shop,florist,"node, area"
+shop,furniture,"node, area"
+shop,garden_centre,"node, area"
+shop,gas,"node, area"
+shop,general,"node, area"
+shop,gift,"node, area"
+shop,greengrocer,"node, area"
+shop,hardware,"node, area"
+shop,hunting,"node, area"
+shop,jewelry,"node, area"
+shop,kiosk,"node, area"
+shop,kitchen,"node, area"
+shop,laundry,"node, area"
+shop,mall,"node, area"
+shop,massage,"node, area"
+shop,mobile_phone,"node, area"
+shop,motorcycle,"node, area"
+shop,organic,"node, area"
+shop,outdoor,"node, area"
+shop,paint,"node, area"
+shop,pet,"node, area"
+shop,second_hand,"node, area"
+shop,shoes,"node, area"
+shop,sports,"node, area"
+shop,supermarket,"node, area"
+shop,tattoo,"node, area"
+shop,ticket,"node, area"
+shop,toys,"node, area"
+shop,vacant,"node, area"
+sport,10pin,"node, area"
+sport,american_football,"node, area"
+sport,athletics,"node, area"
+sport,australian_football,"node, area"
+sport,baseball,"node, area"
+sport,basketball,"node, area"
+sport,beackvolleyball,"node, area"
+sport,bmx,"node, area"
+sport,climbing,"node, area"
+sport,cricket,"node, area"
+sport,dog_racing,"node, area"
+sport,golf,"node, area"
+sport,gymnastics,"node, area"
+sport,hockey,"node, area"
+sport,horse_racing,"node, area"
+sport,motor,"node, area"
+sport,multi,"node, area"
+sport,skateboard,"node, area"
+sport,swimming,"node, area"
+sport,tennis,"node, area"
+sport,volleyball,"node, area"
+surface,paved,way
+surface,unpaved,way
+surface,asphalt,way
+surface,concrete,way
+surface,paving_stones,way
+surface,cobblestone,way
+surface,metal,way
+surface,wood,way
+surface,grass_paver,way
+surface,gravel,way
+surface,pebblestone,way
+surface,grass,way
+surface,ground,way
+surface,earth,way
+surface,dirt,way
+surface,mud,way
+surface,sand,way
+toll,yes,"node, way"
+tourism,attraction,"node, area"
+tourism,artwork,"node, way, area"
+tourism,camp_site,"node, area"
+tourism,caravan_site,"node, area"
+tourism,guest_house,"node, area"
+tourism,hostel,"node, area"
+tourism,information,"node, area"
+tourism,motel,"node, area"
+tourism,museum,"node, area"
+tourism,theme_park,"node, area"
+tourism,viewpoint,node
+tourism,wilderness_hut,"node, area"
+tourism,zoo,"node, area"
+tourism,yes,"node, area"
+tunnel,yes,way
+tunnel,culvert,"node, way"
+usage,main,way
+usage,branch,way
+usage,industrial,way
+usage,military,way
+usage,tourism,way
+voltage,*,way
+waterway,boatyard,"node, area"
+waterway,canal,way
+waterway,ditch,way
+waterway,dock,"node, area"
+waterway,drain,way
+waterway,river,way
+waterway,stream,way
+waterway,dam,"way, area"
+wheelchair,yes,"node, way, area"
+wheelchair,no,"node, way, area"
+wheelchair,limited,"node, way, area"
+width,*,way
+winter_road,yes,way
+wires,single,way
+wires,double,way
+wires,triple,way
+wires,quad,way
+wood,coniferous,"node, way"
+wood,deciduous,"node, area"
+wood,mixed,"node, area"

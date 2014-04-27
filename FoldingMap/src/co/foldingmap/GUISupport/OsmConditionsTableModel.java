@@ -1,0 +1,184 @@
+/* 
+ * Copyright (C) 2014 Alec Dhuse
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package co.foldingmap.GUISupport;
+
+import co.foldingmap.mapImportExport.OsmImportCondition;
+import java.awt.GridLayout;
+import java.awt.Window;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
+
+/**
+ *
+ * @author Alec
+ */
+public class OsmConditionsTableModel extends AbstractTableModel {
+    protected final String[] objectType  = {"Any", "Nodes", "Ways", "Areas", "Relations"};
+    
+    private ArrayList<OsmImportCondition>   rows;
+    private OsmConditionsListener           listener;
+    
+    public OsmConditionsTableModel(Window parent, List<OsmImportCondition> rows) {
+        this.rows         = new ArrayList<OsmImportCondition>(rows);
+        this.listener     = new OsmConditionsListener(parent, this, this.rows);
+    }
+        
+    public OsmConditionsTableModel(Window parent, OsmImportCondition row) {
+        this.rows         = new ArrayList<OsmImportCondition>();
+        this.listener     = new OsmConditionsListener(parent, this, this.rows);
+        this.rows.add(row);        
+    }
+    
+    /**
+     * Adds a new row to the end of this table.
+     * 
+     * @param newRow 
+     */
+    public void addRow(OsmImportCondition newRow) {
+        rows.add(newRow);
+        fireTableDataChanged();
+    }
+    
+    /**
+     * Adds a new row at a given index in this table.
+     * 
+     * @param newRow
+     * @param index 
+     */
+    public void addRow(OsmImportCondition newRow, int index) {
+        rows.add(index, newRow);
+        fireTableDataChanged();
+    }    
+    
+    @Override
+    public Class getColumnClass(int columnIndex) { 
+        return OsmImportCondition.class; 
+    }
+    
+    @Override
+    public int getColumnCount() { 
+        return 4; 
+    }
+    
+    @Override
+    public String getColumnName(int columnIndex) { 
+        if (columnIndex == 0) {
+            return "Object Type";
+        } else if (columnIndex == 1) {
+            return "Key";
+        } else if (columnIndex == 2) {
+            return "Value";
+        } else  {
+            return "";
+        }
+    }
+    
+    public OsmImportCondition getRow(int i) {
+        return rows.get(i);
+    }
+     
+    public ArrayList<OsmImportCondition> getRows() {
+        return rows;
+    }
+    
+    @Override
+    public int getRowCount() { 
+        return rows.size(); 
+    }
+    
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) { 
+        JButton             add, remove;
+        JComboBox           combo;
+        JPanel              panel;
+        JTextField          text;
+        OsmImportCondition  row;
+        
+        row = rows.get(rowIndex);
+        
+        if (columnIndex == 0) {
+            combo = new JComboBox(objectType);
+            combo.setSelectedItem(row.getObjectType());
+            combo.addItemListener(listener);
+            
+            return combo;
+        } else if (columnIndex == 1) {
+            text = new JTextField(row.getKey());
+            text.addCaretListener(listener);
+            text.addMouseListener(listener);
+            text.addKeyListener(listener);
+            
+            return text;
+        } else if (columnIndex == 2) {
+            text = new JTextField(row.getValue());
+            text.addCaretListener(listener);
+            text.addMouseListener(listener);
+            text.addKeyListener(listener);
+            
+            return text;
+        } else if (columnIndex == 3) {
+            panel  = new JPanel(new GridLayout(1,2));
+            add    = new JButton("+");
+            remove = new JButton("-");
+            
+            add.setBorder(null);
+            add.addActionListener(listener);
+            add.setActionCommand("Add");
+            
+            remove.setBorder(null);
+            remove.addActionListener(listener);
+            remove.setActionCommand("Remove");
+            
+            panel.add(remove); 
+            panel.add(add);                              
+            return panel;
+        } else {
+            return new JPanel();
+        }
+    }
+    
+    /**
+     * Hides all popups generated by this TableModel.
+     */
+    public void hidePopups() {
+        this.listener.hideHintPopup();
+    }
+    
+    @Override
+    public boolean isCellEditable(int columnIndex, int rowIndex) { 
+        if (columnIndex >= 0 && columnIndex <= 3) {
+            return true; 
+        } else {
+            return false;
+        }
+    }    
+    
+    /**
+     * Removes a given row index from this table model.
+     * 
+     * @param index 
+     */
+    public void removeRow(int index) {
+        rows.remove(index);
+        fireTableDataChanged();
+    }
+}
