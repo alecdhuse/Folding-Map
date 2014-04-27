@@ -13,10 +13,18 @@ Folding Map is written in Java and is supported on Windows, OSX and Linux.
 
 Requires a minimum of 256mb of stack space
 
-## Features
+## Features:
  * In app downloading of OpenStreetMaps.org data
  * HeatMap Creation
  * Assorted compatible file formats (GPX, Geo RSS, GeoJSON, KML, MbTiles, GPX, OpenStreetMaps.org, SVG)
+
+## Screenshots:
+
+![Screenshot 1](https://github.com/alecdhuse/Folding-Map/blob/master/Screenshots/Folding-Map-Screen-Shot-1.png?raw=true "Screenshot 1")
+
+![Screenshot 2](https://github.com/alecdhuse/Folding-Map/blob/master/Screenshots/Folding-Map-Screen-Shot-2.png?raw=true "Screenshot 2")
+
+![Screenshot 3](https://github.com/alecdhuse/Folding-Map/blob/master/Screenshots/Folding-Map-Screen-Shot-3.png?raw=true "Screenshot 3")
 
 ## Use of other projects:
 
