@@ -15,7 +15,7 @@ Requires a minimum of 256mb of stack space
 
 ## Features:
  * In app downloading of OpenStreetMaps.org data
- * HeatMap Creation
+ * Choropleth map creation
  * Assorted compatible file formats (GPX, Geo RSS, GeoJSON, KML, MbTiles, GPX, OpenStreetMaps.org, SVG)
 
 ## Screenshots:
