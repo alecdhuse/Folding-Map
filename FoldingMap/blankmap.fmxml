@@ -3,7 +3,7 @@
 	<document>
 		<name>New Map</name>
 		<description></description>
-		<view>-122.84127044677734,44.521060943603516,11.281304359436035</view>
+		<view>-122.84127044677734,44.521060943603516,8</view>
 		<projection>Mercator</projection>
 		<nodes>
 		</nodes>

@@ -25,6 +25,7 @@ import co.foldingmap.map.MapView;
 import co.foldingmap.map.raster.ImageOverlay;
 import co.foldingmap.map.raster.RasterLayer;
 import co.foldingmap.map.vector.LatLonAltBox;
+import co.foldingmap.map.vector.LatLonBox;
 import co.foldingmap.map.vector.MapIcon;
 
 /**
@@ -34,7 +35,7 @@ import co.foldingmap.map.vector.MapIcon;
 public class AddGroundOverlay extends Action {
     private DigitalMap      mapData;
     private ImageOverlay    newOverlay;
-    private LatLonAltBox    overlayBounds;
+    private LatLonBox       overlayBounds;
     private MapView         mapView;
     private MainWindow      mainWindow;
     private RasterLayer     parentLayer;
@@ -43,7 +44,7 @@ public class AddGroundOverlay extends Action {
         this.mainWindow     = mainWindow;
         this.mapData        = mapData;
         this.mapView        = mapView;
-        this.overlayBounds  = (LatLonAltBox) mapView.getViewBounds();       
+        this.overlayBounds  = mapView.getViewBounds();       
     }
     
     /**

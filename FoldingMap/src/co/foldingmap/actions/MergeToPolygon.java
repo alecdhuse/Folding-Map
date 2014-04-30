@@ -159,8 +159,13 @@ public class MergeToPolygon extends Action {
                     if (mObject instanceof LineString) {
                         lineString = (LineString) mObject;
                         
-                        if (lineString.equals("Coastline")) 
-                            newObject.setClass("Lake");                 
+                        if (lineString.getObjectClass().equals("Coastline")) {
+                            newObject.setClass("Lake");      
+                        } else if (lineString.getObjectClass().equals("Water Way - Stream")) {
+                            newObject.setClass("Lake");       
+                        } else if (lineString.getObjectClass().equals("Water Way - River")) {
+                            newObject.setClass("Lake");                              
+                        }
                     }
                     
                     newObject.setName(mObject.getName());
