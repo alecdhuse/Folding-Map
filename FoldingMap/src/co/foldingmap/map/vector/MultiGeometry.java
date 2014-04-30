@@ -154,9 +154,10 @@ public class MultiGeometry extends VectorObject {
      */
     @Override
     public void drawOutline(Graphics2D g2, MapView mapView) {
-        
-        for (VectorObject obj: this.mapObjects) {
-            obj.drawOutline(g2, mapView);
+        if (this.isVisible(mapView)) {
+            for (VectorObject obj: this.mapObjects) {
+                obj.drawOutline(g2, mapView);
+            }
         }
     }    
     
