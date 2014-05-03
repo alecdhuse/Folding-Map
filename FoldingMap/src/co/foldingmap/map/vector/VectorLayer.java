@@ -56,6 +56,7 @@ public class VectorLayer extends Layer {
     
     /**
      * Constructor for objects of class VectorLayer
+     * @param layerName
      */
     public VectorLayer(String layerName) {
         this.layerName = layerName;
@@ -165,7 +166,7 @@ public class VectorLayer extends Layer {
     /**
      * Adds one or more Overlays to this layer.
      * 
-     * @param overlay 
+     * @param overlays
      */
     public void addOverlays(ArrayList<Overlay> overlays) {
         for (Overlay ol: overlays)
@@ -239,6 +240,8 @@ public class VectorLayer extends Layer {
                         currentMapObject.drawOutline(g2, mapView);                        
                     } else if (currentMapObject instanceof LineString) {
                         currentMapObject.drawOutline(g2, mapView);
+                    } else if (currentMapObject instanceof MultiGeometry) {
+                        currentMapObject.drawOutline(g2, mapView);                         
                     }
                 }
                 

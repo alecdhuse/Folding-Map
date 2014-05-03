@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 /FoldingMap/build/
+=======
+/FoldingMap/build/
+*.log
+>>>>>>> FETCH_HEAD

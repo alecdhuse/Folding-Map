@@ -98,6 +98,7 @@ public class MergeToLinearRing extends Action {
             Logger.log(Logger.ERR, "Error in CommandMergeToLinearRing.execute: " + e);
         }
         
+        currentMap.setSelected(newObject);
         this.updateable.update();
     }
 

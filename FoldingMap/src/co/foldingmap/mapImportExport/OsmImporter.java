@@ -62,7 +62,6 @@ public class OsmImporter extends Thread {
     private float               minlat, minlon, maxlat, maxlon;
     private ProgressIndicator   progressIndicator;
     private Updateable          updateable;
-    //private Window              mainWindow;
 
     public OsmImporter(DigitalMap        mapData, 
                        File              osmFile, 
@@ -262,7 +261,8 @@ public class OsmImporter extends Thread {
      * Loads Open Street Map nodes into a HashMap.  Node IDs are used as keys,
      * while a Coordinate Object is used as the value.
      *
-     * @param   String      nodeXML The XML code representing the OSM nodes.
+     * @param nodeXML
+     * @param progressPanel Panel to update progress, can be null.
      * @return  HashMap     The HashMap containing the loaded nodes.
      */
     public static HashMap<String, OsmNode> getOsmNodes(String nodeXML, ProgressBarPanel progressPanel) {
@@ -312,6 +312,7 @@ public class OsmImporter extends Thread {
      * Creates a MapPoint from an OsmNode.
      * 
      * @param node
+     * @param nodeMap
      * @return 
      */
     public static MapPoint getOsmPoint(OsmNode node, NodeMap nodeMap) {
@@ -372,6 +373,8 @@ public class OsmImporter extends Thread {
                     newPoint.setClass("Bank");
                 } else if (value.equalsIgnoreCase("bar")) {
                     newPoint.setClass("Bar");       
+                } else if (value.equalsIgnoreCase("bus_station")) {
+                    newPoint.setClass("Bus Station");                         
                 } else if (value.equalsIgnoreCase("cafe")) {
                     newPoint.setClass("Cafe");  
                 } else if (value.equalsIgnoreCase("cinema")) {
@@ -385,7 +388,9 @@ public class OsmImporter extends Thread {
                 } else if (value.equalsIgnoreCase("fuel")) {
                     newPoint.setClass("Gas Station");
                 } else if (value.equalsIgnoreCase("grave_yard")) {
-                    newPoint.setClass("Cemetery");
+                    newPoint.setClass("Gas Station");
+                } else if (value.equalsIgnoreCase("hospital")) {                    
+                    newPoint.setClass("Hospital");
                 } else if (value.equalsIgnoreCase("library")) {
                     newPoint.setClass("Library");
                 } else if (value.equalsIgnoreCase("place_of_worship")) {
@@ -404,6 +409,8 @@ public class OsmImporter extends Thread {
                             newPoint.setClass("Place Of Worship");
                         }
                     }
+                } else if (value.equalsIgnoreCase("pharmacy")) {
+                    newPoint.setClass("Pharmacy");                       
                 } else if (value.equalsIgnoreCase("police")) {
                     newPoint.setClass("Police Station");     
                 } else if (value.equalsIgnoreCase("post_office")) {
@@ -433,13 +440,17 @@ public class OsmImporter extends Thread {
             } else if (customFields.containsKey("landuse")) { 
                 value = customFields.get("landuse");
                 
-                if (value.equalsIgnoreCase("mine")) 
-                    newPoint.setClass("Mine");                   
+                if (value.equalsIgnoreCase("mine")) {
+                    newPoint.setClass("Mine");              
+                }
             } else if (customFields.containsKey("leisure")) {    
                 value = customFields.get("leisure");
                 
-                if (value.equalsIgnoreCase("park")) 
-                    newPoint.setClass("Park");                 
+                if (value.equalsIgnoreCase("park")) {
+                    newPoint.setClass("Park");     
+                } else if (value.equalsIgnoreCase("playground")) {
+                    newPoint.setClass("Park");    
+                }
             } else if (customFields.containsKey("natural")) {
                 value = customFields.get("natural");
                 
@@ -458,6 +469,12 @@ public class OsmImporter extends Thread {
                 if (value.equalsIgnoreCase("memorial")) {
                     newPoint.setClass("Memorial");
                 }      
+            } else if (customFields.containsKey("man_made")) {    
+                value = customFields.get("man_made");
+                
+                if (value.equalsIgnoreCase("tower")) {
+                    newPoint.setClass("Antenna");
+                }
             } else if (customFields.containsKey("parking")) {
                 value = customFields.get("parking");
                 
@@ -596,11 +613,11 @@ public class OsmImporter extends Thread {
      * Creates a LineString or Polygon from an OSM XML String way.
      * 
      * @param wayXML
-     * @param coordinateNodes
+     * @param nodeMap
      * @return 
      */
     public static VectorObject getOsmWay(String wayXML, NodeMap nodeMap) {        
-        boolean                    isPolygon;
+        boolean                    isPolygon, isRing;
         Coordinate                 tempCoordinate;
         CoordinateList<Coordinate> objectCoordinates;
         HashMap<String, String>    customDataFields;
@@ -616,6 +633,7 @@ public class OsmImporter extends Thread {
         //initilize
         customDataFields  = new HashMap<String, String>();
         isPolygon         = false;
+        isRing            = false;
         newMapObject      = null;
         wayName           = "";
         waySurface        = "";
@@ -678,9 +696,15 @@ public class OsmImporter extends Thread {
                         } else if (property.getProperty().equalsIgnoreCase("admin_level")) {
                             wayType = "Territorial Boundary";
                         } else if (property.getProperty().equalsIgnoreCase("amenity")) { 
-                            if (property.getValue().equalsIgnoreCase("fountain")) {
+                            if (property.getValue().equalsIgnoreCase("fast_food")) {
+                                polygonType = "Building"; 
+                                isPolygon   = true;                                
+                            } else if (property.getValue().equalsIgnoreCase("fountain")) {
                                 polygonType = "Lake"; 
                                 isPolygon   = true;
+                            } else if (property.getValue().equalsIgnoreCase("marketplace")) {
+                                polygonType = "Market"; 
+                                isPolygon   = true;                                
                             } else if (property.getValue().equalsIgnoreCase("parking")) {
                                 polygonType = "Parking Lot"; 
                                 isPolygon   = true;
@@ -692,10 +716,16 @@ public class OsmImporter extends Thread {
                                 isPolygon   = true;         
                             } else if (property.getValue().equalsIgnoreCase("pub")) {
                                 polygonType = "Building"; 
-                                isPolygon   = true;                                      
+                                isPolygon   = true;        
+                            } else if (property.getValue().equalsIgnoreCase("restaurant")) {
+                                polygonType = "Building"; 
+                                isPolygon   = true;                                  
                             } else if (property.getValue().equalsIgnoreCase("school")) {
                                 polygonType = "School"; 
-                                isPolygon   = true;                                
+                                isPolygon   = true;      
+                            } else if (property.getValue().equalsIgnoreCase("toilets")) {
+                                polygonType = "Building"; 
+                                isPolygon   = true;                                    
                             } else if (property.getValue().equalsIgnoreCase("university")) {
                                 polygonType = "University";
                                 isPolygon   = true;
@@ -705,6 +735,10 @@ public class OsmImporter extends Thread {
                                 polygonType = "Parking Lot"; 
                                 isPolygon   = true;
                             }
+                        } else if (property.getProperty().equalsIgnoreCase("area")) {
+                            if (property.getValue().equalsIgnoreCase("yes")) {
+                                isPolygon   = true;
+                            }                            
                         } else if (property.getProperty().equalsIgnoreCase("border_type")) {
                             if (property.getValue().equalsIgnoreCase("territorial")) {
                                 wayName = "Border";    
@@ -741,8 +775,10 @@ public class OsmImporter extends Thread {
                                 wayType = "Path - Bikeway";
                             } else if (wayHighway.equalsIgnoreCase("footway")) {
                                 wayType = "Hiking Trail";
+                            } else if (wayHighway.equalsIgnoreCase("living_street")) {
+                                wayType = "Road - City Tertiary";
                             } else if (wayHighway.equalsIgnoreCase("mini_roundabout")) {
-
+                                
                             } else if (wayHighway.equalsIgnoreCase("motorway")) {
                                 wayType = "Road - Motorway";
                             } else if (wayHighway.equalsIgnoreCase("motorway_link")) {
@@ -769,6 +805,8 @@ public class OsmImporter extends Thread {
                                 wayType = "Path - Steps";                                
                             } else if (wayHighway.equalsIgnoreCase("tertiary")) {
                                 wayType = "Road - City Tertiary";
+                            } else if (wayHighway.equalsIgnoreCase("tertiary_link")) {
+                                wayType = "Road - City Tertiary";                                
                             } else if (wayHighway.equalsIgnoreCase("track")) {
                                 wayType = "Road - Unclassified";
                             } else if (wayHighway.equalsIgnoreCase("trunk")) {
@@ -780,7 +818,9 @@ public class OsmImporter extends Thread {
                             }
                         } else if (property.getProperty().equalsIgnoreCase("landuse")) {
                             if (property.getValue().equalsIgnoreCase("commercial")) {
-                                polygonType = "Commercial Area";                            
+                                polygonType = "Commercial Area";     
+                            } else if (property.getValue().equalsIgnoreCase("gated_community")) {
+                                polygonType = "Residential Area";
                             } else if (property.getValue().equalsIgnoreCase("grass")) {
                                 polygonType = "Grass Field";
                             } else if (property.getValue().equalsIgnoreCase("farm")) {
@@ -826,10 +866,13 @@ public class OsmImporter extends Thread {
                                 isPolygon   = true;  
                             } else if (property.getValue().equalsIgnoreCase("playground")) {
                                 polygonType = "Park";
-                                isPolygon   = true;                                  
+                                isPolygon   = true;                                           
                             } else if (property.getValue().equalsIgnoreCase("recreation_ground")) {
                                 polygonType = "Sports Field";
                                 isPolygon   = true;  
+                            } else if (property.getValue().equalsIgnoreCase("shop")) {  
+                                polygonType = "Building";
+                                isPolygon   = true;                                  
                             } else if (property.getValue().equalsIgnoreCase("stadium")) {  
                                 polygonType = "Stadium";
                                 isPolygon   = true;  
@@ -837,12 +880,19 @@ public class OsmImporter extends Thread {
                                 polygonType = "Lake";
                                 isPolygon   = true; 
                             } else if (property.getValue().equalsIgnoreCase("track")) {   
-                                polygonType = "Path - Running";
+                                wayType     = "Path - Running";
                                 isPolygon   = false; 
+                                isRing      = true;
                             }            
                         } else if (property.getProperty().equalsIgnoreCase("man_made")) {
                             if (property.getValue().equalsIgnoreCase("pier")) {
                                 wayType = "Pier";
+                            } else if (property.getValue().equalsIgnoreCase("water_tower")) {
+                                isPolygon   = true; 
+                                polygonType = "Building";                             
+                            } else if (property.getValue().equalsIgnoreCase("wastewater_plant")) {
+                                isPolygon   = true; 
+                                polygonType = "Industrial Area";
                             }
                         } else if (property.getProperty().equalsIgnoreCase("MP_TYPE")) {
                             if (property.getValue().equalsIgnoreCase("0x00")) {
@@ -899,9 +949,12 @@ public class OsmImporter extends Thread {
                             value = property.getValue();
                             
                             if (value.equalsIgnoreCase("line")) {
-                                wayType = "Power Line"; 
+                                wayType     = "Power Line"; 
                                 isPolygon   = false;                                
-                            }                                                        
+                            } else if (value.equalsIgnoreCase("sub_station")) {
+                                wayType     = "Industrial Area"; 
+                                isPolygon   = true;      
+                            }
                         } else if (property.getProperty().equalsIgnoreCase("railway")) {
                             value = property.getValue();
                             
@@ -920,7 +973,9 @@ public class OsmImporter extends Thread {
                             if (property.getValue().equalsIgnoreCase("ferry")) {
                                 wayType = "Ferry Line";
                             }
-             
+                        } else if (property.getProperty().equalsIgnoreCase("shop")) {
+                            polygonType = "Building";           
+                            isPolygon   = true;             
                         } else if (property.getProperty().equalsIgnoreCase("source")) {
                             
                         } else if (property.getProperty().equalsIgnoreCase("sport")) {
@@ -971,6 +1026,8 @@ public class OsmImporter extends Thread {
                         objectCoordinates.remove(0); //Polygon Objects do not contain the same start and end coordinate, but OSM does, remove to prevent conflict
                         newMapObject = new Polygon(wayName, polygonType, objectCoordinates);
                     }
+                } else if (isRing) {
+                    newMapObject = new LinearRing(wayName, wayType, objectCoordinates);
                 } else if (isPolygon) {
                     newMapObject = new Polygon(wayName, polygonType, objectCoordinates);
                 } else {

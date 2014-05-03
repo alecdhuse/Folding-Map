@@ -108,7 +108,21 @@ public class MultiGeometry extends VectorObject {
                 drawObject = this.isVisible(mapView);
             }
 
-            if (drawObject) {                                      
+            if (drawObject) {         
+                //Draw Outlines
+                for (int i = 0; i < mapObjects.size(); i++) {
+                    VectorObject currentMapObject = mapObjects.get(i);   
+                    
+                    if (currentMapObject instanceof Polygon) {
+                        currentMapObject.drawObject(g2, mapView, null);    
+                        currentMapObject.drawOutline(g2, mapView);                        
+                    } else if (currentMapObject instanceof LineString) {
+                        currentMapObject.drawOutline(g2, mapView);
+                    } else if (currentMapObject instanceof MultiGeometry) {
+                        currentMapObject.drawOutline(g2, mapView);                        
+                    }
+                }                
+                
                 for (int i = 0; i < mapObjects.size(); i++) {
                     LineString currentLineString;
                     VectorObject  currentMapObject = mapObjects.get(i);
@@ -140,9 +154,10 @@ public class MultiGeometry extends VectorObject {
      */
     @Override
     public void drawOutline(Graphics2D g2, MapView mapView) {
-        
-        for (VectorObject obj: this.mapObjects) {
-            obj.drawOutline(g2, mapView);
+        if (this.isVisible(mapView)) {
+            for (VectorObject obj: this.mapObjects) {
+                obj.drawOutline(g2, mapView);
+            }
         }
     }    
     
