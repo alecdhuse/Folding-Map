@@ -204,7 +204,7 @@ public class FmXmlImporter implements FormatImporter {
    /**
      * Reads gxTags to create a HashMap of customDataFields.
      * 
-     * @param gxTags
+     * @param dataTag
      * @return 
      */
     public static HashMap<String,String> getCustomDataFields(XMLTag dataTag) {
@@ -709,7 +709,7 @@ public class FmXmlImporter implements FormatImporter {
      */
     public static LineStyle getLineStyle(XMLTag styleTag) {
         try {
-            boolean     hasStroke, scaleWidth;
+            boolean     hasStroke, hasVis, scaleWidth;
             Color       fillColor, outlineColor, selectedFillColor, selectedOutlineColor;
             float       lineWidth;
             int         outline;
@@ -724,13 +724,14 @@ public class FmXmlImporter implements FormatImporter {
             lineWidth    = Float.parseFloat(lineStyleTag.getSubtagContent("width"));
             outline      = Integer.parseInt(lineStyleTag.getSubtagContent("outline"));        
             hasStroke    = lineStyleTag.containsSubTag("lineStroke");
-
+            hasVis       = styleTag.containsSubTag("Visibility");    
+            
             if (hasStroke) {
                 lineStroke = lineStyleTag.getSubtagContent("lineStroke");
             } else {
                 lineStroke = LineStyle.SOLID;
-            }            
-                        
+            }                                            
+            
             if (lineStyleTag.containsSubTag("scaleWidth")) {
                 scaleWidth = Boolean.parseBoolean(lineStyleTag.getSubtagContent("scaleWidth"));
             } else {
@@ -739,6 +740,11 @@ public class FmXmlImporter implements FormatImporter {
             
             lineStyle = new LineStyle(styleID, fillColor, lineWidth, lineStroke, scaleWidth); 
 
+            if (hasVis) {
+                Visibility vis = getVisibility(styleTag.getSubtag("Visibility"));
+                lineStyle.setVisibility(vis);
+            }                 
+            
             if (lineStyleTag.containsSubTag("selectedFillColor")) {
                 selectedFillColor = ColorHelper.parseHexStandard(lineStyleTag.getSubtagContent("selectedFillColor"));
                 lineStyle.setSelectedFillColor(selectedFillColor);
@@ -852,7 +858,6 @@ public class FmXmlImporter implements FormatImporter {
      * @param layer
      * @param multiGeoTag
      * @param coordinateSet
-     * @param placemarkTag
      * @return 
      */
     public static MultiGeometry getMultiGeometry(VectorLayer layer, 
@@ -1197,6 +1202,7 @@ public class FmXmlImporter implements FormatImporter {
      */
     public static PolygonStyle getPolygonStyle(XMLTag styleTag) {
         try {
+            boolean      hasVis;
             Color        fillColor;
             int          colorMode, fill;
             OutlineStyle outlineStyle;
@@ -1211,6 +1217,7 @@ public class FmXmlImporter implements FormatImporter {
             colorModeString = polygonStyleTag.getSubtagContent("colorMode");
             fill            = Integer.parseInt(polygonStyleTag.getSubtagContent("fill"));
             outlineTag      = polygonStyleTag.getSubtag("outlines");
+            hasVis          = polygonStyleTag.containsSubTag("Visibility");    
             
             if (colorModeString.equalsIgnoreCase("normal")) {
                 colorMode = ColorStyle.NORMAL;
@@ -1221,6 +1228,11 @@ public class FmXmlImporter implements FormatImporter {
             polygonStyle = new PolygonStyle(styleID, fillColor);
             polygonStyle.setColorMode(colorMode);
                         
+            if (hasVis) {
+                Visibility vis = getVisibility(polygonStyleTag.getSubtag("Visibility"));
+                polygonStyle.setVisibility(vis);
+            }             
+            
             if (fill == 1) {
                 polygonStyle.setFill(true);
             } else {
@@ -1282,7 +1294,7 @@ public class FmXmlImporter implements FormatImporter {
             LatLonAltBox    latLonAltBox;
             LevelOfDetail   lod;
             Region          newRegion;
-            String          minLodPixels, maxLodPixels, regionName;
+            String          regionName;
             XMLTag          latLonAltBoxTag, lodTag;
 
             regionName      = regionTag.getSubtagContent("Name");
@@ -1414,7 +1426,7 @@ public class FmXmlImporter implements FormatImporter {
                                              XMLTag layerTag,
                                              NodeMap coordinateSet) {
         try {
-            ArrayList<XMLTag>           objects, tags, subTags, subSubTags;
+            ArrayList<XMLTag>           objects;
             boolean                     layerLocked;
             VectorObject                newObject;
             String                      layerDescription, layerName, timeSpanBegin, timeSpanEnd;
@@ -1425,7 +1437,6 @@ public class FmXmlImporter implements FormatImporter {
             layerName        = layerTag.getSubtagContent("Name");
             layerDescription = removeCDataTag(layerTag.getSubtagContent("Description"));
             layerLocked      = Boolean.parseBoolean(layerTag.getSubtagContent("locked"));
-            tags             = layerTag.getTags("Placemark");
             objects          = layerTag.getTagSubtags("objects");
             timeSpanTag      = layerTag.getSubtag("TimeSpan");
             newLayer         = new VectorLayer(layerName);    //create new VectorLayer
