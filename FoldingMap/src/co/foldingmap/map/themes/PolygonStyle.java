@@ -309,46 +309,50 @@ public class PolygonStyle extends ColorStyle {
     }    
     
     /**
-     * Outputs this PolygonStyle as KML.
+     * Outputs this PolygonStyle as XML.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
     @Override
-    public void toXML(XmlOutput kmlWriter) {
-        kmlWriter.openTag ("Style id=\"" + id + "\"");
-        kmlWriter.openTag ("PolyStyle");
+    public void toXML(XmlOutput xmlWriter) {
+        xmlWriter.openTag ("Style id=\"" + id + "\"");
+        xmlWriter.openTag ("PolyStyle");
 
-        kmlWriter.writeTag("featureType", this.featureType); 
-        kmlWriter.writeTag("color",       ColorHelper.getColorHexStandard(fillColor));  
+        xmlWriter.writeTag("featureType", this.featureType); 
+        xmlWriter.writeTag("color",       ColorHelper.getColorHexStandard(fillColor));  
 
         if (colorMode == NORMAL) {
-            kmlWriter.writeTag("colorMode", "normal");
+            xmlWriter.writeTag("colorMode", "normal");
         } else if (colorMode == RANDOM) {
-            kmlWriter.writeTag("colorMode", "random");
+            xmlWriter.writeTag("colorMode", "random");
         }
 
         if (fill) {
-            kmlWriter.writeTag("fill", "1");
+            xmlWriter.writeTag("fill", "1");
         } else {
-            kmlWriter.writeTag("fill", "0");
+            xmlWriter.writeTag("fill", "0");
         }
 
         if (imageFileName != null && !imageFileName.equals("")) {
-            kmlWriter.openTag("Icon");
-            kmlWriter.writeTag("href", imageFileName);
-            kmlWriter.closeTag("Icon");
+            xmlWriter.openTag("Icon");
+            xmlWriter.writeTag("href", imageFileName);
+            xmlWriter.closeTag("Icon");
         }
         
         if (this.outlineStyles.size() > 0) {
-            kmlWriter.openTag("outlines");
+            xmlWriter.openTag("outlines");
 
             for (OutlineStyle outlineStyle: this.outlineStyles) 
-                outlineStyle.toXML(kmlWriter);                
+                outlineStyle.toXML(xmlWriter);                
 
-            kmlWriter.closeTag("outlines");
+            xmlWriter.closeTag("outlines");
         }
         
-        kmlWriter.closeTag("PolyStyle");
-        kmlWriter.closeTag("Style");
+        if (this.getVisibility() != null) {
+            this.getVisibility().toXML(xmlWriter);
+        }        
+        
+        xmlWriter.closeTag("PolyStyle");
+        xmlWriter.closeTag("Style");
     }    
 }

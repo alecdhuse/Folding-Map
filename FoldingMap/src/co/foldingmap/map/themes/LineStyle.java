@@ -268,7 +268,7 @@ public class LineStyle extends ColorStyle {
     /**
      * Writes out this LineStyle to KML.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter
      */
     @Override
     public void toXML(XmlOutput xmlWriter) {
@@ -295,6 +295,10 @@ public class LineStyle extends ColorStyle {
         if (!this.lineStroke.equals(SOLID))
             xmlWriter.writeTag("lineStroke", this.lineStroke);
 
+        if (this.getVisibility() != null) {
+            this.getVisibility().toXML(xmlWriter);
+        }
+        
         xmlWriter.closeTag("LineStyle");
         
         if (this.getLabel() != null) 
