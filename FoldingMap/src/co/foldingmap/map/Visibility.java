@@ -124,6 +124,7 @@ public class Visibility {
     /**
      * Sets the max tile zoom level for this Visibility object.
      * 
+     * @param maxTile
      */
     public void setMaxTileZoomLevel(float maxTile) {
         this.maxTileLevel = maxTile;
@@ -132,6 +133,7 @@ public class Visibility {
     /**
      * Sets the min tile zoom level for this Visibility object.
      * 
+     * @param minTile
      */
     public void setMinTileZoomLevel(float minTile) {
         this.minTileLevel = minTile;
@@ -140,7 +142,7 @@ public class Visibility {
     /**
      * Write FmXml for Lod.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter
      */
     public void toXML(XmlOutput xmlWriter) {
         xmlWriter.openTag ("Visibility");
