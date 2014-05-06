@@ -74,6 +74,17 @@ public class XMLTag {
     }
 
     /**
+     * Adds a given property to this XMLTag.
+     * 
+     * @param name
+     * @param value 
+     */
+    public void addProperty(String name, String value) {
+        if (properties == null) properties = new HashMap<String, String>();
+        properties.put(name, value);          
+    }
+    
+    /**
      * Adds a subtag to this XML Tag.
      * 
      * @param newSubtag 

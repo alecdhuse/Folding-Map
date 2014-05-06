@@ -24,9 +24,9 @@ import static org.junit.Assert.*;
  *
  * @author Alec
  */
-public class KmlBufferTest {
+public class XmlBufferTest {
     
-    public KmlBufferTest() {
+    public XmlBufferTest() {
     }
 
     @BeforeClass

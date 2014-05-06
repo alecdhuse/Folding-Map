@@ -38,9 +38,17 @@ import co.foldingmap.map.themes.PolygonStyle;
 import co.foldingmap.map.themes.IconStyle;
 import co.foldingmap.map.themes.OutlineStyle;
 import co.foldingmap.GUISupport.ProgressBarPanel;
+import co.foldingmap.GUISupport.ProgressIndicator;
 import co.foldingmap.map.DigitalMap;
+import co.foldingmap.map.Layer;
+import co.foldingmap.map.Visibility;
+import co.foldingmap.map.themes.ColorRamp;
+import co.foldingmap.map.tile.TileLayer;
+import co.foldingmap.map.vector.NetworkLayer;
+import co.foldingmap.map.vector.PhotoPoint;
 import co.foldingmap.map.visualization.HeatMap;
 import co.foldingmap.testFileFormats.FmXmlTestData;
+import co.foldingmap.testMapObjects.FmXmlObjects;
 import co.foldingmap.xml.XMLTag;
 import java.io.File;
 import java.util.ArrayList;
@@ -415,11 +423,15 @@ public class FmXmlImporterTest {
     @Test
     public void testParseNodes() {
         System.out.println("parseNodes");
-        NodeMap coordinateSet = null;
-        ArrayList<XMLTag> nodeTags = null;
+        
+        NodeMap coordinateSet = new NodeMap(5);
+        ArrayList<XMLTag> nodeTags = FmXmlObjects.getNodesTag();
+        
+        coordinateSet.put(39649625, new Coordinate("-123.094894,44.06016,0,2014-04-30T04:16:59Z"));
+        coordinateSet.put(39649628, new Coordinate("-123.095375,44.06009,0,2014-04-30T04:16:59Z"));
+        coordinateSet.put(39649631, new Coordinate("-123.09568,44.060005,0,2014-04-30T04:16:59Z"));
+        
         FmXmlImporter.parseNodes(coordinateSet, nodeTags);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -432,6 +444,124 @@ public class FmXmlImporterTest {
         String expResult = "";
         String result = FmXmlImporter.removeCDataTag(text);
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of convertRegionToVisibility method, of class FmXmlImporter.
+     */
+    @Test
+    public void testConvertRegionToVisibility() {
+        System.out.println("convertRegionToVisibility");
+        Region r = null;
+        Visibility expResult = null;
+        Visibility result = FmXmlImporter.convertRegionToVisibility(r);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getColorRamp method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetColorRamp() {
+        System.out.println("getColorRamp");
+        String id = "";
+        XMLTag colorRampTag = null;
+        ColorRamp expResult = null;
+        ColorRamp result = FmXmlImporter.getColorRamp(id, colorRampTag);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getNetworkLayer method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetNetworkLayer() {
+        System.out.println("getNetworkLayer");
+        XMLTag layerTag = null;
+        NetworkLayer expResult = null;
+        NetworkLayer result = FmXmlImporter.getNetworkLayer(layerTag);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getPhotoPoint method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetPhotoPoint() {
+        System.out.println("getPhotoPoint");
+        VectorLayer layer = null;
+        XMLTag placemarkTag = null;
+        NodeMap coordinateSet = null;
+        PhotoPoint expResult = null;
+        PhotoPoint result = FmXmlImporter.getPhotoPoint(layer, placemarkTag, coordinateSet);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getTileLayer method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetTileLayer() {
+        System.out.println("getTileLayer");
+        XMLTag layerTag = null;
+        TileLayer expResult = null;
+        TileLayer result = FmXmlImporter.getTileLayer(layerTag);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getVisibility method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetVisibility() {
+        System.out.println("getVisibility");
+                        
+        XMLTag     visTag    = FmXmlObjects.getTestVisibilityTag();
+        Visibility expResult = FmXmlObjects.getVisibilityObject();
+        Visibility result    = FmXmlImporter.getVisibility(visTag);
+        
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of openFile method, of class FmXmlImporter.
+     */
+    @Test
+    public void testOpenFile() {
+        System.out.println("openFile");
+        File mapFile = null;
+        ProgressIndicator progressIndicator = null;
+        DigitalMap expResult = null;
+        DigitalMap result = FmXmlImporter.openFile(mapFile, progressIndicator);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of importToLayer method, of class FmXmlImporter.
+     */
+    @Test
+    public void testImportToLayer() throws Exception {
+        System.out.println("importToLayer");
+        File mapFile = null;
+        NodeMap nodeMap = null;
+        Layer layer = null;
+        ProgressIndicator progressIndicator = null;
+        FmXmlImporter instance = new FmXmlImporter();
+        instance.importToLayer(mapFile, nodeMap, layer, progressIndicator);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
