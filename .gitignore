@@ -1,2 +1,4 @@
 /FoldingMap/build/
 *.log
+
+FoldingMap/nbproject/private/private.xml
