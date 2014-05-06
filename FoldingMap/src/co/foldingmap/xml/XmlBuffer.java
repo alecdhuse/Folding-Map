@@ -19,21 +19,20 @@ package co.foldingmap.xml;
 import java.util.ArrayList;
 
 /**
- * This class is used to write KML to a String buffer.  Used with clipboard
+ * This class is used to write XML to a String buffer.  Used with clipboard
  * functions and others.
  * 
  * @author Alec
  */
 public class XmlBuffer extends XmlOutput {
     private ArrayList<String> openTags;
-    private int               tabIndentCount;
-    private StringBuilder     kml;
+    private StringBuilder     xml;
     
     /**
      * Creates a new buffer
      */
     public XmlBuffer() {
-        this.kml      = new StringBuilder();
+        this.xml      = new StringBuilder();
         this.openTags = new ArrayList<String>();
     }
     
@@ -54,11 +53,11 @@ public class XmlBuffer extends XmlOutput {
                     openTags.remove(i);
                     tabIndentCount--;
 
-                    kml.append(getIndent());
-                    kml.append("</");
-                    kml.append(tag);
-                    kml.append(">");
-                    kml.append("\n");                    
+                    xml.append(getIndent());
+                    xml.append("</");
+                    xml.append(tag);
+                    xml.append(">");
+                    xml.append("\n");                    
                     
                     break;
                 }
@@ -84,11 +83,11 @@ public class XmlBuffer extends XmlOutput {
                 openTags.add(tagName);
             }            
             
-            kml.append(getIndent());
-            kml.append("<");
-            kml.append(tagName);
-            kml.append(">");
-            kml.append("\n");
+            xml.append(getIndent());
+            xml.append("<");
+            xml.append(tagName);
+            xml.append(">");
+            xml.append("\n");
 
             tabIndentCount++;
         } catch (Exception e) {
@@ -102,16 +101,16 @@ public class XmlBuffer extends XmlOutput {
      *      <pair key="KEY">VALUE</pair>
      * 
      * @param key
-     * @param Value 
+     * @param value 
      */
     @Override
     public void writePairTag(String key, String value) {
-        kml.append(getIndent());
-        kml.append("<pair key=\"");
-        kml.append(key);
-        kml.append("\">");
-        kml.append(value);
-        kml.append("</pair>\n");
+        xml.append(getIndent());
+        xml.append("<pair key=\"");
+        xml.append(key);
+        xml.append("\">");
+        xml.append(value);
+        xml.append("</pair>\n");
     }
     
     /**
@@ -123,11 +122,11 @@ public class XmlBuffer extends XmlOutput {
     @Override
     public void writeTag(String tagName, String content) {
         try {
-            kml.append(getIndent());
-            kml.append("<"  + tagName + ">");
-            kml.append(content);
-            kml.append("</" + tagName + ">");
-            kml.append("\n");
+            xml.append(getIndent());
+            xml.append("<"  + tagName + ">");
+            xml.append(content);
+            xml.append("</" + tagName + ">");
+            xml.append("\n");
         } catch (Exception e) {
             System.err.println("Error in KmlBuffer.writeTag(String, String) - " + e);
         }
@@ -141,7 +140,7 @@ public class XmlBuffer extends XmlOutput {
     @Override
     public void writeText(String text) {
         try {
-            kml.append(text);
+            xml.append(text);
         } catch (Exception e) {
             System.err.println("Error in KmlWriter.writeTextLine(String) - " + e);
         }
@@ -155,9 +154,9 @@ public class XmlBuffer extends XmlOutput {
     @Override
     public void writeTextLine(String text) {
         try {
-            kml.append(getIndent());
-            kml.append(text);
-            kml.append("\n");
+            xml.append(getIndent());
+            xml.append(text);
+            xml.append("\n");
         } catch (Exception e) {
             System.err.println("Error in KmlBuffer.writeTextLine(String) - " + e);
         }
@@ -170,6 +169,6 @@ public class XmlBuffer extends XmlOutput {
      */
     @Override
     public String toString() {
-        return kml.toString().trim();
+        return xml.toString().trim();
     }
 }
