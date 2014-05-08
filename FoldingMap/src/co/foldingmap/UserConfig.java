@@ -27,10 +27,11 @@ import java.util.Map;
  * @author Alec
  */
 public class UserConfig {
-    public static final int NUMBER_OF_RECENT_FILES = 4;
+    public static final int             NUMBER_OF_RECENT_FILES = 4;
+    public static       UserConfig      userConfig;
     
-    protected HashMap<String, String> properties;
-    protected File              configFile;
+    protected HashMap<String, String>   properties;
+    protected File                      configFile;
     
     public UserConfig() {
         init();
@@ -136,6 +137,19 @@ public class UserConfig {
     }    
     
     /**
+     * Returns the instance of this UserConfig.
+     * 
+     * @return 
+     */
+    public static UserConfig getInstance() {
+        if (UserConfig.userConfig == null) {
+            return new UserConfig();
+        } else {        
+            return userConfig;
+        }
+    }
+    
+    /**
      * Returns the directory path to use for the working directory.
      * 
      * @return 
@@ -154,6 +168,8 @@ public class UserConfig {
         properties.put("logToFile",      "true");
         properties.put("useOpenGL",      "false");
         properties.put("workingDIR",     System.getProperty("user.home"));    
+        
+        userConfig = this;
     }
 
     /**
@@ -189,6 +205,8 @@ public class UserConfig {
         } catch (Exception e) {
 
         }
+        
+        userConfig = this;
     }
 
     private void readProperty(String line) {
@@ -281,7 +299,6 @@ public class UserConfig {
      * @return 
      */
     public boolean useOpenGL() {
-//        return useOpenGL;
         return Boolean.getBoolean(properties.get("useOpenGL"));
     }
 }
