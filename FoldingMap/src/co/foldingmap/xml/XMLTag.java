@@ -444,6 +444,7 @@ public class XMLTag {
      * If no value is present, an empty string is returned.
      * 
      * @return 
+     * @deprecated
      */
     public String getTagValue() {
         int     start, end;

@@ -564,28 +564,36 @@ public class FmXmlImporter implements FormatImporter {
                                            XMLTag placemarkTag,
                                            NodeMap coordinateSet) {
         try {
+            boolean                     hasClassProperty;
             boolean                     hasData, hasRef, hasRegion, hasTimestamps;
             CoordinateList<Coordinate>  coordinates;
             HashMap<String,String>      customDataFields;
             LinearRing                  newRing;            
-            String                      coordinateString, description;
-            String                      objectName, styleUrl, timestamps;
+            String                      objectClass, coordinateString, description;
+            String                      objectName, id, timestamps;
             XMLTag                      dataTag, ringTag;
-
-            objectName       = placemarkTag.getSubtagContent("name");
+            
             description      = removeCDataTag(placemarkTag.getSubtagContent("description"));
-            styleUrl         = placemarkTag.getTagValue();
+            id               = placemarkTag.getPropertyValue("id");
             hasData          = placemarkTag.containsSubTag("data");
             hasRef           = placemarkTag.containsSubTag("Ref");  
             hasRegion        = placemarkTag.containsSubTag("Region");
             coordinateString = placemarkTag.getSubtagContent("coordinates");
             coordinates      = getCoordinateList(coordinateSet, coordinateString);
             hasTimestamps    = placemarkTag.containsSubTag("gx:Timestamps");
-
-            if (styleUrl.startsWith("#"))
-                styleUrl = styleUrl.substring(1);
+            hasClassProperty = (placemarkTag.getPropertyValue("class").length() > 0);
+                                
+            if (hasClassProperty) {
+                objectClass = placemarkTag.getPropertyValue("class");
+                objectName  = id;
+            } else {
+                objectClass = id;
+                objectName  = placemarkTag.getSubtagContent("name");
+            }
+                        
+            if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);
                 
-            newRing = new LinearRing(objectName, styleUrl, coordinates);
+            newRing = new LinearRing(objectName, objectClass, coordinates);
 
             newRing.setDescription(description);
 
@@ -636,28 +644,36 @@ public class FmXmlImporter implements FormatImporter {
                                            XMLTag placemarkTag,
                                            NodeMap coordinateSet) {
         try {
+            boolean                     hasClassProperty;
             boolean                     hasData, hasRef, hasRegion, hasTimestamps;
             CoordinateList<Coordinate>  coordinates;
             HashMap<String,String>      customDataFields;
             LineString                  newLine;
             String                      coordinateString, description;
-            String                      objectName, styleUrl, timestamps;
+            String                      objectClass, objectName, id, timestamps;
             XMLTag                      dataTag, linestringTag;
 
-            objectName       = placemarkTag.getSubtagContent("name");
             description      = removeCDataTag(placemarkTag.getSubtagContent("description"));
-            styleUrl         = placemarkTag.getTagValue();
+            id               = placemarkTag.getPropertyValue("id");
             hasData          = placemarkTag.containsSubTag("data");
             hasRef           = placemarkTag.containsSubTag("Ref");  
             hasRegion        = placemarkTag.containsSubTag("Region");
             coordinateString = placemarkTag.getSubtagContent("coordinates");
             coordinates      = getCoordinateList(coordinateSet, coordinateString);
             hasTimestamps    = placemarkTag.containsSubTag("gx:Timestamps");
-
-            if (styleUrl.startsWith("#"))
-                styleUrl = styleUrl.substring(1);            
+            hasClassProperty = (placemarkTag.getPropertyValue("class").length() > 0);
             
-            newLine = new LineString(objectName, styleUrl, coordinates);
+            if (hasClassProperty) {
+                objectClass = placemarkTag.getPropertyValue("class");
+                objectName  = id;
+            } else {
+                objectClass = id;
+                objectName  = placemarkTag.getSubtagContent("name");
+            }
+                        
+            if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);           
+            
+            newLine = new LineString(objectName, id, coordinates);
 
             newLine.setDescription(description);
 
@@ -789,28 +805,36 @@ public class FmXmlImporter implements FormatImporter {
                                        XMLTag placemarkTag,
                                        NodeMap coordinateSet) {
         try {
+            boolean                     hasClassProperty;
             boolean                     hasData, hasRef, hasRegion, hasTimestamps;
             CoordinateList<Coordinate>  coordinates;
             HashMap<String,String>      customDataFields;
             MapPoint                    newPoint;
             String                      coordinateString, description;
-            String                      objectName, styleUrl, timestamps;
+            String                      objectClass, objectName, id, timestamps;
             XMLTag                      dataTag, pointTag;
 
-            objectName       = placemarkTag.getSubtagContent("name");
             description      = removeCDataTag(placemarkTag.getSubtagContent("description"));
-            styleUrl         = placemarkTag.getTagValue();
+            id               = placemarkTag.getPropertyValue("id");
             hasData          = placemarkTag.containsSubTag("data");
             hasRef           = placemarkTag.containsSubTag("Ref");  
             hasRegion        = placemarkTag.containsSubTag("Region");     
             coordinateString = placemarkTag.getSubtagContent("coordinates");
             coordinates      = getCoordinateList(coordinateSet, coordinateString);
             hasTimestamps    = placemarkTag.containsSubTag("gx:Timestamps");            
-
-            if (styleUrl.startsWith("#"))
-                styleUrl = styleUrl.substring(1);            
+            hasClassProperty = (placemarkTag.getPropertyValue("class").length() > 0);
             
-            newPoint = new MapPoint(objectName, styleUrl, description, coordinates);
+            if (hasClassProperty) {
+                objectClass = placemarkTag.getPropertyValue("class");
+                objectName  = id;
+            } else {
+                objectClass = id;
+                objectName  = placemarkTag.getSubtagContent("name");
+            }
+                        
+            if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);          
+            
+            newPoint = new MapPoint(objectName, id, description, coordinates);
 
             if (hasRegion) {
                 Region     region = getRegion(placemarkTag.getSubtag("Region"));
@@ -864,21 +888,31 @@ public class FmXmlImporter implements FormatImporter {
                                                  XMLTag  multiGeoTag,
                                                  NodeMap coordinateSet) {
         
-        ArrayList<XMLTag>        objectTags;
-        boolean                  hasData, hasRef;
-        HashMap<String,String>   customDataFields;
+        ArrayList<XMLTag>              objectTags;
+        boolean                        hasClassProperty, hasData, hasRef;
+        HashMap<String,String>         customDataFields;
         VectorObjectList<VectorObject> objects;
-        MultiGeometry            newMulti;
-        String                   description, objectName;
-        XMLTag                   dataTag;
+        MultiGeometry                  newMulti;
+        String                         description, objectClass, objectName;
+        XMLTag                         dataTag;
         
         try {
+            hasClassProperty = (multiGeoTag.getPropertyValue("class").length() > 0);
             hasData          = multiGeoTag.containsSubTag("data");
             hasRef           = multiGeoTag.containsSubTag("Ref");  
-            objectName       = multiGeoTag.getSubtagContent("name");
             description      = removeCDataTag(multiGeoTag.getSubtagContent("description"));   
             objectTags       = multiGeoTag.getSubtag("elements").getSubtags();            
             objects          = getObjectsFromPlaceMarks(layer, objectTags, coordinateSet);
+            
+            if (hasClassProperty) {
+                objectClass = multiGeoTag.getPropertyValue("class");
+                objectName  = multiGeoTag.getPropertyValue("id");
+            } else {
+                objectClass = "";
+                objectName  = multiGeoTag.getSubtagContent("name");
+            }
+                        
+            if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);            
             
             newMulti = new MultiGeometry(objectName, objects);
             
@@ -1040,20 +1074,21 @@ public class FmXmlImporter implements FormatImporter {
      * @return 
      */
     public static PhotoPoint getPhotoPoint(VectorLayer layer, 
-                                          XMLTag  placemarkTag,
-                                          NodeMap coordinateSet) {
+                                            XMLTag  placemarkTag,
+                                            NodeMap coordinateSet) {
         try {
+            boolean                     hasClassProperty;
             boolean                     hasData, hasRef, hasRegion, hasTimestamps;
             CoordinateList<Coordinate>  coordinates;
             HashMap<String,String>      customDataFields;
             PhotoPoint                  newPoint;
             String                      coordinateString, description;
-            String                      fileName, objectName, styleUrl;
+            String                      fileName, objectClass, objectName, id;
             XMLTag                      dataTag, iconTag;
 
             objectName       = placemarkTag.getSubtagContent("name");
             description      = removeCDataTag(placemarkTag.getSubtagContent("description"));
-            styleUrl         = placemarkTag.getTagValue();
+            id               = placemarkTag.getPropertyValue("id");
             hasData          = placemarkTag.containsSubTag("data");
             hasRef           = placemarkTag.containsSubTag("Ref");  
             hasRegion        = placemarkTag.containsSubTag("Region");   
@@ -1061,14 +1096,22 @@ public class FmXmlImporter implements FormatImporter {
             coordinateString = placemarkTag.getSubtagContent("coordinates");
             coordinates      = getCoordinateList(coordinateSet, coordinateString);
             hasTimestamps    = placemarkTag.containsSubTag("gx:Timestamps");            
+            hasClassProperty = (placemarkTag.getPropertyValue("class").length() > 0);
             fileName         = iconTag.getSubtagContent("href");
                     
-            if (styleUrl.startsWith("#"))
-                styleUrl = styleUrl.substring(1);            
+            if (hasClassProperty) {
+                objectClass = placemarkTag.getPropertyValue("class");
+                objectName  = id;
+            } else {
+                objectClass = id;
+                objectName  = placemarkTag.getSubtagContent("name");
+            }
+                        
+            if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);           
             
             newPoint = new PhotoPoint(objectName, coordinates.get(0), fileName);
             
-            newPoint.setClass(styleUrl);
+            newPoint.setClass(id);
             newPoint.setDescription(description);
             
             if (hasRegion) {
@@ -1110,29 +1153,38 @@ public class FmXmlImporter implements FormatImporter {
      * @return 
      */
     public static Polygon getPolygon(VectorLayer layer, 
-                                     XMLTag placemarkTag,
-                                     NodeMap coordinateSet) {
+                                      XMLTag placemarkTag,
+                                      NodeMap coordinateSet) {
         try {
             ArrayList<XMLTag>           innerBoundaryTags;
+            boolean                     hasClassProperty;
             boolean                     hasData, hasRef, hasRegion, hasTimestamps;
             CoordinateList<Coordinate>  coordinates;
             HashMap<String,String>      customDataFields;
             Polygon                     newPolygon;
             String                      coordinateString, description;
-            String                      objectName, styleUrl, timestamps;
+            String                      objectClass, objectName, id, timestamps;
             XMLTag                      dataTag, lineStringTag, outerBoundaryTag, polygonTag;
             
             objectName        = placemarkTag.getSubtagContent("name");
             description       = removeCDataTag(placemarkTag.getSubtagContent("description"));
-            styleUrl          = placemarkTag.getTagValue();
+            id               = placemarkTag.getPropertyValue("id");
             hasData           = placemarkTag.containsSubTag("data");
             hasRegion         = placemarkTag.containsSubTag("Region");
             hasRef            = placemarkTag.containsSubTag("Ref");                         
-            innerBoundaryTags = placemarkTag.getSubtags("innerBoundaryIs");                                    
+            innerBoundaryTags = placemarkTag.getSubtagsByName("innerBoundaryIs");                                    
             hasTimestamps     = placemarkTag.containsSubTag("gx:Timestamps");
+            hasClassProperty  = (placemarkTag.getPropertyValue("class").length() > 0);
+            
+            if (hasClassProperty) {
+                objectClass = placemarkTag.getPropertyValue("class");
+                objectName  = id;
+            } else {
+                objectClass = id;
+                objectName  = placemarkTag.getSubtagContent("name");
+            }
                         
-            if (styleUrl.startsWith("#"))
-                styleUrl = styleUrl.substring(1);            
+            if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);           
             
             if (placemarkTag.containsSubTag("outerBoundaryIs")) {
                 //Old legacy tag setup
@@ -1150,7 +1202,7 @@ public class FmXmlImporter implements FormatImporter {
             }
             
             if (coordinates != null) {
-                newPolygon = new Polygon(objectName, styleUrl, coordinates);            
+                newPolygon = new Polygon(objectName, id, coordinates);            
                 newPolygon.setDescription(description);
             
                 if (hasRef) 
@@ -1290,7 +1342,6 @@ public class FmXmlImporter implements FormatImporter {
         try {
             boolean         hasMaxAltitude, hasMinAltitude;
             float           north, south, east, west, minAlt, maxAlt;
-            float           minLod, maxLod;
             LatLonAltBox    latLonAltBox;
             LevelOfDetail   lod;
             Region          newRegion;
