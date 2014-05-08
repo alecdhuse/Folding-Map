@@ -17,7 +17,7 @@
 package co.foldingmap.map.tile;
 
 import co.foldingmap.Logger;
-import co.foldingmap.ResourceHelper;
+import co.foldingmap.map.vector.Coordinate;
 import co.foldingmap.map.vector.LatLonAltBox;
 import co.foldingmap.mapImportExport.TileExporter;
 import co.foldingmap.xml.XmlOutput;
@@ -35,7 +35,9 @@ import javax.imageio.ImageIO;
  */
 public class MbTileSource extends TileSource {
     private boolean         tilesTable;  
-    private Connection      conn;      
+    private Connection      conn;    
+    private Coordinate      center;
+    private int             initZoom;
     private String          mapBounds, mapVersion, filePathName;
     
     /**
@@ -134,6 +136,15 @@ public class MbTileSource extends TileSource {
     }    
     
     /**
+     * Returns the center of this map, if it has one.
+     * 
+     * @return 
+     */
+    public Coordinate getCenter() {
+        return center;
+    }
+    
+    /**
      * Returns a BufferedImage from a SQLite database matching the given 
      * TileReference.  If no tile is present in the database then null is 
      * returned.
@@ -213,6 +224,15 @@ public class MbTileSource extends TileSource {
     }    
     
     /**
+     * Returns the zoom loaded from the meta data of this TileSource.
+     * 
+     * @return 
+     */
+    public int getZoom() {
+        return initZoom;
+    }
+    
+    /**
      * Loads the tile map's meta data from the MbTile file.
      */
     private void loadMetaData() {
@@ -234,14 +254,20 @@ public class MbTileSource extends TileSource {
                 if (property.equalsIgnoreCase("bounds")) {
                     this.mapBounds   = value;
                     this.boundingBox = getBounds(mapBounds);
-                }
-                
-                if (property.equalsIgnoreCase("minzoom")) {
+                } else if (property.equalsIgnoreCase("center")) {    
+                    StringTokenizer centerST = new StringTokenizer(value, ",");
+                    
+                    float lng  = Float.parseFloat(centerST.nextToken());
+                    float lat  = Float.parseFloat(centerST.nextToken());
+                    
+                    if (centerST.hasMoreTokens()) 
+                        initZoom = Integer.parseInt(centerST.nextToken());
+                        
+                    center = new Coordinate(0, lat, lng);                    
+                } else if (property.equalsIgnoreCase("minzoom")) {
                     this.minZoom = Integer.parseInt(value);
                     hasMin = true;
-                }
-                
-                if (property.equalsIgnoreCase("maxzoom")) {
+                } else if (property.equalsIgnoreCase("maxzoom")) {
                     this.maxZoom = Integer.parseInt(value);
                     hasMax = true;
                 }                

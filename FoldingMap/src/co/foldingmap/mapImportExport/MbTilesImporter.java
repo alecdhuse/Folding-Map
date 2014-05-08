@@ -83,17 +83,26 @@ public class MbTilesImporter implements FormatImporter {
             proj = new MercatorProjection();
         }
 
-        proj.setZoomLevel(TileMath.getVectorMapZoom(2));                    
+        if (mbTiles.getZoom() > 0) {
+            proj.setZoomLevel(TileMath.getVectorMapZoom(mbTiles.getZoom())); 
+        } else {
+            proj.setZoomLevel(TileMath.getVectorMapZoom(2)); 
+        }
+        
         newMap = new DigitalMap(mbTiles.getName(), proj);
 
         //Set map description from the layer description.
         newMap.setMapDescription(tileLayer.getDescription());
 
-        if (bounds.getNorth() >= 90) {
-            newMap.setLookAtCoordinate(new Coordinate(0, 85.0511f, bounds.getWest()));  
+        if (mbTiles.getCenter() != null) {
+            newMap.setLookAtCoordinate(mbTiles.getCenter());
         } else {
-            newMap.setLookAtCoordinate(new Coordinate(0, bounds.getNorth(), bounds.getWest()));  
-        }     
+            if (bounds.getNorth() >= 90) {
+                newMap.setLookAtCoordinate(new Coordinate(0, 85.0511f, bounds.getWest()));  
+            } else {
+                newMap.setLookAtCoordinate(new Coordinate(0, bounds.getNorth(), bounds.getWest()));  
+            }     
+        }
 
         newMap.addLayer(tileLayer);
         

@@ -84,7 +84,7 @@ public class TileLayer extends Layer {
                 viewBounds = mapView.getViewBounds();
                 longitudeE = viewBounds.getEast();
                 longitudeW = viewBounds.getWest();
-                tileZoom   = TileMath.getTileMapZoom(mapView.getZoomLevel());
+                tileZoom   = Math.round(TileMath.getTileMapZoom(mapView.getZoomLevel()));
                 
                 if (tileZoom > this.tileSource.maxZoom) {
                     tileZoom = tileSource.maxZoom;
@@ -112,22 +112,24 @@ public class TileLayer extends Layer {
                 tileX  = mapView.getX(tileRef1.getCoordinate(), MapView.NO_WRAP);                
                 int x  = tileRef1.getX(); 
                 
-                while (tileX > (size * -1)) {                        
-                    tileY = mapView.getY(tileRef1.getCoordinate());
-                    
-                    for (int y = tileRef1.getY(); y >= tileRef0.getY(); y--) {
-                        currentTileRef = new TileReference(x, y, (int) tileZoom);
-                        image = tileSource.getTileImage(currentTileRef);
+                if (size > 0) {
+                    while (tileX > (size * -1)) {                        
+                        tileY = mapView.getY(tileRef1.getCoordinate());
 
-                        if (image != null) {                                          
-                            g2.drawImage(image, (int) tileX, (int) tileY, (int) size, (int) size, null);   
-                            tileY -= size;
-                        }                                        
-                    }
+                        for (int y = tileRef1.getY(); y >= tileRef0.getY(); y--) {
+                            currentTileRef = new TileReference(x, y, (int) tileZoom);
+                            image = tileSource.getTileImage(currentTileRef);
 
-                    tileX -= size;
-                    x = (x - 1) % ((int) Math.pow(2, tileZoom));
-                }                
+                            if (image != null) {                                          
+                                g2.drawImage(image, (int) tileX, (int) tileY, (int) size, (int) size, null);   
+                                tileY -= size;
+                            }                                        
+                        }
+
+                        tileX -= size;
+                        x = (x - 1) % ((int) Math.pow(2, tileZoom));
+                    }              
+                }
             }
         } catch (Exception e) {
             Logger.log(Logger.ERR, "Error in TileLayer.drawLayer(Graphics2D, MapView) - " + e);

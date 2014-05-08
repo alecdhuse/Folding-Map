@@ -45,7 +45,7 @@ public class Coordinate {
      * Creates a coordinate from a string formated longitude,latitude,altitude
      * Example: 10.5,4.5,1300
      * 
-     * @param coordinates 
+     * @param coordinate
      */
     public Coordinate(String coordinate) {
         try {
