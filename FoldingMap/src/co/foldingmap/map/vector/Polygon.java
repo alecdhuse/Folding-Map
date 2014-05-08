@@ -651,14 +651,13 @@ public class Polygon extends VectorObject {
      * Writes out this object in XML form so it can be copied or written to a 
      * file.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
     @Override
     public void toXML(XmlOutput xmlWriter) {
         try {
-            xmlWriter.openTag ("Polygon id=\"" + this.getObjectClass() + "\"");
-            xmlWriter.writeTag("name", getName());
-            
+            xmlWriter.openTag ("Polygon class=\"" + getObjectClass() + "\" id=\"" + getName() + "\"");
+
             if (this.visibility != null)
                 visibility.toXML(xmlWriter);            
             

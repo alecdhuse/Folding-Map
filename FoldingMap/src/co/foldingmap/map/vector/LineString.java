@@ -839,25 +839,24 @@ public class LineString extends VectorObject {
     }  
     
     @Override
-    public void toXML(XmlOutput kmlWriter) {
+    public void toXML(XmlOutput xmlWriter) {
         try {
-            kmlWriter.openTag ("LineString id=\"" + getObjectClass() + "\"");
-            kmlWriter.writeTag("name", getName());
+            xmlWriter.openTag ("LineString class=\"" + getObjectClass() + "\" id=\"" + getName() + "\"");
             
             if (hasDisplayableText(getDescription()) && !getDescription().equalsIgnoreCase("null"))
-                kmlWriter.writeTag("description", "<![CDATA[" + getDescription() + "]]>");            
+                xmlWriter.writeTag("description", "<![CDATA[" + getDescription() + "]]>");            
             
-            kmlWriter.writeTag("Ref", Long.toString(getReference()));
-            kmlWriter.writeTag("coordinates",  getCoordinateString());
+            xmlWriter.writeTag("Ref", Long.toString(getReference()));
+            xmlWriter.writeTag("coordinates",  getCoordinateString());
 
             if (visibility != null)
-                visibility.toXML(kmlWriter);            
+                visibility.toXML(xmlWriter);            
 
-            writeCustomDataFieldsAsXML(kmlWriter);
+            writeCustomDataFieldsAsXML(xmlWriter);
 
-            kmlWriter.closeTag("LineString");
+            xmlWriter.closeTag("LineString");
         } catch (Exception e) {
-            System.out.println("Error in LineString.toXML(KmlWriter) Object: " + this.objectName + " - " + e);
+            System.out.println("Error in LineString.toXML(xmlWriter) Object: " + this.objectName + " - " + e);
         }
     }
     

@@ -46,8 +46,7 @@ public class PhotoPoint extends MapPoint {
     
     @Override
     public void toXML(XmlOutput xmlWriter) {        
-        xmlWriter.openTag ("PhotoPoint id=\"" + getObjectClass() + "\"");
-        xmlWriter.writeTag("name", getName());
+        xmlWriter.openTag ("PhotoPoint class=\"" + getObjectClass() + "\" id=\"" + getName() + "\"");
         xmlWriter.writeTag("Ref", Long.toString(getReference()));
         
         xmlWriter.openTag ("Icon");

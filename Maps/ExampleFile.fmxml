@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmxml xmlns="http://www.foldingmap.co/fmxml/">
+	<document>
+		<name>Example and Test File</name>
+		<description></description>
+		<view>-122.68022155761719,45.5272216796875,16.0</view>
+		<projection>Mercator</projection>
+		<nodes>
+			<node id="143">-122.67275,45.522644,0,2013-03-17T16:44:12Z</node>
+			<node id="32656162">-122.67277,45.515152,0,2012-09-06T22:41:24Z</node>
+			<node id="32656336">-122.669945,45.520393,0,2012-09-06T22:41:24Z</node>
+			<node id="32656340">-122.66922,45.523304,0,2012-09-06T22:41:24Z</node>
+			<node id="32656345">-122.67039,45.526875,0,2012-09-06T22:41:24Z</node>
+			<node id="40412135">-122.670135,45.52414,0,2012-09-06T22:41:24Z</node>
+			<node id="40412136">-122.67008,45.524506,0,2012-09-06T22:41:24Z</node>
+			<node id="40412137">-122.66992,45.52472,0,2012-09-06T22:41:24Z</node>
+			<node id="40412140">-122.66996,45.525143,0,2012-09-06T22:41:24Z</node>
+			<node id="40508548">-122.67343,45.524548,0,2012-09-06T22:41:25Z</node>
+			<node id="40516268">-122.67238,45.52319,0,2012-09-06T22:41:25Z</node>
+			<node id="40596082">-122.670204,45.52163,0,2012-09-06T22:41:25Z</node>
+			<node id="40596087">-122.67031,45.521362,0,2012-09-06T22:41:25Z</node>
+			<node id="40644438">-122.673416,45.52383,0,2012-09-06T22:41:26Z</node>
+			<node id="40723784">-122.67011,45.5231,0,2012-09-06T22:41:26Z</node>
+			<node id="155699810">-122.671455,45.523125,0,2012-09-06T22:41:26Z</node>
+			<node id="286766352">-122.669655,45.52523,0,2012-09-06T22:41:26Z</node>
+			<node id="286766364">-122.66947,45.52162,0,2012-09-06T22:41:26Z</node>
+			<node id="333451694">-122.66591,45.523014,0,2012-09-06T22:41:26Z</node>
+			<node id="333915941">-122.67129,45.523067,0,2012-09-06T22:41:26Z</node>
+			<node id="339442633">-122.6676,45.527992,0,2012-09-06T22:41:26Z</node>
+			<node id="567256142">-122.672485,45.523193,0,2012-09-06T22:41:27Z</node>
+			<node id="567256143">-122.67339,45.523182,0,2012-09-06T22:41:27Z</node>
+			<node id="567256144">-122.673386,45.52308,0,2012-09-06T22:41:27Z</node>
+			<node id="567256145">-122.67248,45.52309,0,2012-09-06T22:41:27Z</node>
+			<node id="830788473">-122.670334,45.525883,0,2012-09-06T22:41:27Z</node>
+			<node id="830788529">-122.670654,45.52633,0,2012-09-06T22:41:27Z</node>
+			<node id="830788536">-122.67016,45.5238,0,2012-09-06T22:41:27Z</node>
+			<node id="830788735">-122.670074,45.5255,0,2012-09-06T22:41:27Z</node>
+			<node id="830788779">-122.669876,45.525936,0,2012-09-06T22:41:27Z</node>
+			<node id="830788944">-122.670616,45.526268,0,2012-09-06T22:41:27Z</node>
+			<node id="830788949">-122.67386,45.51479,0,2012-09-06T22:41:27Z</node>
+			<node id="830789090">-122.67011,45.522427,0,2012-09-06T22:41:27Z</node>
+			<node id="830789098">-122.67067,45.526535,0,2012-09-06T22:41:27Z</node>
+			<node id="830789126">-122.67314,45.516136,0,2012-09-06T22:41:27Z</node>
+			<node id="830789154">-122.67415,45.514156,0,2012-09-06T22:41:27Z</node>
+			<node id="830789220">-122.674065,45.514328,0,2012-09-06T22:41:27Z</node>
+			<node id="1234800640">-122.67322,45.523567,0,2012-09-06T22:41:28Z</node>
+			<node id="1275171711">-122.66295,45.522957,0,2012-09-06T22:41:28Z</node>
+			<node id="1323150049">-122.66922,45.522957,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150051">-122.67321,45.513954,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150065">-122.67055,45.52676,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150066">-122.67171,45.517277,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150092">-122.66981,45.52068,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150096">-122.67267,45.515266,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150102">-122.669205,45.523197,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150110">-122.66929,45.522514,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150122">-122.669655,45.521053,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150123">-122.67272,45.515144,0,2012-09-06T22:41:29Z</node>
+			<node id="1323150126">-122.67271,45.515278,0,2012-09-06T22:41:29Z</node>
+			<node id="1328062041">-122.66781,45.52305,0,2012-09-06T22:41:29Z</node>
+			<node id="1328062042">-122.66488,45.522995,0,2012-09-06T22:41:29Z</node>
+			<node id="1334933374">-122.67172,45.52307,0,2012-09-06T22:41:29Z</node>
+			<node id="1334933388">-122.67224,45.523083,0,2012-09-06T22:41:29Z</node>
+			<node id="1334933390">-122.67238,45.52309,0,2012-09-06T22:41:29Z</node>
+			<node id="1334933392">-122.67225,45.523182,0,2012-09-06T22:41:29Z</node>
+			<node id="1334933394">-122.671715,45.523174,0,2012-09-06T22:41:29Z</node>
+			<node id="1376369986">-122.67318,45.52308,0,2012-09-06T22:41:30Z</node>
+			<node id="1376370002">-122.67317,45.523182,0,2012-09-06T22:41:30Z</node>
+			<node id="1376370008">-122.67339,45.523262,0,2012-09-06T22:41:30Z</node>
+			<node id="1392884516">-122.673416,45.523766,0,2012-09-06T22:41:30Z</node>
+			<node id="1392884743">-122.67342,45.523907,0,2012-09-06T22:41:30Z</node>
+			<node id="1426624980">-122.670006,45.525303,0,2012-09-06T22:41:30Z</node>
+			<node id="1438456098">-122.67398,45.514507,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466026">-122.6736,45.51528,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466028">-122.673454,45.51553,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466031">-122.6729,45.516582,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466032">-122.672714,45.516922,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466033">-122.672455,45.5174,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466034">-122.671776,45.51865,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466035">-122.67022,45.52156,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466036">-122.67012,45.52222,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466037">-122.67015,45.523945,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466038">-122.67006,45.524536,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466039">-122.67001,45.524567,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466040">-122.66997,45.5246,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466041">-122.669945,45.52464,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466042">-122.66992,45.524925,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466043">-122.66994,45.525043,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466045">-122.67019,45.52568,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466047">-122.6706,45.526245,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466048">-122.67068,45.52649,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466049">-122.67061,45.52669,0,2012-09-06T22:41:31Z</node>
+			<node id="1438466050">-122.670456,45.526833,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678715">-122.66932,45.52214,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678717">-122.66934,45.52215,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678718">-122.669304,45.522182,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678726">-122.66929,45.522232,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678727">-122.66928,45.52229,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678728">-122.66928,45.52234,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678733">-122.669304,45.522385,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678761">-122.66932,45.522423,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678763">-122.66932,45.522446,0,2012-09-06T22:41:31Z</node>
+			<node id="1581678767">-122.66931,45.522514,0,2012-09-06T22:41:31Z</node>
+			<node id="1634664269">-122.666695,45.523026,0,2012-09-06T22:41:31Z</node>
+			<node id="1634664284">-122.668526,45.523064,0,2012-09-06T22:41:31Z</node>
+			<node id="1661403361">-122.66998,45.52523,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403462">-122.67011,45.525574,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403702">-122.67063,45.5263,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403745">-122.67066,45.526363,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403751">-122.67067,45.526398,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403781">-122.67068,45.526432,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403791">-122.67068,45.52646,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403864">-122.67066,45.526566,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403905">-122.670654,45.5266,0,2012-09-06T22:41:32Z</node>
+			<node id="1661403932">-122.67064,45.52664,0,2012-09-06T22:41:32Z</node>
+			<node id="1661404007">-122.67058,45.526726,0,2012-09-06T22:41:32Z</node>
+			<node id="1661404050">-122.67051,45.5268,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247189">-122.66841,45.51365,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247192">-122.668396,45.51383,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247225">-122.668205,45.514935,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247227">-122.672676,45.51523,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247228">-122.67267,45.51525,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247263">-122.67213,45.516457,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247271">-122.67183,45.517056,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247283">-122.667435,45.51781,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247294">-122.67126,45.518085,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247365">-122.670815,45.518864,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247487">-122.66656,45.520683,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247493">-122.66632,45.52133,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247497">-122.669556,45.521378,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247510">-122.66938,45.521988,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247587">-122.66592,45.522892,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247594">-122.66556,45.524162,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247640">-122.669495,45.524582,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247642">-122.6696,45.52504,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247657">-122.66984,45.525814,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247671">-122.66998,45.526176,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247706">-122.670105,45.526398,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247711">-122.670235,45.526627,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247721">-122.66584,45.52689,0,2012-09-06T22:41:32Z</node>
+			<node id="1666247843">-122.66746,45.527924,0,2012-09-06T22:41:32Z</node>
+			<node id="1666626535">-122.6657,45.523705,0,2012-09-06T22:41:32Z</node>
+			<node id="1666626539">-122.665634,45.523983,0,2012-09-06T22:41:32Z</node>
+			<node id="1686224453">-122.67198,45.51827,0,2012-09-06T22:41:32Z</node>
+			<node id="1686224457">-122.67112,45.519855,0,2012-09-06T22:41:32Z</node>
+			<node id="1686224460">-122.67078,45.520496,0,2012-09-06T22:41:32Z</node>
+			<node id="1686224462">-122.67026,45.521465,0,2012-09-06T22:41:32Z</node>
+			<node id="1686224465">-122.670135,45.522068,0,2012-09-06T22:41:32Z</node>
+			<node id="1686224501">-122.67011,45.52233,0,2012-09-06T22:41:32Z</node>
+			<node id="1711981595">-122.67322,45.51391,0,2012-09-06T22:41:32Z</node>
+			<node id="1711981599">-122.673706,45.514038,0,2012-09-06T22:41:32Z</node>
+			<node id="1832493063">-122.67344,45.52432,0,2012-09-06T22:41:33Z</node>
+			<node id="1832493064">-122.66819,45.523003,0,2013-05-23T22:06:32Z</node>
+		</nodes>
+		<mapstyle>
+			<Style>
+				<BackColor>f4f3f0ff</BackColor>
+			</Style>
+			<Style id="Bus Station">
+				<IconStyle>
+					<color>44444480</color>
+					<colorMode>normal</colorMode>
+					<outline>1</outline>
+					<outlineColor>32323280</outlineColor>
+					<scale>0.0</scale>
+					<heading>0.0</heading>
+					<Icon>
+						<href>standard_bus-small.png</href>
+					</Icon>
+					<Visibility>
+						<maxTileZoom>25.0</maxTileZoom>
+						<minTileZoom>16.0</minTileZoom>
+					</Visibility>
+				</IconStyle>
+			</Style>
+			<Style id="Labeled Point">
+				<IconStyle>
+					<color>000000ff</color>
+					<colorMode>normal</colorMode>
+					<outline>1</outline>
+					<outlineColor>32323280</outlineColor>
+					<scale>1.0</scale>
+					<heading>0.0</heading>
+				</IconStyle>
+				<labelStyle>
+					<color>ffffffff</color>
+					<outlineColor>444444ff</outlineColor>
+					<font>
+						<family>SansSerif</family>
+						<style>Plain</style>
+						<size>12</size>
+					</font>
+				</labelStyle>
+			</Style>
+			</Style>
+			<Style id="Photo">
+				<IconStyle>
+					<color>44444480</color>
+					<colorMode>normal</colorMode>
+					<outline>1</outline>
+					<outlineColor>32323280</outlineColor>
+					<scale>0.0</scale>
+					<heading>0.0</heading>
+					<Icon>
+						<href>standard_photo-small.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<Style id="Place - City">
+				<IconStyle>
+					<color>000000ff</color>
+					<colorMode>normal</colorMode>
+					<outline>1</outline>
+					<outlineColor>32323280</outlineColor>
+					<scale>1.0</scale>
+					<heading>0.0</heading>
+					<Visibility>
+						<maxTileZoom>25.0</maxTileZoom>
+						<minTileZoom>2.0</minTileZoom>
+					</Visibility>
+				</IconStyle>
+				<labelStyle>
+					<color>ffffffff</color>
+					<outlineColor>444444ff</outlineColor>
+					<font>
+						<family>SansSerif</family>
+						<style>Plain</style>
+						<size>12</size>
+					</font>
+				</labelStyle>
+			</Style>
+			<Style id="Bar">
+				<IconStyle>
+					<color>44444480</color>
+					<colorMode>normal</colorMode>
+					<outline>1</outline>
+					<outlineColor>32323280</outlineColor>
+					<scale>0.0</scale>
+					<heading>0.0</heading>
+					<Icon>
+						<href>standard_bar-small.png</href>
+					</Icon>
+					<Visibility>
+						<maxTileZoom>25.0</maxTileZoom>
+						<minTileZoom>16.0</minTileZoom>
+					</Visibility>
+				</IconStyle>
+			</Style>
+			<Style id="Railway Stop">
+				<IconStyle>
+					<color>44444480</color>
+					<colorMode>normal</colorMode>
+					<outline>1</outline>
+					<outlineColor>32323280</outlineColor>
+					<scale>0.0</scale>
+					<heading>0.0</heading>
+					<Icon>
+						<href>standard_rail-small.png</href>
+					</Icon>
+					<Visibility>
+						<maxTileZoom>25.0</maxTileZoom>
+						<minTileZoom>16.0</minTileZoom>
+					</Visibility>
+				</IconStyle>
+			</Style>
+			<Style id="Road - City Primary">
+				<LineStyle>
+					<width>1.5</width>
+					<color>ffffffff</color>
+					<selectedFillColor>f33e3e80</selectedFillColor>
+					<outline>1</outline>
+					<outlineColor>44444480</outlineColor>
+					<selectedOutlineColor>ff0000ff</selectedOutlineColor>
+				</LineStyle>
+				<labelStyle>
+					<color>4b443cff</color>
+					<outlineColor>ffffffff</outlineColor>
+					<font>
+						<family>SansSerif</family>
+						<style>Plain</style>
+						<size>10</size>
+					</font>
+				</labelStyle>
+			</Style>
+			<Style id="Park">
+				<PolyStyle>
+					<featureType>Land</featureType>
+					<color>c9dfafff</color>
+					<colorMode>normal</colorMode>
+					<fill>1</fill>
+				</PolyStyle>
+			</Style>
+			<Style id="River">
+				<PolyStyle>
+					<featureType>Water</featureType>
+					<color>a5bfddff</color>
+					<colorMode>normal</colorMode>
+					<fill>1</fill>
+				</PolyStyle>
+			</Style>
+		</mapstyle>
+		<layers>
+			<VectorLayer>
+				<name>New Layer</name>
+				<objects>
+					<Polygon class="River" id="Willamette River">
+						<Ref>0</Ref>
+						<outerBoundary>
+							<coordinates>1666247493 1666247587 1666626535 1666626539 1666247594 1666247721 1666247843 339442633 32656345 1666247711 1666247706 1666247671 830788779 1666247657 286766352 1666247642 1666247640 32656340 1323150102 1323150049 1323150110 1581678767 1581678763 1581678761 1581678733 1581678728 1581678727 1581678726 1581678718 1581678715 1581678717 1666247510 286766364</coordinates>
+						</outerBoundary>
+					</Polygon>
+					<Polygon class="Park" id="Governor Tom McCall Waterfront Park">
+						<Ref>1</Ref>
+						<outerBoundary>
+							<coordinates>1711981595 1323150051 32656162 1323150123 1666247227 1666247228 1323150096 1323150126 1666247263 1666247271 1323150066 1666247294 1666247365 32656336 1323150092 1323150122 1666247497 286766364 1666247510 1581678717 1581678715 1581678718 1581678726 1581678727 1581678728 1581678733 1581678761 1581678763 1581678767 1323150110 1323150049 1323150102 32656340 1666247640 1666247642 286766352 1666247657 830788779 1666247671 1666247706 1666247711 32656345 1438466050 1661404050 1323150065 1661404007 1438466049 1661403932 1661403905 1661403864 830789098 1438466048 1661403791 1661403781 1661403751 1661403745 830788529 1661403702 830788944 1438466047 830788473 1438466045 1661403462 830788735 1426624980 1661403361 40412140 1438466043 1438466042 40412137 1438466041 1438466040 1438466039 1438466038 40412136 40412135 1438466037 830788536 830789090 1686224501 1438466036 1686224465 40596082 1438466035 1686224462 40596087 1686224460 1686224457 1438466034 1686224453 1438466033 1438466032 1438466031 830789126 1438466028 1438466026 830788949 1438456098 830789220 830789154 1711981599</coordinates>
+						</outerBoundary>
+					</Polygon>
+					<LineString class="Road - City Primary" id="East Burnside Street">
+						<Ref>2</Ref>
+						<coordinates>1328062042 1275171711</coordinates>
+					</LineString>
+					<LineString class="Road - City Primary" id="West Burnside Street">
+						<Ref>3</Ref>
+						<coordinates>155699810 40723784</coordinates>
+					</LineString>
+					<LineString class="Road - City Primary" id="Northwest 3rd Avenue">
+						<Ref>4</Ref>
+						<coordinates>40508548 1832493063 1392884743 40644438 1392884516 1376370008 567256143</coordinates>
+					</LineString>
+					<Point class="Bar" id="Yes and No">
+						<Ref>5</Ref>
+						<coordinates>1234800640</coordinates>
+					</Point>
+					<Point class="Railway Stop" id="Skidmore Fountain">
+						<Ref>6</Ref>
+						<coordinates>333915941</coordinates>
+					</Point>
+					<MultiGeometry id="">
+						<Ref>7</Ref>
+						<Name></Name>
+						<elements>
+							<LineString class="Road - City Primary" id="W Burnside Bridge St">
+								<Ref>6549</Ref>
+								<coordinates>155699810 1334933394 1334933392 40516268</coordinates>
+							</LineString>
+							<LineString class="Road - City Primary" id="W Burnside Bridge St">
+								<Ref>9046</Ref>
+								<coordinates>40516268 567256142 1376370002 567256143</coordinates>
+							</LineString>
+						</elements>
+					</MultiGeometry>
+					<MultiGeometry id="">
+						<Ref>8</Ref>
+						<Name></Name>
+						<elements>
+							<LineString class="Road - City Primary" id="Burnside">
+								<Ref>8045</Ref>
+								<coordinates>1334933390 1334933388 1334933374 155699810</coordinates>
+							</LineString>
+							<LineString class="Road - City Primary" id="Burnside">
+								<Ref>5625</Ref>
+								<coordinates>567256144 1376369986 567256145 1334933390</coordinates>
+							</LineString>
+						</elements>
+					</MultiGeometry>
+					<MultiGeometry id="Burnside Bridge">
+						<Ref>9</Ref>
+						<Name>Burnside Bridge</Name>
+						<description><![CDATA[Burnside Bridge MultiGeometry]]></description>
+						<elements>
+							<LineString class="Road - City Primary" id="Burnside Bridge">
+								<Ref>8004</Ref>
+								<coordinates>40723784 1634664284 1328062041</coordinates>
+							</LineString>
+							<LineString class="Road - City Primary" id="Burnside Bridge">
+								<Ref>8001</Ref>
+								<coordinates>1328062041 1634664269 333451694 1328062042</coordinates>
+							</LineString>
+						</elements>
+					</MultiGeometry>
+					<Polygon class="River" id="Willamette River">
+						<Ref>10</Ref>
+						<outerBoundary>
+							<coordinates>1711981595 1323150051 32656162 1323150123 1666247227 1666247228 1323150096 1323150126 1666247263 1666247271 1323150066 1666247294 1666247365 32656336 1323150092 1323150122 1666247497 286766364 1666247493 1666247487 1666247283 1666247225 1666247192 1666247189</coordinates>
+						</outerBoundary>
+					</Polygon>
+					<Point class="Labeled Point" id="Portland">
+						<Ref>11</Ref>
+						<coordinates>143</coordinates>
+					</Point>
+					<PhotoPoint class="Photo" id="Portland Oregon - White Stag sign">
+						<Ref>12</Ref>
+						<Icon>
+							<href>http://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Portland_Oregon_-_White_Stag_sign.jpg/666px-Portland_Oregon_-_White_Stag_sign.jpg</href>
+						</Icon>
+						<coordinates>1832493064</coordinates>
+					</PhotoPoint>
+				</objects>
+			</VectorLayer>
+		</layers>
+	</document>
+</fmxml>

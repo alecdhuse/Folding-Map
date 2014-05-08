@@ -457,21 +457,20 @@ public class MapPoint extends VectorObject {
     }    
     
     @Override
-    public void toXML(XmlOutput kmlWriter) {        
-        kmlWriter.openTag ("Point id=\"" + getObjectClass() + "\"");
-        kmlWriter.writeTag("name", getName());
-        kmlWriter.writeTag("Ref", Long.toString(getReference()));
-        kmlWriter.writeTag("coordinates", getCoordinateString());
+    public void toXML(XmlOutput xmlWriter) {        
+        xmlWriter.openTag ("Point class=\"" + getObjectClass() + "\" id=\"" + getName() + "\"");
+        xmlWriter.writeTag("Ref", Long.toString(getReference()));
+        xmlWriter.writeTag("coordinates", getCoordinateString());
 
         if (hasDisplayableText(getDescription()) && !getDescription().equalsIgnoreCase("null"))
-            kmlWriter.writeTag("description", "<![CDATA[" + getDescription() + "]]>");
+            xmlWriter.writeTag("description", "<![CDATA[" + getDescription() + "]]>");
 
         if (visibility != null)
-            visibility.toXML(kmlWriter);                
+            visibility.toXML(xmlWriter);                
 
-        writeCustomDataFieldsAsXML(kmlWriter);
+        writeCustomDataFieldsAsXML(xmlWriter);
 
-        kmlWriter.closeTag("Point");
+        xmlWriter.closeTag("Point");
     }
     
 }

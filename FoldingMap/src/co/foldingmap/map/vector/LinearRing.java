@@ -53,34 +53,33 @@ public class LinearRing extends LineString {
     /**
      * Writes out the KML for LinearRing.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
     @Override
-    public void toXML(XmlOutput kmlWriter) {
+    public void toXML(XmlOutput xmlWriter) {
         try {            
-            kmlWriter.openTag ("LinearRing id=\"" + getObjectClass() + "\"");
-            kmlWriter.writeTag("name", getName());
+            xmlWriter.openTag ("LinearRing class=\"" + getObjectClass() + "\" id=\"" + getName() + "\"");
             
             if (hasDisplayableText(getDescription()) && !getDescription().equalsIgnoreCase("null"))
-                kmlWriter.writeTag("description", "<![CDATA[" + getDescription() + "]]>");
+                xmlWriter.writeTag("description", "<![CDATA[" + getDescription() + "]]>");
  
             
-            kmlWriter.writeTag("Ref", Long.toString(getReference()));
-            kmlWriter.writeTag("coordinates",  getCoordinateString());
+            xmlWriter.writeTag("Ref", Long.toString(getReference()));
+            xmlWriter.writeTag("coordinates",  getCoordinateString());
 
             if (visibility != null)
-                visibility.toXML(kmlWriter);
+                visibility.toXML(xmlWriter);
             
             if (this.parentLayer.hasTimeSpan()) {
-                kmlWriter.openTag ("gx:Timestamps");
+                xmlWriter.openTag ("gx:Timestamps");
                     for (Coordinate currentCoordinate: coordinates)
-                        kmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
-                kmlWriter.closeTag("gx:Timestamps");
+                        xmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
+                xmlWriter.closeTag("gx:Timestamps");
             }
 
-            writeCustomDataFieldsAsXML(kmlWriter);
+            writeCustomDataFieldsAsXML(xmlWriter);
 
-            kmlWriter.closeTag("LinearRing");
+            xmlWriter.closeTag("LinearRing");
         } catch (Exception e) {
             System.err.println("Error in LinearRing.toXML(KmlWriter) Object: " + this.objectName + " - " + e);
         }

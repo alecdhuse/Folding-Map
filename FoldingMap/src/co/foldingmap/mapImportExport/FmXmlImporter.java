@@ -673,7 +673,7 @@ public class FmXmlImporter implements FormatImporter {
                         
             if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);           
             
-            newLine = new LineString(objectName, id, coordinates);
+            newLine = new LineString(objectName, objectClass, coordinates);
 
             newLine.setDescription(description);
 
@@ -834,7 +834,7 @@ public class FmXmlImporter implements FormatImporter {
                         
             if (objectClass.startsWith("#")) objectClass = objectClass.substring(1);          
             
-            newPoint = new MapPoint(objectName, id, description, coordinates);
+            newPoint = new MapPoint(objectName, objectClass, description, coordinates);
 
             if (hasRegion) {
                 Region     region = getRegion(placemarkTag.getSubtag("Region"));
@@ -1086,7 +1086,6 @@ public class FmXmlImporter implements FormatImporter {
             String                      fileName, objectClass, objectName, id;
             XMLTag                      dataTag, iconTag;
 
-            objectName       = placemarkTag.getSubtagContent("name");
             description      = removeCDataTag(placemarkTag.getSubtagContent("description"));
             id               = placemarkTag.getPropertyValue("id");
             hasData          = placemarkTag.containsSubTag("data");
@@ -1111,7 +1110,7 @@ public class FmXmlImporter implements FormatImporter {
             
             newPoint = new PhotoPoint(objectName, coordinates.get(0), fileName);
             
-            newPoint.setClass(id);
+            newPoint.setClass(objectClass);
             newPoint.setDescription(description);
             
             if (hasRegion) {
@@ -1166,9 +1165,8 @@ public class FmXmlImporter implements FormatImporter {
             String                      objectClass, objectName, id, timestamps;
             XMLTag                      dataTag, lineStringTag, outerBoundaryTag, polygonTag;
             
-            objectName        = placemarkTag.getSubtagContent("name");
             description       = removeCDataTag(placemarkTag.getSubtagContent("description"));
-            id               = placemarkTag.getPropertyValue("id");
+            id                = placemarkTag.getPropertyValue("id");
             hasData           = placemarkTag.containsSubTag("data");
             hasRegion         = placemarkTag.containsSubTag("Region");
             hasRef            = placemarkTag.containsSubTag("Ref");                         
@@ -1202,7 +1200,7 @@ public class FmXmlImporter implements FormatImporter {
             }
             
             if (coordinates != null) {
-                newPolygon = new Polygon(objectName, id, coordinates);            
+                newPolygon = new Polygon(objectName, objectClass, coordinates);            
                 newPolygon.setDescription(description);
             
                 if (hasRef) 
@@ -1312,7 +1310,7 @@ public class FmXmlImporter implements FormatImporter {
                 if (outlineTag.containsSubTag("outlineStyle")) {
                     ArrayList<XMLTag> outlineStyleTags;
 
-                    outlineStyleTags = outlineTag.getSubtags("outlineStyle");
+                    outlineStyleTags = outlineTag.getSubtagsByName("outlineStyle");
 
                     for (XMLTag tag: outlineStyleTags) {
                         outlineStyle = getOutlineStyle(tag);

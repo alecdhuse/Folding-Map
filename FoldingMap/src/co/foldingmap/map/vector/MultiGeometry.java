@@ -420,7 +420,7 @@ public class MultiGeometry extends VectorObject {
     /**
      * Writes this object to XML.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
     @Override
     public void toXML(XmlOutput xmlWriter) {
