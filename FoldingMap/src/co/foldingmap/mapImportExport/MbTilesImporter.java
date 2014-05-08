@@ -86,7 +86,7 @@ public class MbTilesImporter implements FormatImporter {
         if (mbTiles.getZoom() > 0) {
             proj.setZoomLevel(TileMath.getVectorMapZoom(mbTiles.getZoom())); 
         } else {
-            proj.setZoomLevel(TileMath.getVectorMapZoom(2)); 
+            proj.setZoomLevel(TileMath.getVectorMapZoom(mbTiles.getMinZoom())); 
         }
         
         newMap = new DigitalMap(mbTiles.getName(), proj);
