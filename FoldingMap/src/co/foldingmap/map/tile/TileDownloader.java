@@ -37,14 +37,19 @@ public class TileDownloader extends Thread {
     private Connection               conn;  
     private String                   tileServerAddress;
     
-    public TileDownloader(String tileServerAddress, String sourceTitle) {
-        this.tileServerAddress = tileServerAddress;
+    public TileDownloader(String tileServerAddress, String sourceTitle) {        
         this.tilesToDownload   = new ArrayList<TileReference>();    
         
         if (tileServerAddress.contains("{x}")) {
             urlReplace = true;
         } else {
             urlReplace = false;
+        }
+        
+        if (tileServerAddress.toLowerCase().startsWith("http")) {
+            this.tileServerAddress = tileServerAddress;
+        } else {
+            this.tileServerAddress = tileServerAddress + "http://";
         }
         
         //load database
@@ -119,12 +124,12 @@ public class TileDownloader extends Thread {
             if (y < 0) y = 0;
             
             if (urlReplace) {
-                constructedURL = "http://" + tileServerAddress;
+                constructedURL = tileServerAddress;
                 constructedURL = constructedURL.replace("{x}", Integer.toString(x));
                 constructedURL = constructedURL.replace("{y}", Integer.toString(y));
                 constructedURL = constructedURL.replace("{z}", Integer.toString(z));
             } else {
-                constructedURL = "http://" + tileServerAddress + "/" + z + "/" + x + "/" + y + ".png";
+                constructedURL = tileServerAddress + "/" + z + "/" + x + "/" + y + ".png";
             }
             
             url       = new URL(constructedURL);            
