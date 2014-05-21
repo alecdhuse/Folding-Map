@@ -270,7 +270,7 @@ public class LineString extends VectorObject {
             modifiedWidth       = (lineStringStyle.getLineWidth() * widthModifier);
             yOffset             = (modifiedWidth <= 12 ? (modifiedWidth / 3.0f) : 4);
 
-            for (int i = 1; i < lengths.length; i++) {
+            for (int i = 0; i < lengths.length; i++) {
                 Float f         = lengths[i];
                 segmentLengths += f.floatValue();
 
