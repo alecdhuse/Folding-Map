@@ -229,13 +229,13 @@ public class LineString extends VectorObject {
      * 
      * @param g2
      * @param mapView
+     * @param labelStyle
      * @return 
      */
     public ArrayList<LineStringLabel> createLabel(Graphics2D g2, 
                                                   MapView    mapView,
                                                   LabelStyle labelStyle) {
-        
-        ArrayList<Float>            lengths;
+                
         ArrayList<LineStringLabel>  labels;
         boolean                     createLabel;
         double                      slope;
@@ -244,10 +244,11 @@ public class LineString extends VectorObject {
         float                       centeredX, yOffset; 
         float                       labelLength, labelPartLength, segmentLengths;
         float                       modifiedWidth, widthModifier; 
+        float[]                     lengths;
         LabelAbbreviations          labelAbbreviations;  
         LineStringLabel             lineLabel;
         LineStyle                   lineStringStyle;
-        Point2D.Float               p1, p2;        
+        Point2D.Float              p1, p2;        
         String                      nameAbbr;
         StringBuffer                namePart;
         
@@ -269,8 +270,8 @@ public class LineString extends VectorObject {
             modifiedWidth       = (lineStringStyle.getLineWidth() * widthModifier);
             yOffset             = (modifiedWidth <= 12 ? (modifiedWidth / 3.0f) : 4);
 
-            for (int i = 1; i < lengths.size(); i++) {
-                Float f         = lengths.get(i);
+            for (int i = 1; i < lengths.length; i++) {
+                Float f         = lengths[i];
                 segmentLengths += f.floatValue();
 
                 if (labels.size() > 0) {
@@ -320,7 +321,7 @@ public class LineString extends VectorObject {
                             labels.add(lineLabel);
                     } else {
                         //Break up the label
-
+                        //TODO: Write code to have lables drawn in multiple parts at different angles.
                     }
                 }
             }                                                  
@@ -697,19 +698,19 @@ public class LineString extends VectorObject {
      * 
      * @return 
      */
-    public ArrayList<Float> getSegmentLengths() {
-       ArrayList<Float>                 lengths;
-       Float                            distance, length;
-       Point2D                          p1, p2;
+    public float[] getSegmentLengths() {
+       float[]  lengths;
+       float    distance;
+       Point2D  p1, p2;
        
-       lengths = new ArrayList<Float>();
+       lengths = new float[(coordinates.size() - 1)];
               
        for (int i = 1; i < coordinates.size(); i++) {
            p1 = this.coordinates.get(i-1).getCenterPoint();
            p2 = this.coordinates.get(i).getCenterPoint();
 
            distance = (float) Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
-           lengths.add(new Float(distance));
+           lengths[i-1] = distance;
        }
        
        

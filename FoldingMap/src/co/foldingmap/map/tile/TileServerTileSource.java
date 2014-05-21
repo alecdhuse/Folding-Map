@@ -16,7 +16,6 @@
  */
 package co.foldingmap.map.tile;
 
-import co.foldingmap.ResourceHelper;
 import co.foldingmap.xml.XmlOutput;
 import java.awt.image.BufferedImage;
 

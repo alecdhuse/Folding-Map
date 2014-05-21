@@ -286,7 +286,7 @@ public class LineStringTest {
         System.out.println("getSegmentLengths");
         LineString instance = new LineString();
         ArrayList expResult = null;
-        ArrayList result = instance.getSegmentLengths();
+        float[] result = instance.getSegmentLengths();
 
         //TODO: Write an actual test here.
     }
