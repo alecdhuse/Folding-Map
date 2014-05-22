@@ -316,8 +316,7 @@ public class LineString extends VectorObject {
                             lineLabel.setFont(labelStyle.getFont());                            
                         }
                         
-                        //TODO: Figure out why this is needed and make it so it is not, to make drawing faster
-                        if (!labels.contains(lineLabel))
+//                        if (!labels.contains(lineLabel))
                             labels.add(lineLabel);
                     } else {
                         //Break up the label
