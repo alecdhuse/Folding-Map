@@ -49,7 +49,7 @@ public class TileDownloader extends Thread {
         if (tileServerAddress.toLowerCase().startsWith("http")) {
             this.tileServerAddress = tileServerAddress;
         } else {
-            this.tileServerAddress = tileServerAddress + "http://";
+            this.tileServerAddress = "http://" + tileServerAddress;
         }
         
         //load database
