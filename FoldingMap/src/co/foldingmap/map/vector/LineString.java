@@ -458,15 +458,23 @@ public class LineString extends VectorObject {
      * 
      * @param g2
      * @param mapView 
+     * @param inMultiGeometry 
      */
     @Override
-    public void drawOutline(Graphics2D g2, MapView mapView) {
+    public void drawOutline(Graphics2D g2, MapView mapView, boolean inMultiGeometry) {
         BasicStroke lineOutlineStroke;
         boolean     drawObject, outline;
+        int         styleCap;
         float       width, widthModifier;
         LineStyle   lineStringStyle;
         
         try {
+            if (inMultiGeometry) {
+                styleCap = BasicStroke.CAP_BUTT;
+            } else {
+                styleCap = BasicStroke.CAP_ROUND;
+            }
+            
             lineStringStyle = (LineStyle) mapView.getMapTheme().getLineStyle(this.getObjectClass());
             
             if (lineStringStyle != null) {
@@ -488,18 +496,18 @@ public class LineString extends VectorObject {
 
                    if (lineStringStyle.getLineStroke() != null) {
                         if (lineStringStyle.getLineStroke().equals(LineStyle.SOLID)) {
-                           lineOutlineStroke = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                           lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND);
                         } else if (lineStringStyle.getLineStroke().equals(LineStyle.DASHED)) {
-                           lineOutlineStroke = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
+                           lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
                         } else if (lineStringStyle.getLineStroke().equalsIgnoreCase(LineStyle.DOTTED)) {
                             lineOutlineStroke = MapTheme.getStroke(LineStyle.DOTTED, lineStringStyle.getLineWidth());
                         } else if (lineStringStyle.getLineStroke().equals(LineStyle.DASH_DOT)) {
-                            lineOutlineStroke = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
+                            lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
                         } else {
-                            lineOutlineStroke = new BasicStroke((width),  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                            lineOutlineStroke = new BasicStroke((width),  styleCap, BasicStroke.JOIN_ROUND);
                         }
                     } else {
-                        lineOutlineStroke = new BasicStroke((width),  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                        lineOutlineStroke = new BasicStroke((width),  styleCap, BasicStroke.JOIN_ROUND);
                     } 
 
                     g2.setStroke(lineOutlineStroke);

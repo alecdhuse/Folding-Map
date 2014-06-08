@@ -115,11 +115,11 @@ public class MultiGeometry extends VectorObject {
                     
                     if (currentMapObject instanceof Polygon) {
                         currentMapObject.drawObject(g2, mapView, null);    
-                        currentMapObject.drawOutline(g2, mapView);                        
+                        currentMapObject.drawOutline(g2, mapView, true);                        
                     } else if (currentMapObject instanceof LineString) {
-                        currentMapObject.drawOutline(g2, mapView);
+                        currentMapObject.drawOutline(g2, mapView, true);
                     } else if (currentMapObject instanceof MultiGeometry) {
-                        currentMapObject.drawOutline(g2, mapView);                        
+                        currentMapObject.drawOutline(g2, mapView, true);                        
                     }
                 }                
                 
@@ -131,10 +131,10 @@ public class MultiGeometry extends VectorObject {
                     if (currentMapObject != null) {
                         if (currentMapObject instanceof LineString) {
                             currentLineString = (LineString) currentMapObject;
-                            currentLineString.drawOutline(g2, mapView);
+                            currentLineString.drawOutline(g2, mapView, true);
                         } else if (currentMapObject instanceof Polygon) {
                             currentPolygon = (Polygon) currentMapObject;
-                            currentPolygon.drawOutline(g2, mapView);
+                            currentPolygon.drawOutline(g2, mapView, true);
                         }
 
                         currentMapObject.drawObject(g2, mapView, colorStyle);
@@ -153,10 +153,10 @@ public class MultiGeometry extends VectorObject {
      * @param mapView 
      */
     @Override
-    public void drawOutline(Graphics2D g2, MapView mapView) {
+    public void drawOutline(Graphics2D g2, MapView mapView, boolean inMultiGeometry) {
         if (this.isVisible(mapView)) {
             for (VectorObject obj: this.mapObjects) {
-                obj.drawOutline(g2, mapView);
+                obj.drawOutline(g2, mapView, true);
             }
         }
     }    

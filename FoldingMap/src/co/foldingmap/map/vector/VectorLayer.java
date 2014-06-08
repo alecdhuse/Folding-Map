@@ -237,11 +237,11 @@ public class VectorLayer extends Layer {
                     
                     if (currentMapObject instanceof Polygon) {
                         currentMapObject.drawObject(g2, mapView, null);    
-                        currentMapObject.drawOutline(g2, mapView);                        
+                        currentMapObject.drawOutline(g2, mapView, false);                        
                     } else if (currentMapObject instanceof LineString) {
-                        currentMapObject.drawOutline(g2, mapView);
+                        currentMapObject.drawOutline(g2, mapView, false);
                     } else if (currentMapObject instanceof MultiGeometry) {
-                        currentMapObject.drawOutline(g2, mapView);                         
+                        currentMapObject.drawOutline(g2, mapView, false);                         
                     }
                 }
                 
@@ -259,7 +259,7 @@ public class VectorLayer extends Layer {
                             currentMapObject.drawObject(g2, mapView, null);
 
                             if (currentMapObject instanceof Polygon) {
-                                ((Polygon) currentMapObject).drawOutline(g2, mapView);   
+                                ((Polygon) currentMapObject).drawOutline(g2, mapView, false);   
                             } else if (currentMapObject instanceof LineString) {
 
                             }                        

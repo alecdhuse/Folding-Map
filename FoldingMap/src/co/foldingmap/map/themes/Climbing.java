@@ -56,7 +56,8 @@ public class Climbing extends MapTheme {
         addStyleElement(new IconStyle("Trad Route",                    new Color(255,   0,   0, 204), DEFAULT_LABEL,  lvl2));
         
         //LineStyles
-        addStyleElement(new LineStyle("(Unspecified Linestring)",        new Color(68, 68, 68, 128),    1.0f, LineStyle.SOLID,  false));
+        addStyleElement(new LineStyle("(Unspecified Linestring)",        new Color(68, 68, 68, 128),    1.0f, LineStyle.SOLID,  false));        
+        addStyleElement(new LineStyle("Aeroway",                         new Color(211, 202, 189),      1.5f, LineStyle.SOLID,  false));        
         addStyleElement(new LineStyle("Border - Country Border",         new Color(180, 174, 174),      1.2f, LineStyle.SOLID,  false));
         addStyleElement(new LineStyle("Border - Inter-Country",          new Color(180, 174, 174),      1.2f, LineStyle.DASHED, false));
         addStyleElement(new LineStyle("Coastline",                       new Color(234, 200, 117),      1.2f, LineStyle.SOLID,  false));
@@ -75,7 +76,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new LineStyle("Road - City Primary",             Color.WHITE,                   new Color(68, 68, 68, 128), 1.5f, LineStyle.SOLID, cityRoadStandard));
         addStyleElement(new LineStyle("Road - City Secondary",           Color.WHITE,                   new Color(68, 68, 68, 128), 1.5f, LineStyle.SOLID, cityRoadStandard, new Visibility(23, 13)));
         addStyleElement(new LineStyle("Road - City Tertiary",            Color.WHITE,                   new Color(68, 68, 68, 128), 1.0f, LineStyle.SOLID, cityRoadStandard, new Visibility(23, 14)));
-        addStyleElement(new LineStyle("Road - Motorway",                 new Color(255, 195,  69),      new Color(217, 142,  15),   2.5f, LineStyle.SOLID));
+        addStyleElement(new LineStyle("Road - Motorway",                 new Color(255, 195,  69),      new Color(217, 142,  15),   2.5f, LineStyle.SOLID)); 
         addStyleElement(new LineStyle("Road - Motorway Link",            new Color(255, 195,  69),      new Color(217, 142,  15),   1.5f, LineStyle.SOLID, new Visibility(23, 13)));       
         addStyleElement(new LineStyle("Road - Primary Highway",          new Color(255, 195,  69),      new Color(217, 142,  15),   2.5f, LineStyle.SOLID, primaryHighway));
         addStyleElement(new LineStyle("Road - Primary Highway Link",     new Color(255, 195,  69),      new Color(217, 142,  15),   1.5f, LineStyle.SOLID, new Visibility(23, 13)));
@@ -94,18 +95,19 @@ public class Climbing extends MapTheme {
         
         //polystyle
         addStyleElement(new PolygonStyle("(Unspecified Polygon)", new Color(188, 190, 178), new Color(68,68,68,180)));
+        addStyleElement(new PolygonStyle("Airport",               new Color(223, 219, 212), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Agricultural Plot",     new Color(172, 194, 160), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Beach",                 new Color(230, 210, 151), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Building",              new Color(231, 230, 225), new Color(212, 208, 204)));
         addStyleElement(new PolygonStyle("Commercial Area",       new Color(222, 208, 213), ThemeConstants.LAND));  
         addStyleElement(new PolygonStyle("Country - Filled",      new Color(239, 237, 230), new Color(200, 200, 200, 128), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Default Backdrop",      new Color(166, 174, 183, 128)));
-        addStyleElement(new PolygonStyle("Forest",                new Color(135, 162, 121), new Color( 68,  68,  68, 180), ThemeConstants.LAND));
+        addStyleElement(new PolygonStyle("Forest",                new Color(135, 162, 121), new Color( 68,  68,  68, 128), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Grass Field",           new Color(190, 217, 166), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Industrial Area",       new Color(222, 208, 213), ThemeConstants.LAND));  
         addStyleElement(new PolygonStyle("Island",                new Color(239, 237, 230), new Color(239, 237, 230, 140), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Lake",                  new Color(165, 191, 221), ThemeConstants.WATER));
-        addStyleElement(new PolygonStyle("Market",                new Color(  0, 153, 141), ThemeConstants.LAND)); 
+        addStyleElement(new PolygonStyle("Market",                new Color(216, 237, 235), ThemeConstants.LAND)); 
         addStyleElement(new PolygonStyle("Ocean",                 new Color(165, 191, 221), ThemeConstants.WATER));
         addStyleElement(new PolygonStyle("Park",                  new Color(201, 223, 175), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Parking Lot",           new Color(212, 208, 204), new Color(68, 68, 68, 120),    ThemeConstants.LAND));

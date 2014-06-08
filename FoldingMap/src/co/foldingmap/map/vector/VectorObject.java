@@ -60,7 +60,7 @@ public abstract class VectorObject implements MapObject {
     protected Visibility                 visibility;
     
     //abstract methods        
-    public abstract void            drawOutline(Graphics2D g2, MapView mapView);
+    public abstract void            drawOutline(Graphics2D g2, MapView mapView, boolean inMultiGeometry);
     public abstract VectorObject    fitToBoundry(LatLonAltBox boundry) throws ObjectNotWithinBoundsException;
     public abstract Coordinate      getCoordinateWithinRectangle(Rectangle2D range);    
     public abstract void            toXML(XmlOutput kmlWriter);    

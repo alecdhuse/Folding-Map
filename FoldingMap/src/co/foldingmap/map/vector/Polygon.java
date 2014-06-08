@@ -396,9 +396,10 @@ public class Polygon extends VectorObject {
      * 
      * @param g2
      * @param mapView 
+     * @param inMultiGeometry 
      */
     @Override
-    public void drawOutline(Graphics2D g2, MapView mapView) {       
+    public void drawOutline(Graphics2D g2, MapView mapView, boolean inMultiGeometry) {       
         boolean     drawObject;
         ColorStyle  polygonStyle;
          
