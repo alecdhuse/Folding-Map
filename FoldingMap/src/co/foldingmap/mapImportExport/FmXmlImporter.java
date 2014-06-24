@@ -57,6 +57,7 @@ import co.foldingmap.map.themes.LineStyle;
 import co.foldingmap.GUISupport.ProgressBarPanel;
 import co.foldingmap.GUISupport.ProgressIndicator;
 import co.foldingmap.Logger;
+import co.foldingmap.map.vector.LatLonBox;
 import co.foldingmap.map.visualization.HeatMap;
 import co.foldingmap.map.visualization.HeatMapKey;
 import co.foldingmap.xml.XMLParser;
@@ -290,7 +291,7 @@ public class FmXmlImporter implements FormatImporter {
                     positionRef = HeatMapKey.TOP_RIGHT;
                 } 
                 
-                for (XMLTag tag: keyTag.getSubtags("color")) {
+                for (XMLTag tag: keyTag.getSubtagsByName("color")) {
                     colors.add(ColorHelper.parseHexStandard(tag.getTagContent()));
                 }
                 
@@ -513,9 +514,29 @@ public class FmXmlImporter implements FormatImporter {
     }    
     
     /**
+     * Creates a LatLonBox object from the XML LatLonBox.
+     * 
+     * @param tag
+     * @return 
+     */
+    public static LatLonBox getLatLonBox(XMLTag tag) {
+        float        north, south, east, west;
+        LatLonBox    latLonBox;              
+        
+        north   = Float.parseFloat(tag.getSubtagContent("north"));
+        south   = Float.parseFloat(tag.getSubtagContent("south"));
+        east    = Float.parseFloat(tag.getSubtagContent("east"));
+        west    = Float.parseFloat(tag.getSubtagContent("west"));
+
+        latLonBox = new LatLonBox(north, south, east, west);        
+        
+        return latLonBox;
+    }    
+    
+    /**
      * Reads in XML for LevelOfDetail and returns a LevelOfDetail object.
      * 
-     * @param lodTag - FmXml tag containing the LEvelOfDetail tag.
+     * @param lodTag - FmXml tag containing the LevelOfDetail tag.
      * @return 
      */
     public static LevelOfDetail getLevelOfDetail(XMLTag lodTag) {        

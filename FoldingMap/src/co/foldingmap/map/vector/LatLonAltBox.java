@@ -383,32 +383,32 @@ public class LatLonAltBox extends LatLonBox {
     }    
             
     /**
-     * Writes the LAtLonAltBox to KML.
+     * Writes the LatLonAltBox to fmXML.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
-    public void toXML(XmlOutput kmlWriter) {
-        kmlWriter.openTag ("LatLonAltBox");
+    public void toXML(XmlOutput xmlWriter) {
+        xmlWriter.openTag ("LatLonAltBox");
 
-        kmlWriter.writeTag("north",       Double.toString(north));
-        kmlWriter.writeTag("south",       Double.toString(south));
-        kmlWriter.writeTag("east",        Double.toString(east));
-        kmlWriter.writeTag("west",        Double.toString(west));
-        kmlWriter.writeTag("minAltitude", Double.toString(minAltitude));
-        kmlWriter.writeTag("maxAltitude", Double.toString(maxAltitude));
+        xmlWriter.writeTag("north",       Double.toString(north));
+        xmlWriter.writeTag("south",       Double.toString(south));
+        xmlWriter.writeTag("east",        Double.toString(east));
+        xmlWriter.writeTag("west",        Double.toString(west));
+        xmlWriter.writeTag("minAltitude", Double.toString(minAltitude));
+        xmlWriter.writeTag("maxAltitude", Double.toString(maxAltitude));
 
         switch (altitudeMode) {
             case CLAMP_TO_GROUND:
-                kmlWriter.writeTag("altitudeMode", "clampToGround");
+                xmlWriter.writeTag("altitudeMode", "clampToGround");
                 break;
             case RELATIVE_TO_GROUND:
-                kmlWriter.writeTag("altitudeMode", "relativeToGround");
+                xmlWriter.writeTag("altitudeMode", "relativeToGround");
                 break;
             case ABSOLUTE:
-                kmlWriter.writeTag("altitudeMode", "absolute");
+                xmlWriter.writeTag("altitudeMode", "absolute");
                 break;
         }
 
-        kmlWriter.closeTag("LatLonAltBox");
+        xmlWriter.closeTag("LatLonAltBox");
     }    
 }

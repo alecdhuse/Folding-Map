@@ -367,7 +367,7 @@ public class DigitalMap {
      * Returns all the values for a specified custom field name of objects
      * in the map.
      *
-     * @param   String             The field name for the associated value.
+     * @param fieldName            The field name for the associated value.
      * @return  ArrayList<String>  The value for the passed in fieldName.
      */
     public ArrayList<String> getCustomDataFieldValue(String fieldName) {
@@ -466,6 +466,8 @@ public class DigitalMap {
     
     /**
      * Returns the file holding this map's data.
+     * 
+     * @return The file this map is saved to.
      */
     public File getMapFile() {
         return mapFile;
@@ -483,8 +485,8 @@ public class DigitalMap {
     /**
      * Returns the maximum value for a numeric data field of all objects in this map.
      *
-     * @param   String  The field name to find the maximum.
-     * @return  double  The maximum value for the supplied field.
+     * @param   fieldName The field name to find the maximum.
+     * @return  double    The maximum value for the supplied field.
      */
     public double getMaximumFieldValue(String fieldName) {
         double      fieldValue, valueMax;
@@ -509,8 +511,8 @@ public class DigitalMap {
     /**
      * Returns the minimum value for a numeric data field of all objects in this map.
      *
-     * @param   String  The field name to find the minimum.
-     * @return  double  The minimum value for the supplied field.
+     * @param   fieldName The field name to find the minimum.
+     * @return  double    The minimum value for the supplied field.
      */
     public double getMinimumFieldValue(String fieldName) {
         double      fieldValue, valueMin;
@@ -782,6 +784,7 @@ public class DigitalMap {
     /**
      * Sets the Action manager to be used with this map.
      * 
+     * @param actions The actions manager to be used with this map.
      */
     public void setActions(Actions actions) {
         this.actions = actions;
@@ -885,6 +888,8 @@ public class DigitalMap {
      * Sets the theme associated with this map.
      * 
      * @param mapTheme 
+     * @param updateable 
+     * @param progressIndicator The indicator used to show progress for this method.
      */
     public void setTheme(MapTheme          mapTheme, 
                          Updateable        updateable,

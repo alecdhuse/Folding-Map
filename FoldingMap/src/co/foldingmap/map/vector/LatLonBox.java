@@ -18,6 +18,7 @@ package co.foldingmap.map.vector;
 
 import co.foldingmap.map.MapUtilities;
 import co.foldingmap.map.NumericValueOutOfRangeException;
+import co.foldingmap.xml.XmlOutput;
 
 /**
  *
@@ -33,6 +34,11 @@ public class LatLonBox {
     
     /**
      * Constructor for objects of class LatLonAltBox using floats.
+     * 
+     * @param north North bounds of the box.
+     * @param south South bounds of the box.
+     * @param east  East bounds of the box.
+     * @param west  West bounds of the box.
      */
     public LatLonBox(float north, float south, float east, float west) {        
         setNorth(north);
@@ -274,4 +280,20 @@ public class LatLonBox {
 
         return sb.toString();
     }      
+    
+    /**
+     * Writes the LatLonAltBox to fmXML.
+     * 
+     * @param xmlWriter 
+     */
+    public void toXML(XmlOutput xmlWriter) {
+        xmlWriter.openTag ("LatLonBox");
+
+        xmlWriter.writeTag("north", Double.toString(north));
+        xmlWriter.writeTag("south", Double.toString(south));
+        xmlWriter.writeTag("east",  Double.toString(east));
+        xmlWriter.writeTag("west",  Double.toString(west));
+
+        xmlWriter.closeTag("LatLonBox");
+    }       
 }

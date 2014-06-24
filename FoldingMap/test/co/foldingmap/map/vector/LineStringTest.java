@@ -184,7 +184,7 @@ public class LineStringTest {
         System.out.println("drawOutline");
         Graphics2D g2 = new Graphics2DTest();
 
-        line2.drawOutline(g2, mapView2_1);
+        line2.drawOutline(g2, mapView2_1, false);
         
         // TODO write an actual test here
     }

@@ -27,6 +27,7 @@ import co.foldingmap.map.vector.VectorLayer;
 import co.foldingmap.map.vector.NodeMap;
 import co.foldingmap.map.vector.VectorObject;
 import co.foldingmap.map.vector.Coordinate;
+import co.foldingmap.map.vector.LatLonBox;
 import co.foldingmap.xml.XmlWriter;
 import java.io.File;
 import java.util.ArrayList;
@@ -41,26 +42,33 @@ public class FmXmlExporter {
     public static void export(DigitalMap mapData, File fileOut) {
         ArrayList<Coordinate>   coordinates;
         Coordinate              c;        
+        LatLonBox               bounds;
         MapProjection           mapProjection;
         NodeMap                 nodeMap;
         String                  keyString, valueString, viewInfo;
-        XmlWriter               kmlWriter;
+        XmlWriter               xmlWriter;
         
         try {
-            kmlWriter     = new XmlWriter(fileOut);        
+            xmlWriter     = new XmlWriter(fileOut);        
             mapProjection = mapData.getLastMapView().getMapProjection();
-                    
-            //write xml header stuff
-            kmlWriter.writeText("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");        
-            kmlWriter.openTag("fmxml xmlns=\"http://www.foldingmap.co/fmxml/\"");
-
-            kmlWriter.openTag("document");
-            kmlWriter.writeTag("name",        mapData.getName());
-            kmlWriter.writeTag("description", mapData.getMapDescription());
-            kmlWriter.writeTag("view",        mapProjection.getViewInfo());
+            bounds        = mapData.getCoordinateSet().getBounds();
             
+            //write xml header stuff
+            xmlWriter.writeText("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");        
+            xmlWriter.openTag("fmxml xmlns=\"http://www.foldingmap.co/fmxml/\"");
+
+            xmlWriter.openTag("document");
+            xmlWriter.writeTag("name",        mapData.getName());
+            xmlWriter.writeTag("description", mapData.getMapDescription());            
+            xmlWriter.writeTag("view",        mapProjection.getViewInfo());
+            
+            //Write out map bounds, used in linked/network files.
+            xmlWriter.openTag("bounds");
+            bounds.toXML(xmlWriter);
+            xmlWriter.closeTag("bounds");
+                        
             if (mapProjection instanceof MercatorProjection) {
-                kmlWriter.writeTag("projection", "Mercator");
+                xmlWriter.writeTag("projection", "Mercator");
             }
             
             //Get Nodes to write
@@ -92,7 +100,7 @@ public class FmXmlExporter {
                 nodeMap.put(cord);                                            
                      
             //Write Nodes
-            kmlWriter.openTag("nodes");                
+            xmlWriter.openTag("nodes");                
 
             for (int i = 1; i <= nodeMap.size(); i++) {
                 c = nodeMap.getFromIndex(i);
@@ -101,31 +109,31 @@ public class FmXmlExporter {
                     keyString   = Long.toString(c.getID());                            
                     valueString = c.toString();
 
-                    kmlWriter.writeTag("node id=\"" + keyString + "\"", valueString);
+                    xmlWriter.writeTag("node id=\"" + keyString + "\"", valueString);
                 }
             }
 
-            kmlWriter.closeTag("nodes");         
+            xmlWriter.closeTag("nodes");         
             
             //TEMP until CSS is up
-            kmlWriter.openTag("mapstyle");
-            mapData.getTheme().toXML(kmlWriter);
-            kmlWriter.closeTag("mapstyle");
+            xmlWriter.openTag("mapstyle");
+            mapData.getTheme().toXML(xmlWriter);
+            xmlWriter.closeTag("mapstyle");
             
             //Write Layers
-            kmlWriter.openTag("layers");
+            xmlWriter.openTag("layers");
             
             for (Layer currentLayer: mapData.getLayers()) 
-                currentLayer.toXML(kmlWriter);                        
+                currentLayer.toXML(xmlWriter);                        
             
-            kmlWriter.closeTag("layers");
+            xmlWriter.closeTag("layers");
             
-            kmlWriter.closeTag("document");
+            xmlWriter.closeTag("document");
 
             //write xml close
-            kmlWriter.closeTag("fmxml");
+            xmlWriter.closeTag("fmxml");
             
-            kmlWriter.closeFile();
+            xmlWriter.closeFile();
         } catch (Exception e) {
             System.err.println("Error in FmXmlExporter.export(DigitalMap, File) - " + e);
         }

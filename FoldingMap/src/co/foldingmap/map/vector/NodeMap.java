@@ -129,6 +129,29 @@ public class NodeMap {
     }
     
     /**
+     * Returns a LatLonBox that bounds all the coordinates in this NodeMap.
+     * 
+     * @return 
+     */
+    public LatLonBox getBounds() {
+        double north = 0;
+        double south = 0;
+        double east  = 0;
+        double west  = 0;
+        
+        for (int i = 0; i < lastIndex; i++) {
+            Coordinate c = values[i];
+            
+            if (c.getLatitude()  > north) north = c.getLatitude();
+            if (c.getLatitude()  < south) south = c.getLatitude();
+            if (c.getLongitude() < west)  west  = c.getLongitude();
+            if (c.getLongitude() > east)  east  = c.getLongitude();
+        }
+        
+        return new LatLonBox((float) north, (float) south, (float) east, (float) west);
+    }
+    
+    /**
      * Returns an ArrayList<Coordinate> of the Coordinates contained in the 
      * given LatLonBox boundary.
      * 
