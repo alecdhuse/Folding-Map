@@ -44,6 +44,7 @@ import co.foldingmap.map.Layer;
 import co.foldingmap.map.Visibility;
 import co.foldingmap.map.themes.ColorRamp;
 import co.foldingmap.map.tile.TileLayer;
+import co.foldingmap.map.vector.LatLonBox;
 import co.foldingmap.map.vector.NetworkLayer;
 import co.foldingmap.map.vector.PhotoPoint;
 import co.foldingmap.map.visualization.HeatMap;
@@ -51,6 +52,8 @@ import co.foldingmap.testFileFormats.FmXmlTestData;
 import co.foldingmap.testMapObjects.FmXmlObjects;
 import co.foldingmap.xml.XMLTag;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
@@ -564,5 +567,38 @@ public class FmXmlImporterTest {
         instance.importToLayer(mapFile, nodeMap, layer, progressIndicator);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBounds method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetBounds() {
+        System.out.println("getBounds");
+        
+        try {
+            URL  path    = this.getClass().getResource("ExampleFile.fmxml");        
+            File mapFile = new File(path.toURI());
+            LatLonBox expResult = new LatLonBox(45.527992248535156f, 45.513648986816406f, -122.66294860839844f, -122.67414855957031f);
+            LatLonBox result    = FmXmlImporter.getBounds(mapFile);
+            
+            assertEquals(expResult, result);
+        } catch (URISyntaxException e) {
+            fail("Can't read test map file.");
+        }
+    }
+
+    /**
+     * Test of getLatLonBox method, of class FmXmlImporter.
+     */
+    @Test
+    public void testGetLatLonBox() {
+        System.out.println("getLatLonBox");
+        
+        XMLTag    tag       = FmXmlObjects.getLatLonBoxTag();
+        LatLonBox expResult = FmXmlObjects.getLatLonBoxObject();
+        LatLonBox result    = FmXmlImporter.getLatLonBox(tag);
+        
+        assertEquals(expResult, result);
     }
 }

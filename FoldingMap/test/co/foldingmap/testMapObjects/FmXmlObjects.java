@@ -18,6 +18,7 @@
 package co.foldingmap.testMapObjects;
 
 import co.foldingmap.map.Visibility;
+import co.foldingmap.map.vector.LatLonBox;
 import co.foldingmap.xml.XMLTag;
 import java.util.ArrayList;
 import org.junit.Ignore;
@@ -28,6 +29,29 @@ import org.junit.Ignore;
  */
 @Ignore
 public class FmXmlObjects {
+    
+    /**
+     * Returns the test object for LatLonBox.
+     * 
+     * @return 
+     */
+    public static LatLonBox getLatLonBoxObject() {
+        return new LatLonBox(10, -10, 10, -10);
+    }
+    
+    /**
+     * Returns the XmlTag for LatLonBox.
+     * 
+     * @return 
+     */
+    public static XMLTag getLatLonBoxTag() {
+        XMLTag boxTag = new XMLTag("LatLonBox", new XMLTag("north", "10"));
+        boxTag.addSubtag(new XMLTag("south", "-10"));
+        boxTag.addSubtag(new XMLTag("east",   "10"));
+        boxTag.addSubtag(new XMLTag("west", "-10"));
+        
+        return boxTag;
+    }    
     
     /**
      * Test XMLTag object for Visibility. 

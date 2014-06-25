@@ -691,6 +691,8 @@ public class NetworkLayer extends VectorLayer implements ActionListener {
      * Removes a given mapObject from the layer.  It does not change the 
      * parentLayer field of that object.
      * 
+     * @param object The object to remove.  Only removes it from this instance,
+     *               not from the linked file.
      */
     @Override
     public void removeObject(VectorObject object) {
@@ -891,7 +893,7 @@ public class NetworkLayer extends VectorLayer implements ActionListener {
     /**
      * Writes this Layer as KML.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
     @Override
     public void toXML(XmlOutput xmlWriter) {

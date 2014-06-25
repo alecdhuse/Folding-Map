@@ -65,6 +65,7 @@ import co.foldingmap.xml.XMLTag;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -97,6 +98,43 @@ public class FmXmlImporter implements FormatImporter {
         } else {
             return new Visibility(25, 0);
         }
+    }
+    
+    /**
+     * Does a quick read of the head of the FmXML file to retrieve the bounds.
+     * The map is not loaded, this is used to check if a map needs to be loaded
+     * when linking files.
+     * 
+     * @param mapFile
+     * @return 
+     */
+    public static LatLonBox getBounds(File mapFile) {
+        byte[]    buffer = new byte[4096];
+        LatLonBox bounds = null;
+        
+        try {
+            //Open the file and grab the first 4096 bytes
+            FileInputStream fs = new FileInputStream(mapFile);
+            fs.read(buffer);
+            
+            //Cponvert to a string and get the lovation of the bounds tag.
+            String header = new String(buffer, "UTF-8");
+            int    start  = header.indexOf("<bounds>") + 8;
+            int    end    = header.indexOf("</bounds>");
+            
+            //If the bounds tag exists parse it and get the map bounds.
+            if (start > 0 && end > 0) {
+                String boundsString = header.substring(start, end);
+                XMLTag boundsTag    = new XMLTag("bounds", boundsString);                
+                bounds = FmXmlImporter.getLatLonBox(boundsTag.getSubtag("LatLonBox"));
+            } else {
+                Logger.log(Logger.WARN, "FmXmlImporter.getBounds(File) - Map file does not contain bounds.");
+            }           
+        } catch (IOException e) {
+            Logger.log(Logger.WARN, "FmXmlImporter.getBounds(File) - Error getting bounds of " + mapFile.getName());
+        }
+        
+        return bounds;
     }
     
     /**

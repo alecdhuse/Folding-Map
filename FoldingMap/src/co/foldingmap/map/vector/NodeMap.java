@@ -134,18 +134,23 @@ public class NodeMap {
      * @return 
      */
     public LatLonBox getBounds() {
-        double north = 0;
-        double south = 0;
-        double east  = 0;
-        double west  = 0;
+        double north = -90;
+        double south = 90;
+        double east  = -180;
+        double west  = 180;
         
         for (int i = 0; i < lastIndex; i++) {
             Coordinate c = values[i];
             
-            if (c.getLatitude()  > north) north = c.getLatitude();
-            if (c.getLatitude()  < south) south = c.getLatitude();
-            if (c.getLongitude() < west)  west  = c.getLongitude();
-            if (c.getLongitude() > east)  east  = c.getLongitude();
+            if (c.getLatitude() >= -90 && c.getLatitude() <= 90) {
+                if (c.getLatitude()  > north) north = c.getLatitude();
+                if (c.getLatitude()  < south) south = c.getLatitude();
+            }
+            
+            if (c.getLongitude() >= -180 && c.getLongitude() <= 180) {
+                if (c.getLongitude() < west)  west  = c.getLongitude();
+                if (c.getLongitude() > east)  east  = c.getLongitude();
+            }
         }
         
         return new LatLonBox((float) north, (float) south, (float) east, (float) west);
