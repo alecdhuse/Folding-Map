@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 dhusea
+ * Copyright (C) 2014 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -166,7 +166,17 @@ public class LatLonBoxTest {
         System.out.println("overlaps");
         
         LatLonBox instance = new LatLonBox(10, -10, 10, -20);
-        assertEquals(true, instance.overlaps(new LatLonBox(5, -10, 10, -20)));
+        assertEquals(true, instance.overlaps(new LatLonBox(15,  -5,  0, -30)));
+        assertEquals(true, instance.overlaps(new LatLonBox(15,   5, 20, 0)));
+        assertEquals(true, instance.overlaps(new LatLonBox( 5, -15,  0, -30)));
+        assertEquals(true, instance.overlaps(new LatLonBox(15,   5,  0, -50)));
+        assertEquals(true, instance.overlaps(new LatLonBox( 5,  -5, -5, -10)));
+        assertEquals(true, instance.overlaps(new LatLonBox(20,  -9, 50, -80)));
+        
+        assertEquals(false, instance.overlaps(new LatLonBox(30,   20,  80,  40)));
+        assertEquals(false, instance.overlaps(new LatLonBox(-30, -60,  80,  40)));
+        assertEquals(false, instance.overlaps(new LatLonBox(30,   20, -30, -60)));
+        assertEquals(false, instance.overlaps(new LatLonBox(-30, -60, -40, -60)));        
     }
 
     /**
