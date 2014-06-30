@@ -25,8 +25,8 @@ import java.util.ArrayList;
  * @author Alec
  */
 public class XmlBuffer extends XmlOutput {
-    private ArrayList<String> openTags;
-    private StringBuilder     xml;
+    private final ArrayList<String> openTags;
+    private final StringBuilder     xml;
     
     /**
      * Creates a new buffer

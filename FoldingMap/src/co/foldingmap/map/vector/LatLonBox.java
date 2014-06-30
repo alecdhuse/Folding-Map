@@ -29,7 +29,10 @@ public class LatLonBox {
     protected float north, south, east, west;
     
     public LatLonBox() {
-
+        north = 0;
+        south = 0;
+        east  = 0;
+        west  = 0;
     }
     
     /**
@@ -93,7 +96,7 @@ public class LatLonBox {
         if (obj instanceof LatLonBox) {
             LatLonBox box = (LatLonBox) obj;
             
-            return (obj.hashCode() == box.hashCode());
+            return (this.hashCode() == box.hashCode());
         } else {
             return false;
         }
@@ -108,9 +111,10 @@ public class LatLonBox {
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + Float.floatToIntBits(this.north);
-        hash = 53 * hash + Float.floatToIntBits(this.south);
-        hash = 53 * hash + Float.floatToIntBits(this.east);
-        hash = 53 * hash + Float.floatToIntBits(this.west);
+        hash = 52 * hash + Float.floatToIntBits(this.south);
+        hash = 51 * hash + Float.floatToIntBits(this.east);
+        hash = 50 * hash + Float.floatToIntBits(this.west);
+        
         return hash;
     }
     
@@ -208,6 +212,56 @@ public class LatLonBox {
 
         return width;
     }
+    
+    /**
+     * Returns if this LatLonBox overlaps another LatLonAltBox.
+     * @param box
+     * @return 
+     */
+    public boolean overlaps(LatLonBox box) {
+        boolean     overlap = false;
+                
+        Coordinate  northWest, northEast, southWest, southEast;
+        Coordinate  boxNorthWest, boxNorthEast, boxSouthWest, boxSouthEast;
+
+        boolean     northSouth = false;
+        boolean     eastWest   = false;
+        
+        northWest    = new Coordinate(0, north, west);
+        northEast    = new Coordinate(0, north, east);
+        southWest    = new Coordinate(0, south, west);
+        southEast    = new Coordinate(0, south, east);
+
+        boxNorthWest = new Coordinate(0, box.getNorth(), box.getWest());
+        boxNorthEast = new Coordinate(0, box.getNorth(), box.getEast());
+        boxSouthWest = new Coordinate(0, box.getSouth(), box.getWest());
+        boxSouthEast = new Coordinate(0, box.getSouth(), box.getEast());
+        
+        if (northWest.isSouthOf(boxNorthWest) && northWest.isNorthOf(boxSouthWest)) {
+            northSouth = true;
+        } else if (southWest.isSouthOf(boxNorthWest) && southWest.isNorthOf(boxSouthWest)) {
+            northSouth = true;
+        } else if (northWest.isNorthOf(boxNorthWest) && southWest.isSouthOf(boxSouthWest)) {
+            northSouth = true;
+        } else if (boxNorthWest.isNorthOf(northWest) && boxSouthWest.isSouthOf(southWest)) {   
+            northSouth = true;
+        }
+
+        if (northWest.isEastOf(boxNorthWest) && northWest.isWestOf(boxSouthEast, 90)) {
+            eastWest = true;
+        } else if (northWest.isWestOf(boxNorthWest, 90) && northWest.isEastOf(boxSouthWest)) {
+            eastWest = true;
+        } else if (southEast.isEastOf(boxNorthWest) && southEast.isWestOf(boxSouthEast, 90)) {
+            eastWest = true;
+        } else if (northWest.isWestOf(boxNorthWest, 90) && northEast.isEastOf(boxSouthEast)) {            
+            eastWest = true;
+        }       
+        
+        if (eastWest && northSouth)
+            overlap = true;
+
+        return overlap;
+    }       
     
     /**
      * Sets this LatLonAltBox's north value.

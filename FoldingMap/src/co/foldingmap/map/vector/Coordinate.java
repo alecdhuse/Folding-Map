@@ -35,7 +35,7 @@ public class Coordinate {
     protected byte                  pullCount;
     protected long                  id, timestamp;
     protected float                 altitude, latitude, longitude;    
-    protected Point2D.Float         centerPoint, leftPoint, rightPoint;
+    protected Point2D.Float        centerPoint, leftPoint, rightPoint;
             
     public static final Coordinate UNKNOWN_COORDINATE = new Coordinate(0, -999, -999);
     public static final float      RAD_CONVERSION     = 0.01745329251994f;    

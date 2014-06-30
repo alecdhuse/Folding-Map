@@ -53,6 +53,11 @@ public class LatLonAltBox extends LatLonBox {
     
     /**
      * Constructor for objects of class LatLonAltBox using string parameters.
+     * 
+     * @param north
+     * @param south
+     * @param east
+     * @param west
      */
     public LatLonAltBox(String north, String south, String east, String west) {
         
@@ -72,6 +77,13 @@ public class LatLonAltBox extends LatLonBox {
     
     /**
      * Constructor for objects of class LatLonAltBox using floats.
+     * 
+     * @param north
+     * @param south
+     * @param east
+     * @param west
+     * @param minAltitude
+     * @param maxAltitude
      */
     public LatLonAltBox(float north, float south, float east, float west, float minAltitude, float maxAltitude) {
         
@@ -109,7 +121,7 @@ public class LatLonAltBox extends LatLonBox {
     /**
      * Returns if this LatLonAltBox is equal to another.
      * 
-     * @param box
+     * @param object
      * @return 
      */
     @Override
@@ -291,57 +303,7 @@ public class LatLonAltBox extends LatLonBox {
         }
         
         return withinViewPort;
-    }     
-    
-    /**
-     * Returns if this LatLonAltBoc overlaps another LatLonAltBox.
-     * @param box
-     * @return 
-     */
-    public boolean overlaps(LatLonAltBox box) {
-        boolean     overlap = false;
-                
-        Coordinate  northWest, northEast, southWest, southEast;
-        Coordinate  boxNorthWest, boxNorthEast, boxSouthWest, boxSouthEast;
-
-        boolean     northSouth = false;
-        boolean     eastWest   = false;
-        
-        northWest    = new Coordinate(0, north, west);
-        northEast    = new Coordinate(0, north, east);
-        southWest    = new Coordinate(0, south, west);
-        southEast    = new Coordinate(0, south, east);
-
-        boxNorthWest = new Coordinate(0, box.getNorth(), box.getWest());
-        boxNorthEast = new Coordinate(0, box.getNorth(), box.getEast());
-        boxSouthWest = new Coordinate(0, box.getSouth(), box.getWest());
-        boxSouthEast = new Coordinate(0, box.getSouth(), box.getEast());
-        
-        if (northWest.isSouthOf(boxNorthWest) && northWest.isNorthOf(boxSouthWest)) {
-            northSouth = true;
-        } else if (southWest.isSouthOf(boxNorthWest) && southWest.isNorthOf(boxSouthWest)) {
-            northSouth = true;
-        } else if (northWest.isNorthOf(boxNorthWest) && southWest.isSouthOf(boxSouthWest)) {
-            northSouth = true;
-        } else if (boxNorthWest.isNorthOf(northWest) && boxSouthWest.isSouthOf(southWest)) {   
-            northSouth = true;
-        }
-
-        if (northWest.isEastOf(boxNorthWest) && northWest.isWestOf(boxSouthEast, 90)) {
-            eastWest = true;
-        } else if (northWest.isWestOf(boxNorthWest, 90) && northWest.isEastOf(boxSouthWest)) {
-            eastWest = true;
-        } else if (southEast.isEastOf(boxNorthWest) && southEast.isWestOf(boxSouthEast, 90)) {
-            eastWest = true;
-        } else if (northWest.isWestOf(boxNorthWest, 90) && northEast.isEastOf(boxSouthEast)) {            
-            eastWest = true;
-        }       
-        
-        if (eastWest && northSouth)
-            overlap = true;
-
-        return overlap;
-    }   
+    }        
     
     /**
      * Sets this LatLonAltBox's MaxAltitude value.
