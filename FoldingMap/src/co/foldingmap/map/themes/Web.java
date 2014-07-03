@@ -79,6 +79,7 @@ public class Web extends MapTheme {
         addStyleElement(new LineStyle("Road - Primary Highway Link",     new Color(255, 195,  69),      new Color(217, 142,  15),   1.5f, LineStyle.SOLID, new Visibility(23, 13)));
         addStyleElement(new LineStyle("Road - Secondary Highway",        new Color(255, 254, 121),      new Color(226, 213, 162),   1.8f, LineStyle.SOLID, secondaryHighway));
         addStyleElement(new LineStyle("Road - Secondary Highway Link",   new Color(255, 254, 121),      new Color(226, 213, 162),   1.0f, LineStyle.SOLID, secondaryHighway));
+        addStyleElement(new LineStyle("Road - Track",                    Color.WHITE,                  new Color(128, 128, 128, 128), 1.0f, LineStyle.SOLID, cityRoadStandard, new Visibility(23, 14)));
         addStyleElement(new LineStyle("Rock Face",                       new Color(119,  44,   0),      1.5f, LineStyle.DASHED, false));
         addStyleElement(new LineStyle("Route",                           new Color(105, 168, 238, 128), 1.0f, LineStyle.SOLID,  true));
         addStyleElement(new LineStyle("Track",                           new Color(68, 68, 68, 128),    1.0f, LineStyle.SOLID,  true));

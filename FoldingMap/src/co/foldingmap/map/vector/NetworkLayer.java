@@ -216,6 +216,10 @@ public class NetworkLayer extends VectorLayer implements ActionListener {
             //See if this layer is visible and if we need to draw this layer.
             if (this.visible == true) {
                 drawLayer = layerVisibility.isVisible(mapView.getZoomLevel());      
+                
+                if (drawLayer && (bounds != null)) {
+                    drawLayer = mapView.getViewBounds().overlaps(bounds);
+                }                
             } else {
                 drawLayer = false;
             }
@@ -624,6 +628,7 @@ public class NetworkLayer extends VectorLayer implements ActionListener {
      */
     private void importFmXML(File file) {
         try {
+            this.bounds = FmXmlImporter.getBounds(file);
             DigitalMap tempMap = FmXmlImporter.openFile(file, null);
 
             if (nodeMap.isEmpty()) {
@@ -857,7 +862,7 @@ public class NetworkLayer extends VectorLayer implements ActionListener {
                         CsvImporter csv = new CsvImporter(tempFile, this.parentMap, this);    
                         csv.setDefaultPointClass(defaultPointClass);
                         csv.start();    
-                    } else if (tempFile.getName().endsWith("fmxml")) {                        
+                    } else if (tempFile.getName().endsWith("fmxml")) {                          
                         importFmXML(tempFile);                        
                     } else if (tempFile.getName().endsWith("geojson")) {
                         importJSON(tempFile);      

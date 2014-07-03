@@ -136,7 +136,7 @@ public class OsmOverpassDownloader extends Thread {
                 wayStarted      = false;
                 relationStarted = false;
 
-                osmConnection.setReadTimeout(120*1000);
+                osmConnection.setReadTimeout(180*1000);
                 osmConnection.connect();
 
                 br = new BufferedReader(new InputStreamReader(osmConnection.getInputStream()));

@@ -154,9 +154,9 @@ public class OsmImporter extends Thread {
     /**
      * Extracts a specific property from an Open Street Map xlm string
      *
-     * @param   String  The xml string.
-     * @param   String  The name of the property being retreived.
-     * @return  String  The property value.
+     * @param   nodeString    The XML string.
+     * @param   nodeProperty  The name of the property being retrieved.
+     * @return  String        The property value.
      */
     public static String getOsmNodeProperty(String nodeString, String nodeProperty) {
         int     tabPropertyStart;
@@ -808,7 +808,7 @@ public class OsmImporter extends Thread {
                             } else if (wayHighway.equalsIgnoreCase("tertiary_link")) {
                                 wayType = "Road - City Tertiary";                                
                             } else if (wayHighway.equalsIgnoreCase("track")) {
-                                wayType = "Road - Unclassified";
+                                wayType = "Road - Track";
                             } else if (wayHighway.equalsIgnoreCase("trunk")) {
                                 wayType = "Road - Secondary Highway";
                             } else if (wayHighway.equalsIgnoreCase("trunk_link")) {
