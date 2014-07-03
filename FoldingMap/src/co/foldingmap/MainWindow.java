@@ -87,7 +87,6 @@ public class MainWindow extends    JFrame
     private ButtonGroup                 buttonGroupMapTools; 
     private LayersTree                  treeLayers;
     private CheckedTreeNode             rootLayerNode;
-    private com.apple.eawt.Application  macApp;
     private DataSheetPanel              dataSheetPanel;
     private DecimalFormat               decimalFormat, zoomFormat;
     private DefaultTreeModel            layersDefaultTreeModel;
@@ -152,8 +151,8 @@ public class MainWindow extends    JFrame
             this.config = config;
             
             if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
-                macApp = com.apple.eawt.Application.getApplication();
-                macApp.setDockIconImage(helper.getBufferedImage("folding_map-32.png"));                 
+//                com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
+//                macApp.setDockIconImage(helper.getBufferedImage("folding_map-32.png"));                 
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             }                
 
