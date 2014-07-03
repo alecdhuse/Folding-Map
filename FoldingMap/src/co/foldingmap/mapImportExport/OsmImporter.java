@@ -666,7 +666,7 @@ public class OsmImporter extends Thread {
                     currentTag = wayXML.substring( (tabPropertyStart + 1), (tabPropertyEnd));
 
                     if (currentTag.equalsIgnoreCase("nd ref")) {
-                        //comonet node
+                        //componet node
                         tabPropertyStart = wayXML.indexOf("=", tabPropertyStart);
                         tabPropertyEnd   = wayXML.indexOf("/", tabPropertyStart);
                         nodeID           = wayXML.substring( (tabPropertyStart + 2), (tabPropertyEnd - 1));
@@ -680,7 +680,8 @@ public class OsmImporter extends Thread {
                             //cannot find node
                             Logger.log(Logger.ERR, "OsmImporter.getOsmWay() - Can't find Node: " + nodeID);
                         } else {
-                            objectCoordinates.add(tempCoordinate); //add coordinate to vector to eventualy put in new VectorObject
+                            //Add coordinate to vector to eventualy put in new VectorObject, force add to make sure loops are closed.
+                            objectCoordinates.forceAdd(tempCoordinate); 
                         }
                     } else if (currentTag.equalsIgnoreCase("tag k")) {
                         //property
