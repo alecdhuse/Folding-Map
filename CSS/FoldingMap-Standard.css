@@ -2,3 +2,27 @@ Map {
 	background-color: rgb(244, 243, 240);
 }
 
+.CampSite {
+	display-name: “Camp Site”;
+	marker-file: url(standard_campsite-small.png);	
+	visibility-zoom-min: 12;
+}
+
+.TouristAttraction {
+	display-name: “Tourist Attraction”
+	color: #99b3cc;
+	outline: true;
+	outline-color: #32323280;
+	visibility-zoom-min: 16;
+}
+
+.Road.CityPrimary {
+	display-name: “Road - City Primary”;
+	fill-color: white;
+	fill-color-selected: #f33e3e80;
+	outline: true;
+	outline-color: #44444480;
+	outline-color-selected: ff0000ff;
+	width: 1.5;
+	
+}

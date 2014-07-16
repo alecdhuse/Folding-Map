@@ -324,7 +324,7 @@ public class Polygon extends VectorObject {
                 convertCoordinatesToLines(mapView);
 
                 if (colorStyle == null) {
-                    polygonStyle = (PolygonStyle) mapView.getMapTheme().getStyle(this);
+                    polygonStyle = (PolygonStyle) mapView.getMapTheme().getStyle(this, mapView.getZoomLevel());
 
                     if (polygonStyle == null) 
                         polygonStyle = mapView.getMapTheme().getPolygonStyle("(Unspecified Polygon)");                
@@ -961,7 +961,7 @@ public class Polygon extends VectorObject {
         
         for (OutlineStyle os: polyStyle.getOutlineStyles()) {
             if (os != null) {
-                borderingStyle  = theme.getStyle(borderingObject);
+                borderingStyle  = theme.getStyle(borderingObject, 0);
 
                 if (os.getBorderCondition().equalsIgnoreCase(borderingStyle.getFeatureType())  || 
                     os.getBorderCondition().equalsIgnoreCase(borderingObject.getObjectClass()) ||

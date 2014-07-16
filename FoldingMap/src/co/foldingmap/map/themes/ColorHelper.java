@@ -16,6 +16,7 @@
  */
 package co.foldingmap.map.themes;
 
+import co.foldingmap.Logger;
 import java.awt.Color;
 
 /**
@@ -113,7 +114,7 @@ public class ColorHelper {
                 returnColor = new Color(returnColor.getRed(), returnColor.getGreen(), returnColor.getBlue(), decimalAlpha);
             }
         } catch (Exception e) {
-            System.out.println("Error in ColorHelper.parseHexString - " + e);
+            Logger.log(Logger.ERR, "Error in ColorHelper.parseHexString - " + e);
         }
 
         return returnColor;
@@ -223,7 +224,7 @@ public class ColorHelper {
                 returnColor = new Color(returnColor.getRed(), returnColor.getGreen(), returnColor.getBlue(), decimalAlpha);
             }
         } catch (Exception e) {
-            System.out.println("Error in ColorHelper.parseHexString - " + e);
+            Logger.log(Logger.ERR, "Error in ColorHelper.parseHexString - " + e);
         }
 
         return returnColor;

@@ -321,9 +321,10 @@ public class MapTheme {
      * Returns the ColorStyle that best fits the given VectorObject.
      * 
      * @param vectorObject The VectorObject we are seeking the style for.
+     * @param zoom The zoom level to ge the style for.
      * @return The ColorStyle that best fits the given VectorObject, null if none can be found.
      */
-    public ColorStyle getStyle(VectorObject vectorObject) {
+    public ColorStyle getStyle(VectorObject vectorObject, float zoom) {
         ColorStyle style = null;
         
         // TODO: add other options such as looking for styles based on the Key-Value property pairs of the object.

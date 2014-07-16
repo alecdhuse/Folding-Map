@@ -356,7 +356,7 @@ public class LineString extends VectorObject {
             if (drawObject) {                
                 //style
                 if (colorStyle == null) {
-                    lineStringStyle = (LineStyle) mapView.getMapTheme().getStyle(this);
+                    lineStringStyle = (LineStyle) mapView.getMapTheme().getStyle(this, mapView.getZoomLevel());
                 } else {
                     lineStringStyle = (LineStyle) colorStyle;
                 }
