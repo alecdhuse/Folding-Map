@@ -140,7 +140,7 @@ public class MapPoint extends VectorObject {
             if (drawObject) {
                 //Figure out which IconStyle to use
                 if (colorStyle == null) {
-                    pointIcon = (IconStyle) mapView.getMapTheme().getIconStyle(objectClass);
+                    pointIcon = (IconStyle) mapView.getMapTheme().getStyle(this);
                     if (pointIcon == null) pointIcon = new IconStyle();                
                 } else {
                     pointIcon = (IconStyle) colorStyle;

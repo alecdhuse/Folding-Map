@@ -22,7 +22,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Component element for Overlays.
+ * 
  * @author Alec
  */
 public class MapIcon {
@@ -276,16 +277,16 @@ public class MapIcon {
     /**
      * Writes this MapIcon to XML.
      * 
-     * @param kmlWriter 
+     * @param xmlWriter 
      */
-    public void toXML(XmlOutput kmlWriter) {
-        kmlWriter.openTag("Icon id=\"" + id + "\"");
+    public void toXML(XmlOutput xmlWriter) {
+        xmlWriter.openTag("Icon id=\"" + id + "\"");
         
-        kmlWriter.writeTag("href",            fileAddress);
-        kmlWriter.writeTag("refreshMode",     Integer.toString(refreshMode));
-        kmlWriter.writeTag("refreshInterval", Float.toString(refreshInterval));
-        kmlWriter.writeTag("viewRefreshMode", Integer.toString(viewRefreshMode));
+        xmlWriter.writeTag("href",            fileAddress);
+        xmlWriter.writeTag("refreshMode",     Integer.toString(refreshMode));
+        xmlWriter.writeTag("refreshInterval", Float.toString(refreshInterval));
+        xmlWriter.writeTag("viewRefreshMode", Integer.toString(viewRefreshMode));
         
-        kmlWriter.closeTag("Icon");        
+        xmlWriter.closeTag("Icon");        
     }
 }

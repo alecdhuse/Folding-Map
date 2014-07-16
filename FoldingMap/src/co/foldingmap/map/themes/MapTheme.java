@@ -19,6 +19,10 @@ package co.foldingmap.map.themes;
 import co.foldingmap.Logger;
 import co.foldingmap.ResourceHelper;
 import co.foldingmap.map.Visibility;
+import co.foldingmap.map.vector.LineString;
+import co.foldingmap.map.vector.MapPoint;
+import co.foldingmap.map.vector.Polygon;
+import co.foldingmap.map.vector.VectorObject;
 import co.foldingmap.xml.XmlOutput;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -49,7 +53,6 @@ public class MapTheme {
     
     public MapTheme(String themeName) {
         this.themeName       = themeName;
-        //this.backgroundColor = new Color(86, 111, 139);
         this.backgroundColor = new Color(244, 243, 240);
         
         lvl1  = new Visibility(25, 16);
@@ -64,7 +67,6 @@ public class MapTheme {
         this.polygonStyles   = new HashMap<String, PolygonStyle>();
         this.styleMaps       = new HashMap<String, StyleMap>();
         
-        //this.defaultLabel    = new LabelStyle(Color.WHITE);
         this.resourceHelper  = ResourceHelper.getInstance();
         
         addStyleElement(new IconStyle(   "(Unspecified Point)",      new Color(68, 68, 68, 128)));
@@ -209,7 +211,6 @@ public class MapTheme {
 
         try {
             imageIcon = resourceHelper.getImage(fileName);
-            //imageIcon = (new ImageIcon(getClass().getResource("resources/" + fileName)));
         } catch (Exception e) {
             imageIcon = null;
             System.err.println("Error in MapTheme.getImageFromResourceMap(String) - " + e);
@@ -299,6 +300,8 @@ public class MapTheme {
      * 
      * @param elementName
      * @return 
+     * 
+     * @deprecated Use getStyle(VectorObject) instead.
      */
     public ColorStyle getStyle(String elementName) {
         ColorStyle style;
@@ -314,6 +317,28 @@ public class MapTheme {
         return style;
     }
     
+    /**
+     * Returns the ColorStyle that best fits the given VectorObject.
+     * 
+     * @param vectorObject The VectorObject we are seeking the style for.
+     * @return The ColorStyle that best fits the given VectorObject, null if none can be found.
+     */
+    public ColorStyle getStyle(VectorObject vectorObject) {
+        ColorStyle style = null;
+        
+        // TODO: add other options such as looking for styles based on the Key-Value property pairs of the object.
+        
+        if (vectorObject instanceof LineString) {
+            style = this.getLineStyle(vectorObject.getObjectClass());
+        } else if (vectorObject instanceof MapPoint) {
+            style = this.getIconStyle(vectorObject.getObjectClass());
+        } else if (vectorObject instanceof Polygon) {  
+            style = this.getPolygonStyle(vectorObject.getObjectClass());
+        }
+        
+        return style;
+    }
+   
     /**
      * Returns a StyleMap with with a given name.  Will Return null if the 
      * given name does not exist in the HashMap.

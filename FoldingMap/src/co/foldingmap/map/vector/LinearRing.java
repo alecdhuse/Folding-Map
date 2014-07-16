@@ -16,6 +16,7 @@
  */
 package co.foldingmap.map.vector;
 
+import co.foldingmap.Logger;
 import co.foldingmap.map.MapView;
 import co.foldingmap.xml.XmlOutput;
 
@@ -33,6 +34,7 @@ public class LinearRing extends LineString {
     
     /**
      * Converts the objects latitude and longitude coordinates screen x,y points.
+     * Calls the same method from the SuperClass LineString, but then closes the path.
      * 
      * @param mapView 
      */
@@ -70,18 +72,19 @@ public class LinearRing extends LineString {
             if (visibility != null)
                 visibility.toXML(xmlWriter);
             
-            if (this.parentLayer.hasTimeSpan()) {
-                xmlWriter.openTag ("gx:Timestamps");
-                    for (Coordinate currentCoordinate: coordinates)
-                        xmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
-                xmlWriter.closeTag("gx:Timestamps");
-            }
+            //Timestanps are now in nodes and this isn't needed - 2014-07-16 ASD
+//            if (this.parentLayer.hasTimeSpan()) {
+//                xmlWriter.openTag ("gx:Timestamps");
+//                    for (Coordinate currentCoordinate: coordinates)
+//                        xmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
+//                xmlWriter.closeTag("gx:Timestamps");
+//            }
 
             writeCustomDataFieldsAsXML(xmlWriter);
 
             xmlWriter.closeTag("LinearRing");
         } catch (Exception e) {
-            System.err.println("Error in LinearRing.toXML(KmlWriter) Object: " + this.objectName + " - " + e);
+            Logger.log(Logger.ERR, "Error in LinearRing.toXML(KmlWriter) Object: " + this.objectName + " - " + e);
         }
     }    
 }

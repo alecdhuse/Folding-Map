@@ -140,6 +140,7 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
         imageDimension = new Dimension(16, 20);
         imageLabel.setPreferredSize(imageDimension);
         imageLabel.setMaximumSize(imageDimension);     
+        
       } else if (value instanceof DefaultMutableTreeNode) {
         DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) value;          
         String                 displayText;

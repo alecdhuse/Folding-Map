@@ -92,7 +92,7 @@ public class Polygon extends VectorObject {
      * A Constructor for shared init elements between constructors.
      * 
      * @param name
-     * @param type 
+     * @param objectClass
      */
     public final void commonConstructor(String name, String objectClass) {
         try {
@@ -109,7 +109,7 @@ public class Polygon extends VectorObject {
             this.segmentsGenerated  = false;
             this.stroke             = new BasicStroke(1f,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         } catch (Exception e) {
-            System.err.println("Error in Polygon.commonConstructor(String, String) - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.commonConstructor(String, String) - " + e);
         }
     }    
     
@@ -265,7 +265,7 @@ public class Polygon extends VectorObject {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error in Polygon.convertCoordinatesToLines(MapView) - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.convertCoordinatesToLines(MapView) - " + e);
         }
     }    
     
@@ -324,7 +324,7 @@ public class Polygon extends VectorObject {
                 convertCoordinatesToLines(mapView);
 
                 if (colorStyle == null) {
-                    polygonStyle = mapView.getMapTheme().getPolygonStyle(objectClass);
+                    polygonStyle = (PolygonStyle) mapView.getMapTheme().getStyle(this);
 
                     if (polygonStyle == null) 
                         polygonStyle = mapView.getMapTheme().getPolygonStyle("(Unspecified Polygon)");                
@@ -387,7 +387,7 @@ public class Polygon extends VectorObject {
 //                createLabel(g2, mapView);
             } //end drawObject check                        
         } catch (Exception e) {
-            System.err.println("Error in Polygon.drawObjet(Graphics2D, MapView) " + this.objectName + " - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.drawObjet(Graphics2D, MapView) " + this.objectName + " - " + e);
         }
     }
 
@@ -409,7 +409,6 @@ public class Polygon extends VectorObject {
                 this.updateOutlines(mapView.getMapTheme());                
             }
             
-            drawObject   = true;
             polygonStyle = mapView.getMapTheme().getPolygonStyle(this.getObjectClass());            
 
             if (polygonStyle != null) {  
@@ -431,7 +430,7 @@ public class Polygon extends VectorObject {
                 }
             } 
         } catch (Exception e) {
-            System.err.println("Error in Polygon.drawOutline(Graphics2D, MapView) - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.drawOutline(Graphics2D, MapView) - " + e);
         }
     }    
     
@@ -636,7 +635,7 @@ public class Polygon extends VectorObject {
             }
 
         } catch (Exception e) {
-            System.err.println("Error in Polygon.isObjectWithinRectangle(Rectangle2D) - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.isObjectWithinRectangle(Rectangle2D) - " + e);
             isObjectWithinRectangle(range);
         }
 
@@ -672,19 +671,20 @@ public class Polygon extends VectorObject {
             
             for (InnerBoundary ib: innerBoundaries)
                 ib.toXML(xmlWriter);
-                
-            if (parentLayer.hasTimeSpan()) {
-                xmlWriter.openTag ("gx:Timestamps");
-                    for (Coordinate currentCoordinate: coordinates)
-                        xmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
-                xmlWriter.closeTag("gx:Timestamps");
-            }
+
+            //Timestanps are now in nodes and this isn't needed - 2014-07-16 ASD            
+//            if (parentLayer.hasTimeSpan()) {
+//                xmlWriter.openTag ("gx:Timestamps");
+//                    for (Coordinate currentCoordinate: coordinates)
+//                        xmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
+//                xmlWriter.closeTag("gx:Timestamps");
+//            }
 
              writeCustomDataFieldsAsXML(xmlWriter);
 
             xmlWriter.closeTag("Polygon");
         } catch (Exception e) {
-            System.err.println("Error in Polygon.toXML(KmlWriter) Object: " + this.objectName + " - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.toXML(KmlWriter) Object: " + this.objectName + " - " + e);
         }
     }
     
@@ -869,7 +869,7 @@ public class Polygon extends VectorObject {
             
             addOutlineSegment(currentOutlineSegment);       
         } catch (Exception e) {
-            System.err.println("Error in Polygon.buildSegments(MapView) - " + e);
+            Logger.log(Logger.ERR, "Error in Polygon.buildSegments(MapView) - " + e);
         }        
     }
     
@@ -961,7 +961,7 @@ public class Polygon extends VectorObject {
         
         for (OutlineStyle os: polyStyle.getOutlineStyles()) {
             if (os != null) {
-                borderingStyle  = theme.getStyle(borderingObject.getObjectClass());
+                borderingStyle  = theme.getStyle(borderingObject);
 
                 if (os.getBorderCondition().equalsIgnoreCase(borderingStyle.getFeatureType())  || 
                     os.getBorderCondition().equalsIgnoreCase(borderingObject.getObjectClass()) ||

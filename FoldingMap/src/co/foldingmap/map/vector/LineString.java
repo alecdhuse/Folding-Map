@@ -105,7 +105,7 @@ public class LineString extends VectorObject {
             this.objectClass        = lineClass;
             this.objectDescription  = "";            
         } catch (Exception e) {
-            System.err.println("Error in LineString.commonConstructor(String, String) - " + e);
+            Logger.log(Logger.ERR, "Error in LineString.commonConstructor(String, String) - " + e);
         }          
     }      
     
@@ -326,7 +326,7 @@ public class LineString extends VectorObject {
             }                                                  
             
         } catch (Exception e) {
-            System.err.println("Error in LineString.createLabel(Graphics2D, MapView) - " + e);
+            Logger.log(Logger.ERR, "Error in LineString.createLabel(Graphics2D, MapView) - " + e);
         }    
         
         return labels;
@@ -347,7 +347,8 @@ public class LineString extends VectorObject {
         LineStyle   lineStringStyle;
         String      lineStroke;
         
-        drawObject    = true;
+        //Default to drawing the object.
+        drawObject = true;
         
         try {
             drawObject = this.isVisible(mapView);
@@ -355,7 +356,7 @@ public class LineString extends VectorObject {
             if (drawObject) {                
                 //style
                 if (colorStyle == null) {
-                    lineStringStyle = (LineStyle) mapView.getMapTheme().getLineStyle(getObjectClass());
+                    lineStringStyle = (LineStyle) mapView.getMapTheme().getStyle(this);
                 } else {
                     lineStringStyle = (LineStyle) colorStyle;
                 }
@@ -449,7 +450,7 @@ public class LineString extends VectorObject {
                 
             } //end if draw object
         } catch (Exception e) {
-            System.err.println("Error in LineString.drawObject(Graphics2D, MapView) " + e + " - " + this.objectName);
+            Logger.log(Logger.ERR, "Error in LineString.drawObject(Graphics2D, MapView) " + e + " - " + this.objectName);
         }
     }// end drawObject
 
@@ -528,7 +529,7 @@ public class LineString extends VectorObject {
                 } // end style != null check
             }
         } catch (Exception e) {
-            System.err.println("Error in LineString.drawOutline(Graphics2D, MapView) - " + e);
+            Logger.log(Logger.ERR, "Error in LineString.drawOutline(Graphics2D, MapView) - " + e);
         }
     }
     
@@ -830,8 +831,7 @@ public class LineString extends VectorObject {
                 } 
             }     
         } catch (Exception e) {
-            System.err.println("Error in LineString.isObjectWithinRectangle(Rectangle2D) - " + e);
-//            isObjectWithinRectangle(range);
+           Logger.log(Logger.ERR, "Error in LineString.isObjectWithinRectangle(Rectangle2D) - " + e);
         }
         
         return returnValue;
@@ -864,7 +864,7 @@ public class LineString extends VectorObject {
 
             xmlWriter.closeTag("LineString");
         } catch (Exception e) {
-            System.out.println("Error in LineString.toXML(xmlWriter) Object: " + this.objectName + " - " + e);
+            Logger.log(Logger.ERR, "Error in LineString.toXML(xmlWriter) Object: " + this.objectName + " - " + e);
         }
     }
     
