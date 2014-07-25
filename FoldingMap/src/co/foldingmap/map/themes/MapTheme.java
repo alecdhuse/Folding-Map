@@ -213,7 +213,7 @@ public class MapTheme {
             imageIcon = resourceHelper.getImage(fileName);
         } catch (Exception e) {
             imageIcon = null;
-            System.err.println("Error in MapTheme.getImageFromResourceMap(String) - " + e);
+            Logger.log(Logger.ERR, "Error in MapTheme.getImageFromResourceMap(String) - " + e);
         }
         
         return imageIcon;
@@ -321,7 +321,7 @@ public class MapTheme {
      * Returns the ColorStyle that best fits the given VectorObject.
      * 
      * @param vectorObject The VectorObject we are seeking the style for.
-     * @param zoom The zoom level to ge the style for.
+     * @param zoom The zoom level to get the style for.
      * @return The ColorStyle that best fits the given VectorObject, null if none can be found.
      */
     public ColorStyle getStyle(VectorObject vectorObject, float zoom) {

@@ -16,6 +16,7 @@
  */
 package co.foldingmap.mapImportExport;
 
+import co.foldingmap.Logger;
 import co.foldingmap.map.vector.MultiGeometry;
 import co.foldingmap.map.vector.LatLonAltBox;
 import co.foldingmap.map.vector.VectorLayer;
@@ -76,7 +77,7 @@ public class SvgExporter {
         if (layer instanceof VectorLayer) {
             exportVectorLayer(outputStream, (VectorLayer) layer, theme, maxY);
         } else {
-            System.err.println("Export of layers other than VectorLayer not supported at this time.");
+            Logger.log(Logger.ERR, "Export of layers other than VectorLayer not supported at this time.");
         }
     }
     
@@ -116,7 +117,7 @@ public class SvgExporter {
             outputStream.write("</g>\n");
             removeIndent();
         } catch (Exception e) {
-            System.err.println("Error in SvgExporter.exportVectorLayer(ObjectOutputStream, VectorLayer, MapTheme) - " + e);
+            Logger.log(Logger.ERR, "Error in SvgExporter.exportVectorLayer(ObjectOutputStream, VectorLayer, MapTheme) - " + e);
         }
     }
         
@@ -150,7 +151,7 @@ public class SvgExporter {
                 outputStream.write(getIndent());
                 outputStream.write("</g>\n");
             } catch (Exception e) {
-                System.err.println("Error in SvgExporter.exportVectorObject() while exporting MultiGeometry: " + e);
+                Logger.log(Logger.ERR, "Error in SvgExporter.exportVectorObject() while exporting MultiGeometry: " + e);
             }                   
         } else {
             writePath(outputStream, object.getName(), object.getCoordinateList(), style, false);
@@ -257,7 +258,7 @@ public class SvgExporter {
             
 
         } catch (Exception e) {
-            System.err.println("Error in SvgExporter.exportMapLabel(BufferedWriter, MapLabel) - " + e);
+            Logger.log(Logger.ERR, "Error in SvgExporter.exportMapLabel(BufferedWriter, MapLabel) - " + e);
         }
     }
     
@@ -328,7 +329,7 @@ public class SvgExporter {
             outputStream.write("</svg>");
             outputStream.close();
         } catch (Exception e) {
-            System.err.println("Error in SvgExporter.exportMap(DigitalMap) - " + e);
+            Logger.log(Logger.ERR, "Error in SvgExporter.exportMap(DigitalMap) - " + e);
         }
     }
     
@@ -503,10 +504,8 @@ public class SvgExporter {
                 bi   = ImageIO.read(style.getImageFile());            
 
                 ImageIO.write(bi, "PNG", baos);        
-                imageBytes = baos.toByteArray();
-
-                Base64 encoder = new Base64();                
-                imageEnc = encoder.encodeBase64String(imageBytes);
+                imageBytes = baos.toByteArray();               
+                imageEnc   = Base64.encodeBase64String(imageBytes);
 
                 baos.close();            
 
@@ -557,7 +556,7 @@ public class SvgExporter {
                 outputStream.write("\" />\n");           
             }
         } catch (Exception e) {
-            System.err.println("Error in SvgExporter.writeImage() - " + e);
+            Logger.log(Logger.ERR, "Error in SvgExporter.writeImage() - " + e);
         }
     }
     
@@ -615,7 +614,7 @@ public class SvgExporter {
             outputStream.write(" />\n");
             removeIndent();             
         } catch (Exception e) {
-            System.err.println("Error in SvgExporter.writePath(BufferedWriter, String, CoordinateList, ColorStyle - " + e);
+            Logger.log(Logger.ERR, "Error in SvgExporter.writePath(BufferedWriter, String, CoordinateList, ColorStyle - " + e);
         }             
     }
     
@@ -624,8 +623,7 @@ public class SvgExporter {
                               CoordinateList<Coordinate> coordinates, 
                               ColorStyle style,
                               boolean isOutline) {
-        Coordinate  c;
-        
+        Coordinate  c;        
         String      styleString;
         
         try {                        
@@ -652,7 +650,7 @@ public class SvgExporter {
             outputStream.write("\" />\n");
             removeIndent();  
         } catch (Exception e) {
-            System.err.println("Error in SvgExporter.writePolyLine(BufferedWriter, String, CoordinateList, ColorStyle - " + e);
+            Logger.log(Logger.ERR, "Error in SvgExporter.writePolyLine(BufferedWriter, String, CoordinateList, ColorStyle - " + e);
         }     
     }    
 }
