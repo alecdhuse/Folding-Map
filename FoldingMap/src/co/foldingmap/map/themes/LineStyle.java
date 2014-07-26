@@ -48,9 +48,10 @@ public class LineStyle extends ColorStyle {
      * Constructor No Outline
      * 
      * @param id
-     * @param c
-     * @param width
-     * @param outline 
+     * @param fillColor
+     * @param lineWidth
+     * @param lineStroke
+     * @param scaleWidth
      */
     public LineStyle(String  id, 
                      Color   fillColor, 
@@ -71,9 +72,10 @@ public class LineStyle extends ColorStyle {
      * Constructor with outline
      * 
      * @param id
-     * @param c
-     * @param width
-     * @param outline 
+     * @param fillColor
+     * @param outlineColor
+     * @param lineStroke
+     * @param lineWidth
      */
     public LineStyle(String id, 
                      Color  fillColor, 
@@ -95,9 +97,10 @@ public class LineStyle extends ColorStyle {
      * Constructor with outline
      * 
      * @param id
-     * @param c
-     * @param width
-     * @param outline 
+     * @param fillColor
+     * @param outlineColor
+     * @param lineWidth
+     * @param lineStroke
      * @param visibility
      */
     public LineStyle(String     id, 

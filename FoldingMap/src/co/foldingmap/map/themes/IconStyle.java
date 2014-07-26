@@ -16,6 +16,7 @@
  */
 package co.foldingmap.map.themes;
 
+import co.foldingmap.Logger;
 import co.foldingmap.ResourceHelper;
 import co.foldingmap.map.Visibility;
 import co.foldingmap.xml.XmlOutput;
@@ -53,7 +54,6 @@ public class IconStyle extends ColorStyle {
      * 
      * @param id
      * @param fillColor
-     * @param label 
      */
     public IconStyle(String id, Color fillColor) {
         super();
@@ -73,6 +73,7 @@ public class IconStyle extends ColorStyle {
      * @param id
      * @param fillColor
      * @param label 
+     * @param visibility 
      */
     public IconStyle(String id, Color fillColor, LabelStyle label, Visibility visibility) {
         super();
@@ -168,7 +169,7 @@ public class IconStyle extends ColorStyle {
                 return null;
             }
         } catch (Exception e) {
-            System.out.println("Error in IconStyle.getImageFile() - " + e);
+            Logger.log(Logger.ERR, "Error in IconStyle.getImageFile() - " + e);
             return null;
         }
     }    
@@ -269,7 +270,7 @@ public class IconStyle extends ColorStyle {
                 this.objectImage   = null;
             }
         } catch (Exception e) {
-            System.err.println("Error in IconStyle.setImageFileName(" + fileName + ") - " + e);
+            Logger.log(Logger.ERR, "Error in IconStyle.setImageFileName(" + fileName + ") - " + e);
         }
     }    
     
@@ -297,48 +298,48 @@ public class IconStyle extends ColorStyle {
      * @param kmlWriter 
      */
     @Override
-    public void toXML(XmlOutput kmlWriter) {
+    public void toXML(XmlOutput xmlWriter) {
         try {
-            kmlWriter.openTag ("Style id=\"" + id + "\"");
-            kmlWriter.openTag ("IconStyle");
+            xmlWriter.openTag ("Style id=\"" + id + "\"");
+            xmlWriter.openTag ("IconStyle");
 
-            kmlWriter.writeTag("color", ColorHelper.getColorHexStandard(fillColor));
+            xmlWriter.writeTag("color", ColorHelper.getColorHexStandard(fillColor));
 
             if (colorMode == NORMAL) {
-                kmlWriter.writeTag("colorMode", "normal");
+                xmlWriter.writeTag("colorMode", "normal");
             } else if (colorMode == RANDOM) {
-                kmlWriter.writeTag("colorMode", "random");
+                xmlWriter.writeTag("colorMode", "random");
             }
 
             if (outline) {
-                kmlWriter.writeTag("outline", "1");
-                kmlWriter.writeTag("outlineColor", ColorHelper.getColorHexStandard(getOutlineColor()));
+                xmlWriter.writeTag("outline", "1");
+                xmlWriter.writeTag("outlineColor", ColorHelper.getColorHexStandard(getOutlineColor()));
             } else {
-                kmlWriter.writeTag("outline", "0");
+                xmlWriter.writeTag("outline", "0");
             }        
 
-            kmlWriter.writeTag("scale",   Float.toString(scale));
-            kmlWriter.writeTag("heading", Float.toString(heading));
+            xmlWriter.writeTag("scale",   Float.toString(scale));
+            xmlWriter.writeTag("heading", Float.toString(heading));
 
             if (imageFileName != null) {
                 if ( (!imageFileName.equals("null")) && !(imageFileName == null) && (!imageFileName.equals(""))) {
-                    kmlWriter.openTag ("Icon");
-                    kmlWriter.writeTag("href", imageFileName);
-                    kmlWriter.closeTag("Icon");
+                    xmlWriter.openTag ("Icon");
+                    xmlWriter.writeTag("href", imageFileName);
+                    xmlWriter.closeTag("Icon");
                 }
             }
 
             if (this.visibility != null)
-                this.visibility.toXML(kmlWriter);
+                this.visibility.toXML(xmlWriter);
 
-            kmlWriter.closeTag("IconStyle");
+            xmlWriter.closeTag("IconStyle");
 
             if (label != null)
-                label.toXML(kmlWriter);
+                label.toXML(xmlWriter);
 
-            kmlWriter.closeTag("Style");     
+            xmlWriter.closeTag("Style");     
         } catch (Exception e) {
-            System.err.println("Error in IconStyle.toXML(KmlOutput) - " + e);
+            Logger.log(Logger.ERR, "Error in IconStyle.toXML(KmlOutput) - " + e);
         }
     }
 }
