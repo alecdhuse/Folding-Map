@@ -92,6 +92,15 @@ public class TileServerTileSource extends TileSource {
     }
 
     /**
+     * Sets the server address for this tile source.
+     * 
+     * @param tileServerAddress With or without the http:// 
+     */
+    public void setTileServerAddress(String tileServerAddress) {
+        this.tileServerAddress = tileServerAddress;
+    }
+    
+    /**
      * Writes this TileSource to FmXML.
      * 
      * @param xmlWriter 

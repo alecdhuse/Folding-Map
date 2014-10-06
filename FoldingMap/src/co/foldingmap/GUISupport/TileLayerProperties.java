@@ -19,6 +19,7 @@ package co.foldingmap.GUISupport;
 import co.foldingmap.GUISupport.panels.ActionPanel;
 import co.foldingmap.map.DigitalMap;
 import co.foldingmap.map.tile.TileLayer;
+import co.foldingmap.map.tile.TileServerTileSource;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -42,9 +43,19 @@ public class TileLayerProperties extends ActionPanel {
         addObjectsToFrame();
     }
     
+    /**
+     * Handles action performed on this window.
+     * 
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
-
+        if (ae.getActionCommand().equals("Ok")) {
+            if (tileLayer.getTileSource() instanceof TileServerTileSource)  {
+                TileServerTileSource tsSource = (TileServerTileSource) tileLayer.getTileSource();
+                tsSource.setTileServerAddress(textSource.getText());
+            }
+        }
     }
     
     /**
