@@ -25,6 +25,7 @@ import co.foldingmap.map.vector.LatLonAltBox;
 import co.foldingmap.map.vector.LatLonBox;
 import co.foldingmap.xml.XmlOutput;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JMenuItem;
@@ -80,7 +81,9 @@ public class TileLayer extends Layer {
         TileReference   currentTileRef, tileRef0, tileRef1;
         
         try {
-            if (this.visible) {               
+            if (this.visible) {     
+                g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+                
                 viewBounds = mapView.getViewBounds();
                 longitudeE = viewBounds.getEast();
                 longitudeW = viewBounds.getWest();

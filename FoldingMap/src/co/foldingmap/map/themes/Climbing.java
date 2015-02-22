@@ -99,7 +99,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Airport",               new Color(223, 219, 212), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Agricultural Plot",     new Color(172, 194, 160), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Beach",                 new Color(230, 210, 151), ThemeConstants.LAND));
-        addStyleElement(new PolygonStyle("Building",              new Color(231, 230, 225), new Color(212, 208, 204)));
+        addStyleElement(new PolygonStyle("Building",              new Color(231, 230, 225), new Color(230, 230, 200)));
         addStyleElement(new PolygonStyle("Commercial Area",       new Color(222, 208, 213), ThemeConstants.LAND));  
         addStyleElement(new PolygonStyle("Country - Filled",      new Color(239, 237, 230), new Color(200, 200, 200, 128), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Default Backdrop",      new Color(166, 174, 183, 128)));
@@ -119,7 +119,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("River",                 new Color(165, 191, 221), ThemeConstants.WATER));
         addStyleElement(new PolygonStyle("Rock - Basalt",         new Color( 56,  54,  45), new Color( 68, 68, 68,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Rock - Granite",        new Color(188, 190, 178), new Color(100,100,100,180), ThemeConstants.LAND));
-        addStyleElement(new PolygonStyle("Rock - Lava Tuft",      new Color(175, 166, 136), new Color( 68, 68, 68,180), ThemeConstants.LAND));
+        addStyleElement(new PolygonStyle("Rock - Lava Tuft",      new Color(175, 166, 136), new Color(85,68,0,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Rock - Limestone",      new Color(200, 213, 213), new Color(174,185,185,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Rock - Sandstone",      new Color(203, 183, 156), new Color(173,153,126,180), ThemeConstants.LAND));        
         addStyleElement(new PolygonStyle("School",                new Color(232, 221, 189), ThemeConstants.LAND));
