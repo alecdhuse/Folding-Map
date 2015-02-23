@@ -925,7 +925,10 @@ public class OsmImporter extends Thread {
                                 
                                 //If coastline end points are close together, assume an island
                                 if (CoordinateMath.getDistance(objectCoordinates.get(0), objectCoordinates.lastCoordinate()) < 200)
-                                    isPolygon   = true;    
+                                    isPolygon   = true;  
+                            } if (naturalType.equalsIgnoreCase("heath")) {
+                                polygonType = "Land Cover - Heath";   
+                                isPolygon   = true;
                             } if (naturalType.equalsIgnoreCase("reef")) {    
                                 polygonType = "Reef";   
                                 isPolygon   = true;  
