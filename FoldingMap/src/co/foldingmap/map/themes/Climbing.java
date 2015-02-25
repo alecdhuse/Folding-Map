@@ -116,7 +116,6 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Protected Area",        new Color(201, 223, 175), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Reef",                  new Color(203, 216, 230), new Color(183, 203, 228, 200))); 
         addStyleElement(new PolygonStyle("Residential Area",      new Color(220, 220, 220), new Color( 68,  68,  68, 128), ThemeConstants.LAND));  
-        //addStyleElement(new PolygonStyle("River",                 new Color(165, 191, 221), ThemeConstants.WATER,          new Color(158, 194, 253), new Color(179, 209, 255)));
         addStyleElement(new PolygonStyle("River",                 new Color(165, 191, 221), ThemeConstants.WATER));
         addStyleElement(new PolygonStyle("Rock - Basalt",         new Color( 56,  54,  45), new Color( 68, 68, 68,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Rock - Granite",        new Color(188, 190, 178), new Color(100,100,100,180), ThemeConstants.LAND));
@@ -130,6 +129,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Sports Field",          new Color(201, 223, 175), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Stadium",               new Color(170, 204, 130), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("University",            new Color(232, 221, 189), ThemeConstants.LAND));
+        addStyleElement(new PolygonStyle("Water - Wadi",          Color.WHITE,              new Color(165, 191, 221), ThemeConstants.WATER, "standard_wadi-fill.png"));
         addStyleElement(new PolygonStyle("Wet Land",              new Color(132, 220,  79), ThemeConstants.LAND));    
         
         PolygonStyle sandStoneCavePS = new PolygonStyle("Rock - Sandstone Cave", new Color(203, 183, 156, 180), ThemeConstants.LAND);
