@@ -100,7 +100,8 @@ public class PolygonStyle extends ColorStyle {
      * Fill color is Color.WHITE if fill == true.
      * 
      * @param id
-     * @param fillColor
+     * @param outlineColor
+     * @param fill
      * @param featureType 
      */
     public PolygonStyle(String id, Color outlineColor, String featureType, boolean fill) {
@@ -125,6 +126,7 @@ public class PolygonStyle extends ColorStyle {
      * 
      * @param id
      * @param objectColor 
+     * @param outlineColor 
      */
     public PolygonStyle(String id, Color objectColor, Color outlineColor) {
         this.colorMode          = NORMAL;
@@ -148,6 +150,8 @@ public class PolygonStyle extends ColorStyle {
      * 
      * @param id
      * @param objectColor 
+     * @param outlineColor 
+     * @param featureType 
      */
     public PolygonStyle(String id, Color objectColor, Color outlineColor, String featureType) {
         this.colorMode          = NORMAL;
@@ -216,7 +220,9 @@ public class PolygonStyle extends ColorStyle {
         this.objectImage        = null;
         this.outline            = false;
         this.outlineColor       = outlineColor;  
-        this.outlineStyles      = new ArrayList<OutlineStyle>(0);          
+        this.outlineStyles      = new ArrayList<OutlineStyle>(1);    
+        
+        addOutlineStyle(new OutlineStyle(outlineColor));
     }    
     
     /**
