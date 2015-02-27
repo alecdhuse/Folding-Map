@@ -130,13 +130,17 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Sports Field",          new Color(201, 223, 175), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Stadium",               new Color(170, 204, 130), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("University",            new Color(232, 221, 189), ThemeConstants.LAND));
-        addStyleElement(new PolygonStyle("Water - Wadi",          Color.WHITE,              new Color(165, 191, 221), ThemeConstants.WATER, "standard_wadi-fill.png"));
         addStyleElement(new PolygonStyle("Wet Land",              new Color(132, 220,  79), ThemeConstants.LAND));    
         
         PolygonStyle sandStoneCavePS = new PolygonStyle("Rock - Sandstone Cave", new Color(203, 183, 156, 180), ThemeConstants.LAND);
         sandStoneCavePS.addOutlineStyle(new OutlineStyle(new Color(203, 183, 156),   ThemeConstants.LAND));   
         sandStoneCavePS.addOutlineStyle(new OutlineStyle(new Color(173,153,126,180), ThemeConstants.ANY));       
         addStyleElement(sandStoneCavePS);
+        
+        PolygonStyle waterWadi = new PolygonStyle("Water - Wadi", new Color(230, 230, 230), null, ThemeConstants.WATER, "standard_wadi-fill.png");
+        sandStoneCavePS.addOutlineStyle(new OutlineStyle(new Color(230, 230, 230), ThemeConstants.WATER));   
+        sandStoneCavePS.addOutlineStyle(new OutlineStyle(new Color(165, 191, 221), ThemeConstants.ANY));       
+        addStyleElement(waterWadi);        
     }
             
 }

@@ -200,7 +200,9 @@ public class PolygonStyle extends ColorStyle {
         this.outlineColor       = outlineColor;  
         this.outlineStyles      = new ArrayList<OutlineStyle>(1);  
         
-        outlineStyles.add(new OutlineStyle(outlineColor));
+        if (outlineColor != null) {
+            outlineStyles.add(new OutlineStyle(outlineColor));
+        }
     }        
     
     public PolygonStyle(String  id, 
