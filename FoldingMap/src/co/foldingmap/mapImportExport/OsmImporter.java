@@ -1001,6 +1001,9 @@ public class OsmImporter extends Thread {
                             } else if(wayType.equalsIgnoreCase("stream")) {
                                 wayType     = "Water Way - Stream";
                                 isPolygon   = false;
+                            } else if(wayType.equalsIgnoreCase("wadi")) {
+                                wayType     = "Water Way - Intermittent Stream";
+                                isPolygon   = false;                                
                             } else {
                                 wayType     = "Water Way - River";
                                 polygonType = "Lake";
@@ -1131,7 +1134,10 @@ public class OsmImporter extends Thread {
                             mergeToPolygon = true;
                         }
                     } else if (tag.getProperty().equalsIgnoreCase("natural")) {
-                        if (tag.getValue().equalsIgnoreCase("water")) {
+                        if (tag.getValue().equalsIgnoreCase("wadi")) {
+                            polygonType = "Water - Wadi";
+                            lineType    = "Water Way - Intermittent Stream";
+                        } else if (tag.getValue().equalsIgnoreCase("water")) {
                             polygonType = "River";
                             lineType    = "Water Way - River";
                         }             
