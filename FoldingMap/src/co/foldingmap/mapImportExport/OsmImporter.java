@@ -617,27 +617,30 @@ public class OsmImporter extends Thread {
      * @return 
      */
     public static VectorObject getOsmWay(String wayXML, NodeMap nodeMap) {        
-        boolean                    isPolygon, isRing;
+        boolean                    isCliff, isPolygon, isRing;
         Coordinate                 tempCoordinate;
         CoordinateList<Coordinate> objectCoordinates;
         HashMap<String, String>    customDataFields;
         int                        dataLevel, offset, propertyTagXmlEnd, tabPropertyStart, tabPropertyEnd;
         VectorObject               newMapObject;
-        OsmNode                    tempOsmNode;
+        //OsmNode                    tempOsmNode;
         PropertyValuePair          property;
         Region                     objectRegion;
+        String                     objectColor;
         String                     nodeID, wayHighway, wayID, wayName, waySurface, wayTimestamp, wayTrackType;
         String                     currentTag, polygonType, propertyTagXML, value, wayType, naturalType;
         StringBuilder              objectDescription;
         
         //initilize
         customDataFields  = new HashMap<String, String>();
+        isCliff           = false;
         isPolygon         = false;
         isRing            = false;
         newMapObject      = null;
         wayName           = "";
         waySurface        = "";
         wayTrackType      = "";
+        objectColor       = "";
         objectCoordinates = new CoordinateList<Coordinate>();
         objectRegion      = null;
         offset            = 0;
@@ -760,6 +763,18 @@ public class OsmImporter extends Thread {
                             }
                             
                             isPolygon   = true;
+                        } else if (property.getProperty().equalsIgnoreCase("color")) {
+                            objectColor  = property.getValue();
+                            
+                            if (isCliff == true) {
+                                if (objectColor.equals("Brown")) {
+                                    polygonType = "Rock - Sandstone";
+                                } else if (objectColor.equals("Red")) {
+                                    polygonType = "Rock - Sandstone Red";
+                                } else if (objectColor.equals("White")) {
+                                    polygonType = "Rock - Sandstone White";
+                                }                                
+                            }
                         } else if (property.getProperty().equalsIgnoreCase("DataLevel")) {
                             dataLevel   = Integer.parseInt(property.getValue());
                         } else if (property.getProperty().equalsIgnoreCase("footway")) {
@@ -919,6 +934,19 @@ public class OsmImporter extends Thread {
                             if (naturalType.equalsIgnoreCase("beach")) {
                                 polygonType = "Beach";
                                 isPolygon   = true;    
+                            } else if (naturalType.equalsIgnoreCase("cliff")) { 
+                                if (objectColor.length() > 0) {
+                                    isPolygon = true;
+                                    isCliff   = true;
+                                    
+                                    if (objectColor.equals("brown")) {
+                                        polygonType = "Rock - Sandstone";
+                                    } else if (objectColor.equals("red")) {
+                                        polygonType = "Rock - Sandstone Red";
+                                    } else if (objectColor.equals("white")) {
+                                        polygonType = "Rock - Sandstone White";
+                                    }
+                                }
                             } else if (naturalType.equalsIgnoreCase("coastline")) {
                                 wayType     = "Coastline";
                                 polygonType = "Island";
@@ -926,16 +954,19 @@ public class OsmImporter extends Thread {
                                 //If coastline end points are close together, assume an island
                                 if (CoordinateMath.getDistance(objectCoordinates.get(0), objectCoordinates.lastCoordinate()) < 200)
                                     isPolygon   = true;  
-                            } if (naturalType.equalsIgnoreCase("heath")) {
+                            } else if (naturalType.equalsIgnoreCase("heath")) {
                                 polygonType = "Land Cover - Heath";   
                                 isPolygon   = true;
-                            } if (naturalType.equalsIgnoreCase("reef")) {    
+                            } else if (naturalType.equalsIgnoreCase("reef")) {    
                                 polygonType = "Reef";   
                                 isPolygon   = true;  
-                            } if (naturalType.equalsIgnoreCase("water")) {
+                            } else if (naturalType.equalsIgnoreCase("wadi")) { 
+                                polygonType = "Water - Wadi";
+                                wayType     = "Water Way - Intermittent Stream";
+                            } else if (naturalType.equalsIgnoreCase("water")) {
                                 wayType     = "Water Way - River";
                                 polygonType = "Lake";     
-                            } if (naturalType.equalsIgnoreCase("wood")) {
+                            } else if (naturalType.equalsIgnoreCase("wood")) {
                                 polygonType = "Forest";    
                                 isPolygon   = true;
                             }
@@ -1002,8 +1033,8 @@ public class OsmImporter extends Thread {
                                 wayType     = "Water Way - Stream";
                                 isPolygon   = false;
                             } else if(wayType.equalsIgnoreCase("wadi")) {
-                                wayType     = "Water Way - Intermittent Stream";
-                                isPolygon   = false;                                
+                                polygonType = "Water - Wadi";
+                                wayType     = "Water Way - Intermittent Stream";                             
                             } else {
                                 wayType     = "Water Way - River";
                                 polygonType = "Lake";
@@ -1063,8 +1094,10 @@ public class OsmImporter extends Thread {
      * Creates MultiGeometry from OSM relations.
      * TODO: Needs work on the merging of LineString
      * 
+     * @param importLayer
      * @param xml
-     * @param ways 
+     * @param objects 
+     * @return  
      */
     public static VectorObject getRelation(VectorLayer importLayer, String xml, HashMap<String, VectorObject> objects) {
         boolean                     mergeToPolygon;
@@ -1134,7 +1167,9 @@ public class OsmImporter extends Thread {
                             mergeToPolygon = true;
                         }
                     } else if (tag.getProperty().equalsIgnoreCase("natural")) {
-                        if (tag.getValue().equalsIgnoreCase("wadi")) {
+                        if (tag.getValue().equalsIgnoreCase("cliff")) {
+                            lineType    = "Rock Face";                                                                                    
+                        } else if (tag.getValue().equalsIgnoreCase("wadi")) {
                             polygonType = "Water - Wadi";
                             lineType    = "Water Way - Intermittent Stream";
                         } else if (tag.getValue().equalsIgnoreCase("water")) {
@@ -1434,6 +1469,7 @@ public class OsmImporter extends Thread {
      * OSM relation build polygons, specify restrictions and add other info.
      * 
      * @param objects
+     * @param importLayer
      * @param relation 
      */
     public static void processRelation(HashMap<String, VectorObject> objects, 

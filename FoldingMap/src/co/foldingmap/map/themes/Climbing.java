@@ -108,7 +108,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Industrial Area",       new Color(222, 208, 213), ThemeConstants.LAND));  
         addStyleElement(new PolygonStyle("Island",                new Color(239, 237, 230), new Color(239, 237, 230, 140), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Lake",                  new Color(165, 191, 221), ThemeConstants.WATER));
-        addStyleElement(new PolygonStyle("Land Cover - Heath",    new Color(206, 224, 132), ThemeConstants.LAND)); 
+        addStyleElement(new PolygonStyle("Land Cover - Heath",    new Color(239, 218, 194), null, ThemeConstants.LAND, "standard_heath-fill.png")); 
         addStyleElement(new PolygonStyle("Market",                new Color(216, 237, 235), ThemeConstants.LAND)); 
         addStyleElement(new PolygonStyle("Ocean",                 new Color(165, 191, 221), ThemeConstants.WATER));
         addStyleElement(new PolygonStyle("Park",                  new Color(201, 223, 175), ThemeConstants.LAND));
@@ -123,7 +123,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Rock - Limestone",      new Color(200, 213, 213), new Color(174,185,185,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Rock - Sandstone",      new Color(203, 183, 156), new Color(173,153,126,180), ThemeConstants.LAND));        
         addStyleElement(new PolygonStyle("Rock - Sandstone Red",  new Color(196, 147, 126), new Color(143,72,92), ThemeConstants.LAND)); 
-        addStyleElement(new PolygonStyle("Rock - Sandstone White",new Color(255, 249, 232), new Color(230,230,230), ThemeConstants.LAND));
+        addStyleElement(new PolygonStyle("Rock - Sandstone White",new Color(255, 249, 232), new Color(160,160,160), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("School",                new Color(232, 221, 189), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Small Island",          new Color(239, 237, 230), new Color(239, 237, 230,  90), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Snow Cover",            new Color(255, 255, 255), new Color(255, 255, 255, 140), ThemeConstants.LAND));
