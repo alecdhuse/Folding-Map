@@ -516,6 +516,8 @@ public class OsmImporter extends Thread {
             } else if (customFields.containsKey("tourism")) {
                 if (value.equalsIgnoreCase("hotel")) {
                     newPoint.setClass("Hotel");
+                } else if (value.equalsIgnoreCase("camp_site")) {
+                    newPoint.setClass("Camp Site");
                 } else {                
                     newPoint.setClass("Tourist Attraction");
                 }
@@ -710,7 +712,7 @@ public class OsmImporter extends Thread {
                                 polygonType = "Market"; 
                                 isPolygon   = true;                                
                             } else if (property.getValue().equalsIgnoreCase("parking")) {
-                                polygonType = "Parking Lot"; 
+                                polygonType = "Parking"; 
                                 isPolygon   = true;
                             } else if (property.getValue().equalsIgnoreCase("place_of_worship")) {
                                 polygonType = "Building"; 
@@ -752,6 +754,8 @@ public class OsmImporter extends Thread {
                             
                             if (property.getValue().equalsIgnoreCase("administrative")) {
                                 wayType = "Border - Inter-Country";
+                            } else if (property.getValue().equalsIgnoreCase("national_park")) {
+                                polygonType = "Protected Area";
                             } else if (property.getValue().equalsIgnoreCase("town")) {
                                 polygonType = "Country - Filled";
                             }    
