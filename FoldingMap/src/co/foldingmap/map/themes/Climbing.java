@@ -90,7 +90,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new LineStyle("Trail - Unimproved",              Color.WHITE,                   new Color(68, 68, 68, 100), 0.4f, LineStyle.IN_DASH, cityRoadStandard));
         addStyleElement(new LineStyle("Trail - Water Crossing",          new Color(161, 132, 179),      new Color(68, 68, 68, 100), 0.6f, LineStyle.IN_DASH, cityRoadStandard));
         addStyleElement(new LineStyle("Territorial Boundary",            new Color(161, 132, 179),      1.5f, LineStyle.DASHED, false));            
-        addStyleElement(new LineStyle("Water Way - Intermittent Stream", new Color(165, 191, 221),      1.0f, LineStyle.DASHED, false));
+        addStyleElement(new LineStyle("Water Way - Intermittent Stream", new Color(165, 191, 221),      1.0f, LineStyle.DASHED, false, new Visibility(23, 16)));
         addStyleElement(new LineStyle("Water Way - River",               new Color(165, 191, 221),      3.0f, LineStyle.SOLID,  true));
         addStyleElement(new LineStyle("Water Way - Stream",              new Color(165, 191, 221),      1.0f, LineStyle.SOLID,  false));        
         

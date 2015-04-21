@@ -69,6 +69,33 @@ public class LineStyle extends ColorStyle {
     }    
     
     /**
+     * Constructor No Outline and Visibility
+     * 
+     * @param id
+     * @param fillColor
+     * @param lineWidth
+     * @param lineStroke
+     * @param scaleWidth
+     * @param visibility
+     */
+    public LineStyle(String  id, 
+                     Color   fillColor, 
+                     float   lineWidth, 
+                     String  lineStroke,
+                     boolean scaleWidth,
+                     Visibility visibility) {
+        
+        this.id          = id;
+        this.featureType = ThemeConstants.UNKNOWN;
+        this.fillColor   = fillColor;
+        this.lineWidth   = lineWidth;
+        this.lineStroke  = lineStroke;
+        this.outline     = false;
+        this.scaleWidth  = scaleWidth;
+        this.visibility  = visibility;
+    }    
+    
+    /**
      * Constructor with outline
      * 
      * @param id
