@@ -123,7 +123,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Rock - Limestone",      new Color(200, 213, 213), new Color(174,185,185,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Rock - Sandstone",      new Color(203, 183, 156), new Color(173,153,126,180), ThemeConstants.LAND));        
         addStyleElement(new PolygonStyle("Rock - Sandstone Red",  new Color(196, 147, 126), new Color(143,72,92), ThemeConstants.LAND)); 
-        addStyleElement(new PolygonStyle("Rock - Sandstone White",new Color(255, 249, 232), new Color(220,220,210), ThemeConstants.LAND));
+        addStyleElement(new PolygonStyle("Rock - Sandstone White",new Color(255, 249, 232), new Color(220,220,210,180), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("School",                new Color(232, 221, 189), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Small Island",          new Color(239, 237, 230), new Color(239, 237, 230,  90), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Snow Cover",            new Color(255, 255, 255), new Color(255, 255, 255, 140), ThemeConstants.LAND));

@@ -57,11 +57,11 @@ import java.util.StringTokenizer;
  */
 public class OsmImporter extends Thread {
     
-    private DigitalMap          mapData;
-    private File                osmFile;
-    private float               minlat, minlon, maxlat, maxlon;
-    private ProgressIndicator   progressIndicator;
-    private Updateable          updateable;
+    private final DigitalMap          mapData;
+    private final File                osmFile;
+    private float                     minlat, minlon, maxlat, maxlon;
+    private final ProgressIndicator   progressIndicator;
+    private final Updateable          updateable;
 
     public OsmImporter(DigitalMap        mapData, 
                        File              osmFile, 
@@ -75,6 +75,28 @@ public class OsmImporter extends Thread {
         this.updateable        = updateable;
         this.progressIndicator = progressIndicator;
     }    
+    
+    /**
+     * Check custom data field to see if it has a match.
+     * 
+     * @param customDataFields
+     * @param selectors
+     * @return
+     */
+    public static boolean checkDataFieldsForMatch(HashMap<String, String> customDataFields, PropertyValuePair[] selectors) {
+        boolean returnValue = false;
+        
+        for (PropertyValuePair selector : selectors) {
+            if (customDataFields.get(selector.getProperty()).equals(selector.getValue())) {
+                returnValue = true;
+            } else {
+                returnValue = false;
+                break;
+            }
+        }
+        
+        return returnValue;
+    }
     
     /**
      * Creates a KML region based on the OSM dataLevel
@@ -251,7 +273,7 @@ public class OsmImporter extends Thread {
             }
 
             return new OsmNode(id, nodeCoordinate, tagInfo);
-        } catch (Exception e) {
+        } catch (NumberFormatException | ParseException e) {
             Logger.log(Logger.ERR, "Error in OsmImporter.getOsmNode(String) - " + e);
             return null;
         }
@@ -625,7 +647,6 @@ public class OsmImporter extends Thread {
         HashMap<String, String>    customDataFields;
         int                        dataLevel, offset, propertyTagXmlEnd, tabPropertyStart, tabPropertyEnd;
         VectorObject               newMapObject;
-        //OsmNode                    tempOsmNode;
         PropertyValuePair          property;
         Region                     objectRegion;
         String                     objectColor;
@@ -1058,11 +1079,17 @@ public class OsmImporter extends Thread {
                 }
             } //end while loop
 
+            //Experiment with new class creation system
+            if (checkDataFieldsForMatch(customDataFields, new PropertyValuePair[]{new PropertyValuePair("waterway", "stream"), new PropertyValuePair("intermittent", "yes")})) {
+                polygonType = "Water - Wadi";
+                wayType     = "Water Way - Intermittent Stream";    
+            }
+            
             //add newly constructed object
             if (objectCoordinates.size() > 1) {
                 if (objectCoordinates.get(0) == objectCoordinates.get(objectCoordinates.size() - 1)) {
                     //closed object, if not a road or Boundary create polygon
-                    if ((wayType.indexOf("Road") >= 0) || wayType.indexOf("Boundary") >= 0 || wayType.indexOf("Border") >= 0) {
+                    if ((wayType.contains("Road")) || wayType.contains("Boundary") || wayType.contains("Border")) {
                         newMapObject = new LinearRing(wayName, wayType, objectCoordinates);
                     } else {
                         objectCoordinates.remove(0); //Polygon Objects do not contain the same start and end coordinate, but OSM does, remove to prevent conflict
