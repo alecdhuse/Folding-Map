@@ -86,12 +86,14 @@ public class OsmImporter extends Thread {
     public static boolean checkDataFieldsForMatch(HashMap<String, String> customDataFields, PropertyValuePair[] selectors) {
         boolean returnValue = false;
         
-        for (PropertyValuePair selector : selectors) {
-            if (customDataFields.get(selector.getProperty()).equals(selector.getValue())) {
-                returnValue = true;
-            } else {
-                returnValue = false;
-                break;
+        if ((customDataFields != null) && (selectors != null)) {
+            for (PropertyValuePair selector : selectors) {
+                if (customDataFields.get(selector.getProperty()).equals(selector.getValue())) {
+                    returnValue = true;
+                } else {
+                    returnValue = false;
+                    break;
+                }
             }
         }
         

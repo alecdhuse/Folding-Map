@@ -17,6 +17,7 @@
 package co.foldingmap.mapImportExport;
 
 import co.foldingmap.GUISupport.ProgressBarPanel;
+import co.foldingmap.Logger;
 import co.foldingmap.MainWindow;
 import co.foldingmap.map.DigitalMap;
 import co.foldingmap.map.vector.LatLonBox;
@@ -180,13 +181,17 @@ public class OsmOverpassDownloader extends Thread {
                             wayXML.append(line);   
                             currentObject = OsmImporter.getOsmWay(wayXML.toString(), nodeMap);             
                             
-                            if (currentObject.getObjectClass().equalsIgnoreCase("Coastline")) {
-                                coastlines.add(currentObject);
+                            if (currentObject != null) {
+                                if (currentObject.getObjectClass().equalsIgnoreCase("Coastline")) {
+                                    coastlines.add(currentObject);
+                                }
+
+                                objectIDs.put(currentObject.getCustomDataFieldValue("OsmID"), currentObject);                                                        
+                                importLayer.addObject(currentObject);      
+                            } else {
+                                Logger.log(Logger.ERR, "Could Not Covert OSM Way - " + wayXML.toString());                            
                             }
-
-                            objectIDs.put(currentObject.getCustomDataFieldValue("OsmID"), currentObject);                                                        
-                            importLayer.addObject(currentObject);      
-
+                            
                             mainWindow.repaint();
                             wayStarted = false; 
                         } else if (line.startsWith("<relation ")) {
