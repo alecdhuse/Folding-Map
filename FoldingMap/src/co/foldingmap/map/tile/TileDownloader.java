@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ import co.foldingmap.mapImportExport.TileExporter;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -32,19 +32,14 @@ import javax.imageio.ImageIO;
  * @author Alec
  */
 public class TileDownloader extends Thread {
-    private ArrayList<TileReference> tilesToDownload;
-    private boolean                  urlReplace;
-    private Connection               conn;  
-    private String                   tileServerAddress;
+    private final ArrayList<TileReference> tilesToDownload;
+    private final boolean                  urlReplace;
+    private Connection                     conn;  
+    private final String                   dbFile, tileServerAddress;
     
     public TileDownloader(String tileServerAddress, String sourceTitle) {        
-        this.tilesToDownload   = new ArrayList<TileReference>();    
-        
-        if (tileServerAddress.contains("{x}")) {
-            urlReplace = true;
-        } else {
-            urlReplace = false;
-        }
+        this.tilesToDownload = new ArrayList<TileReference>();   
+        this.urlReplace      = tileServerAddress.contains("{x}");
         
         if (tileServerAddress.toLowerCase().startsWith("http")) {
             this.tileServerAddress = tileServerAddress;
@@ -52,14 +47,10 @@ public class TileDownloader extends Thread {
             this.tileServerAddress = "http://" + tileServerAddress;
         }
         
+        this.dbFile = sourceTitle + ".mbtiles";
+        
         //load database
-        try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:" + sourceTitle + ".mbtiles");       
-            createTables();
-        } catch (Exception e) {
-            Logger.log(Logger.ERR, "Error in TileDownloader(String) when loading database - " + e);
-        }        
+        openDbConnection();      
     }
     
     public void closeConnection() {
@@ -114,7 +105,7 @@ public class TileDownloader extends Thread {
         int             x, y, z;
         String          constructedURL, lastMod;
         URL             url;
-        URLConnection   urlConn;
+        //URLConnection   urlConn;
         
         try {
             x = tileRef.getX();
@@ -133,13 +124,13 @@ public class TileDownloader extends Thread {
             }
             
             url       = new URL(constructedURL);            
-            urlConn   = url.openConnection();
+            //urlConn  = url.openConnection();
             //lastMod  = urlConn.getHeaderField("Expires");
             
             bufferedImage = ImageIO.read(url);     
         } catch (Exception e) {            
             Logger.log(Logger.ERR, "Error TileDownloader.downloadTile(" + tileRef.toString() + ") - " + e);            
-            bufferedImage   = null;
+            bufferedImage = null;
         }      
         
         return bufferedImage;
@@ -154,7 +145,7 @@ public class TileDownloader extends Thread {
     public BufferedImage getTileFromDB(TileReference tileRef) {
         byte[]                  tileImage;
         BufferedImage           bi;     
-        int                     numberOfTiles, x, y, zoom;
+        int                     numberOfTiles, x, y;
         ResultSet               rs;
         Statement               stat;
         String                  sql, tileID;
@@ -190,7 +181,7 @@ public class TileDownloader extends Thread {
                     bi = ImageIO.read(new ByteArrayInputStream(tileImage));                                        
                 }       
             }                            
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
             Logger.log(Logger.ERR, "Error in TileDownloader.getTileFromDB(TileReference) - " + e);
         }
         
@@ -222,6 +213,20 @@ public class TileDownloader extends Thread {
     }      
     
     /**
+     *  Open the SQLite database connection.
+     * 
+     */
+    public final void openDbConnection() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            this.conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbFile);       
+            createTables();
+        } catch (ClassNotFoundException | SQLException e) {
+            Logger.log(Logger.ERR, "Error in openDbConnection() - " + e);
+        }           
+    }
+    
+    /**
      * Puts a tile into the tile cache database.
      * 
      * @param tileRef
@@ -232,7 +237,6 @@ public class TileDownloader extends Thread {
         ByteArrayOutputStream   baos;      
         int                     numberOfTiles;
         PreparedStatement       prep; 
-        Statement               stat;
         String                  imageHash;
         
         try {
@@ -270,7 +274,9 @@ public class TileDownloader extends Thread {
                 prep.executeBatch();
                 conn.setAutoCommit(true);     
             }
-        } catch (Exception e) {
+        } catch (IOException | SQLException e) {
+            closeConnection();
+            openDbConnection();            
             Logger.log(Logger.ERR, "Error in TileDownloader.putTileImage(TileReference, BufferedImage) - " + e);
         }
     }    
