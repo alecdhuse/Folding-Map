@@ -50,7 +50,8 @@ public class TileDownloader extends Thread {
         this.dbFile = sourceTitle + ".mbtiles";
         
         //load database
-        openDbConnection();      
+        openDbConnection();     
+        createTables();
     }
     
     public void closeConnection() {
@@ -202,8 +203,10 @@ public class TileDownloader extends Thread {
             tileBI = getTileFromDB(tileRef);
 
             if (tileBI == null) {
-                tilesToDownload.add(tileRef);
-                if (!this.isAlive()) this.start();
+                if (!tilesToDownload.contains(tileRef)) {
+                    tilesToDownload.add(tileRef);
+                    if (!this.isAlive()) this.start();
+                }
             }
         } else {             
             tileBI = null;  
@@ -219,8 +222,7 @@ public class TileDownloader extends Thread {
     public final void openDbConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            this.conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbFile);       
-            createTables();
+            this.conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbFile);                   
         } catch (ClassNotFoundException | SQLException e) {
             Logger.log(Logger.ERR, "Error in openDbConnection() - " + e);
         }           
