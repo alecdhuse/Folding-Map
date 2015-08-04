@@ -995,6 +995,14 @@ public class OsmImporter extends Thread {
                             } else if (naturalType.equalsIgnoreCase("reef")) {    
                                 polygonType = "Reef";   
                                 isPolygon   = true;  
+                            } else if (naturalType.equalsIgnoreCase("rock")) { 
+                                polygonType = "Rock - Granite";
+                                isCliff     = true;
+                                isPolygon   = true;
+                            } else if (naturalType.equalsIgnoreCase("rocks")) { 
+                                polygonType = "Rock - Granite";
+                                isCliff     = true;
+                                isPolygon   = true;                                
                             } else if (naturalType.equalsIgnoreCase("wadi")) { 
                                 polygonType = "Water - Wadi";
                                 wayType     = "Water Way - Intermittent Stream";
