@@ -780,16 +780,18 @@ public class OsmImporter extends Thread {
                             if (property.getValue().equalsIgnoreCase("territorial")) {
                                 wayName = "Border";    
                             }
-                        } else if (property.getProperty().equalsIgnoreCase("boundary")) {
-                            wayType = "Territorial Boundary";
-                            
+                        } else if (property.getProperty().equalsIgnoreCase("boundary")) {                                                        
                             if (property.getValue().equalsIgnoreCase("administrative")) {
                                 wayType = "Border - Inter-Country";
                             } else if (property.getValue().equalsIgnoreCase("national_park")) {
                                 polygonType = "Protected Area";
+                            } else if (property.getValue().equalsIgnoreCase("protected_area")) {
+                                polygonType = "Protected Area";                                
                             } else if (property.getValue().equalsIgnoreCase("town")) {
                                 polygonType = "Country - Filled";
-                            }    
+                            } else {
+                                wayType = "Territorial Boundary";
+                            } 
                         } else if (property.getProperty().equalsIgnoreCase("building")) {
                             if (property.getValue().equalsIgnoreCase("yes")) {
                                 polygonType = "Building";                                
@@ -869,7 +871,9 @@ public class OsmImporter extends Thread {
                             }
                         } else if (property.getProperty().equalsIgnoreCase("landuse")) {
                             if (property.getValue().equalsIgnoreCase("commercial")) {
-                                polygonType = "Commercial Area";     
+                                polygonType = "Commercial Area";  
+                            } else if (property.getValue().equalsIgnoreCase("conservation")) {
+                                polygonType = "Protected Area";  
                             } else if (property.getValue().equalsIgnoreCase("gated_community")) {
                                 polygonType = "Residential Area";
                             } else if (property.getValue().equalsIgnoreCase("grass")) {
