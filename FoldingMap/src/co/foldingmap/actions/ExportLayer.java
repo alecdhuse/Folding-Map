@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,9 +41,9 @@ import java.io.File;
  * @author Alec
  */
 public class ExportLayer extends Action {
-    private Layer         layer;
-    private MainWindow    mainWindow;
-    private MapProjection projection;
+    private final Layer         layer;
+    private final MainWindow    mainWindow;
+    private final MapProjection projection;
     
     public ExportLayer(MainWindow mainWindow, MapProjection projection, Layer layer) {
         this.mainWindow  = mainWindow;

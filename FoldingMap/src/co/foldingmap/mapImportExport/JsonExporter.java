@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,6 +36,7 @@ import co.foldingmap.map.MapObject;
 import co.foldingmap.map.Visibility;
 import co.foldingmap.map.themes.ColorStyle;
 import co.foldingmap.map.themes.IconStyle;
+import co.foldingmap.map.vector.CoordinateList;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -102,12 +103,42 @@ public class JsonExporter {
         
         return object;
     }    
-    public static JsonObject exportLinearRing(LinearRing ring) {
-        return null;
+    public static JsonObject exportLinearRing(DigitalMap mapData, LinearRing ring) {
+        JsonObject geometryObject, jObject, propertiesObject;
+        
+        jObject          = new JsonObject();
+        propertiesObject = new JsonObject();
+        geometryObject   = new JsonObject();          
+                
+        propertiesObject.addPair(new JsonPair("name", ring.getName()));
+        
+        geometryObject.addPair(new JsonPair("type", "LineString"));
+        geometryObject.addPair(getCoordinatePair(ring));        
+        
+        jObject.addPair(new JsonPair("type",       "Feature"));
+        jObject.addPair(new JsonPair("properties", propertiesObject));
+        jObject.addPair(new JsonPair("geometry",   geometryObject));          
+        
+        return jObject;
     }    
     
-    public static JsonObject exportLineString(LineString line) {
-        return null;
+    public static JsonObject exportLineString(DigitalMap mapData, LineString line) {
+        JsonObject geometryObject, jObject, propertiesObject;
+        
+        jObject          = new JsonObject();
+        propertiesObject = new JsonObject();
+        geometryObject   = new JsonObject();          
+                
+        propertiesObject.addPair(new JsonPair("name", line.getName()));
+        
+        geometryObject.addPair(new JsonPair("type", "LineString"));
+        geometryObject.addPair(getCoordinatePair(line));        
+        
+        jObject.addPair(new JsonPair("type",       "Feature"));
+        jObject.addPair(new JsonPair("properties", propertiesObject));
+        jObject.addPair(new JsonPair("geometry",   geometryObject));          
+        
+        return jObject;
     }
     
     /**
@@ -146,7 +177,8 @@ public class JsonExporter {
         
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            writer.write(jsonObject.toString());
+            String jsonString = jsonObject.toString();
+            writer.write(jsonString);
             writer.close();
         } catch (Exception e) {
             Logger.log(Logger.ERR, "Error in JsonExporter.exportMap(DigitalMap, File) - " + e);
@@ -244,15 +276,8 @@ public class JsonExporter {
         for (PropertyValuePair pvp: point.getAllCustomData()) 
             propertiesObject.addPair(new JsonPair(pvp.getProperty(), pvp.getValue()));       
         
-        //Get Coordinate
-        Coordinate       c    = point.getCoordinateList().get(0);
-        JsonCoordinate   jc   = new JsonCoordinate(c.getLongitude(), c.getLatitude(), c.getAltitude());
-        JsonCoordinate[] cArr = new JsonCoordinate[1];
-        
-        cArr[0] = jc;
-        
-        geometryObject.addPair(new JsonPair("type",        "Point"));
-        geometryObject.addPair(new JsonPair("coordinates", jc));
+        geometryObject.addPair(new JsonPair("type", "Point"));
+        geometryObject.addPair(getCoordinatePair(point));
         
         jObject.addPair(new JsonPair("type",       "Feature"));
         jObject.addPair(new JsonPair("properties", propertiesObject));
@@ -261,12 +286,59 @@ public class JsonExporter {
         return jObject;
     }
     
-    public static JsonObject exportMultiGeometry(MultiGeometry multi) {
-        return null;
+    public static JsonObject exportMultiGeometry(DigitalMap mapData, MultiGeometry multi) {
+        JsonObject   geometryObject, jObject, propertiesObject;
+        JsonObject[] geometries;
+        
+        jObject          = new JsonObject();
+        propertiesObject = new JsonObject();
+        geometryObject   = new JsonObject();          
+        geometries       = new JsonObject[multi.getComponentObjects().size()];
+        
+        propertiesObject.addPair(new JsonPair("name", multi.getName()));        
+        geometryObject.addPair(new JsonPair("type", "GeometryCollection"));
+        
+        for (int i = 0; i < multi.getComponentObjects().size(); i++) {
+            VectorObject obj = multi.getComponentObjects().get(i);
+            geometries[i] = new JsonObject();
+            
+            if (obj instanceof MapPoint) {
+                geometries[i].addPair(new JsonPair("type", "Point"));
+            } else if (obj instanceof LineString) {
+                geometries[i].addPair(new JsonPair("type", "LineString"));
+            } else if (obj instanceof LinearRing) {
+                geometries[i].addPair(new JsonPair("type", "LineString"));
+            } else if (obj instanceof Polygon) {
+                geometries[i].addPair(new JsonPair("type", "Polygon"));
+            }                       
+         
+            geometries[i].addPair(getCoordinatePair(obj));  
+        }              
+        
+        jObject.addPair(new JsonPair("type",       "Feature"));
+        jObject.addPair(new JsonPair("properties", propertiesObject));
+        jObject.addPair(new JsonPair("geometries", geometryObject));          
+        
+        return jObject;
     }      
     
-    public static JsonObject exportPolygon(Polygon poly) {
-        return null;
+    public static JsonObject exportPolygon(DigitalMap mapData, Polygon poly) {
+        JsonObject geometryObject, jObject, propertiesObject;
+        
+        jObject          = new JsonObject();
+        propertiesObject = new JsonObject();
+        geometryObject   = new JsonObject();          
+                
+        propertiesObject.addPair(new JsonPair("name", poly.getName()));
+        
+        geometryObject.addPair(new JsonPair("type", "Polygon"));
+        geometryObject.addPair(getCoordinatePair(poly));        
+        
+        jObject.addPair(new JsonPair("type",       "Feature"));
+        jObject.addPair(new JsonPair("properties", propertiesObject));
+        jObject.addPair(new JsonPair("geometry",   geometryObject));          
+        
+        return jObject;
     }    
     
     public static JsonObject exportVectorObject(DigitalMap mapData, VectorObject obj) {
@@ -274,10 +346,36 @@ public class JsonExporter {
         
         if (obj instanceof MapPoint) {
             objectJson = exportMapPoint(mapData, (MapPoint) obj);
+        } else if (obj instanceof LineString) {
+            objectJson = exportLineString(mapData, (LineString) obj);
+        } else if (obj instanceof LinearRing) {
+            objectJson = exportLinearRing(mapData, (LinearRing) obj);
+        } else if (obj instanceof Polygon) {
+            objectJson = exportPolygon(mapData, (Polygon) obj);
+        } else if (obj instanceof MultiGeometry) {
+            objectJson = exportMultiGeometry(mapData, (MultiGeometry) obj);
         } else {
             
         }
         
         return objectJson;
+    }
+    
+    /**
+     * Returns a JsonPair containing all the coordinates for an object.
+     * 
+     * @param  obj A vector object to extract coordinates from.
+     * @return The JsonPair containing all the coordinates.
+     */
+    public static JsonPair getCoordinatePair(VectorObject obj) {
+        CoordinateList<Coordinate> coordinateList  = obj.getCoordinateList();
+        JsonCoordinate[]           coordinateArray = new JsonCoordinate[coordinateList.size()];
+        
+        for (int i = 0; i < coordinateList.size(); i++) {
+            Coordinate c = coordinateList.get(i);
+            coordinateArray[i] = new JsonCoordinate(c.getLongitude(), c.getLatitude(), c.getAltitude());
+        }
+        
+        return new JsonPair("coordinates", (JsonCoordinate[]) coordinateArray);
     }
 }
