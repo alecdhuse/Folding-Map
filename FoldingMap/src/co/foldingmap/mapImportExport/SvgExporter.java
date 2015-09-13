@@ -107,8 +107,12 @@ public class SvgExporter {
             
             //Draw LineString outlines first          
             for (VectorObject object: lineStrings) {
-                ColorStyle style = theme.getStyle(object.getObjectClass());
-                writeSvgLine(outputStream, object.getName(), object.getCoordinateList(), style, true);
+                LineStyle ls = theme.getLineStyle(object.getObjectClass());
+                
+                if (ls != null) {
+                    if (ls.isOutlined()) 
+                        writeSvgLine(outputStream, object.getName(), object.getCoordinateList(), ls, true);
+                }
             }
             
             for (VectorObject object: layer.getObjectList()) 
@@ -162,24 +166,25 @@ public class SvgExporter {
                                 MapLabel label) {
         
         Color   outlineColor, fillColor;
-        float   x, y;
+        float   strokeSize, x, y;
         Font    labelFont;
         String  style, fontStyle;
         
         try {
-            labelFont = label.getFont();
+            labelFont  = label.getFont();
+            strokeSize = 0;
             
             //construct style
             if (label.getFillColor() != null) {
                 fillColor = label.getFillColor();
             } else {
-                fillColor = Color.BLACK;
+                fillColor = Color.WHITE;
             }
             
             if (label.getOutlineColor() != null) {
                 outlineColor = label.getOutlineColor();
             } else {
-                outlineColor = Color.WHITE;
+                outlineColor = Color.BLACK;
             }
             
             if (labelFont.getStyle() == Font.BOLD) {
@@ -198,7 +203,7 @@ public class SvgExporter {
             outputStream.write("<g " + style + ">\n"); 
             addIndent();
             
-            style = "fill:#" + getHexColor(fillColor) + ";stroke:#" + getHexColor(outlineColor);    
+            style = "fill:#" + getHexColor(fillColor) + ";stroke:#" + getHexColor(outlineColor) + "stroke-width:" + Float.toString(strokeSize) + "pg;";    
                 
             if (label instanceof PointLabel) {
                 PointLabel pointLabel = (PointLabel) label;
@@ -364,7 +369,7 @@ public class SvgExporter {
         
         sb.append("stroke-width:");
         sb.append(Float.toString(width)); 
-        sb.append(";");           
+        sb.append("px;");           
         
         sb.append("stroke-linecap:round;");
         
@@ -401,20 +406,22 @@ public class SvgExporter {
         
         //Outline Color
         if (style.getOutlineStyles().size() > 0) {
-            //no stroke, outlines will be seperate objects
-            sb.append("stroke:none");     
-            sb.append("stroke-opacity:0");
-        } else {
             sb.append("stroke:#");
             sb.append(getHexColor(style.getOutlineColor()));
             sb.append(";");            
-            sb.append("stroke-opacity:1;");
+            sb.append("stroke-opacity:1;");            
+        } else {
+            //no stroke, outlines will be seperate objects
+            sb.append("stroke:none");     
+            sb.append("stroke-opacity:0");
         }
         
         //Stroke Width
-        if (style.getOutlineStyles().size() > 0) {
+        if (style.getOutlineStyles().size() > 1) {
             //no stroke, outlines will be seperate objects
-            sb.append("stroke-width:0px");            
+            sb.append("stroke-width:0px;");  
+            
+            //TODO: Implement multiple outlines
         } else {
             sb.append("stroke:");
             sb.append(width);
@@ -469,9 +476,9 @@ public class SvgExporter {
     }    
     
     private void writeImage(BufferedWriter outputStream, 
-                           IconStyle style, 
-                           Coordinate c, 
-                           String id) {
+                            IconStyle  style, 
+                            Coordinate c, 
+                            String id) {
         
         BufferedImage         bi;
         byte[]                imageBytes;
@@ -479,7 +486,7 @@ public class SvgExporter {
         float                 x, y, height, width;
         ImageIcon             image;
         OutputStream          os64;
-        Point2D.Float        point;
+        Point2D.Float         point;
         String                imageEnc;        
         
         try {
