@@ -277,7 +277,6 @@ public class SvgExporter {
         
         
         try {
-            height       = 600;
             width        = 1200;
             mapView      = mapData.getLastMapView();
             mapBounds    = mapData.getBoundary();            

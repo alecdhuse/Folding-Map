@@ -35,7 +35,7 @@ public class TileServerTileSource extends TileSource {
         this.tileDownloader    = new TileDownloader(tileServerAddress, sourceTitle);
         this.tileServerAddress = tileServerAddress;
         this.name              = "Tile Server";        
-        this.maxZoom           = 20;
+        this.maxZoom           = 19;
     }
     
     @Override

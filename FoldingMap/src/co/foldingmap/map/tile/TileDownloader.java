@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 /**
@@ -32,14 +33,16 @@ import javax.imageio.ImageIO;
  * @author Alec
  */
 public class TileDownloader extends Thread {
-    private final ArrayList<TileReference> tilesToDownload;
-    private final boolean                  urlReplace;
-    private Connection                     conn;  
-    private final String                   dbFile, tileServerAddress;
+    private final ArrayList<TileReference>          tilesToDownload;
+    private final boolean                           urlReplace;
+    private Connection                              conn;  
+    private HashMap<TileReference, BufferedImage>   tileMap;
+    private final String                            dbFile, tileServerAddress;
     
     public TileDownloader(String tileServerAddress, String sourceTitle) {        
         this.tilesToDownload = new ArrayList<TileReference>();   
         this.urlReplace      = tileServerAddress.contains("{x}");
+        this.tileMap         = new HashMap<TileReference, BufferedImage>();
         
         if (tileServerAddress.toLowerCase().startsWith("http")) {
             this.tileServerAddress = tileServerAddress;
@@ -50,8 +53,8 @@ public class TileDownloader extends Thread {
         this.dbFile = sourceTitle + ".mbtiles";
         
         //load database
-        openDbConnection();     
-        createTables();
+        //openDbConnection();     
+        //createTables();
     }
     
     public void closeConnection() {
@@ -106,7 +109,6 @@ public class TileDownloader extends Thread {
         int             x, y, z;
         String          constructedURL, lastMod;
         URL             url;
-        //URLConnection   urlConn;
         
         try {
             x = tileRef.getX();
@@ -133,6 +135,8 @@ public class TileDownloader extends Thread {
             Logger.log(Logger.ERR, "Error TileDownloader.downloadTile(" + tileRef.toString() + ") - " + e);            
             bufferedImage = null;
         }      
+        
+        tileMap.put(tileRef, bufferedImage);
         
         return bufferedImage;
     }         
@@ -165,6 +169,9 @@ public class TileDownloader extends Thread {
                 x = tileRef.getX();
             }            
             
+            return tileMap.get(tileRef);
+            
+            /*
             //MBTiles y is reversed
             y    = (numberOfTiles - tileRef.getY()) - 1;            
             
@@ -181,8 +188,10 @@ public class TileDownloader extends Thread {
                     tileImage = rs.getBytes("tile_data");
                     bi = ImageIO.read(new ByteArrayInputStream(tileImage));                                        
                 }       
-            }                            
-        } catch (SQLException | IOException e) {
+            }   
+            */                        
+        } catch (Exception e) {
+        //} catch (SQLException | IOException e) {
             Logger.log(Logger.ERR, "Error in TileDownloader.getTileFromDB(TileReference) - " + e);
         }
         

@@ -33,6 +33,35 @@ public class TileReference {
     }
     
     /**
+     * Returns if this object is equal to another.
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TileReference) {
+            return (this.hashCode() == obj.hashCode());
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the hash of this object
+     * 
+     * @return 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.x;
+        hash = 97 * hash + this.y;
+        hash = 97 * hash + this.zoom;
+        return hash;
+    }
+    
+    /**
      * Creates a Coordinate Object to represent the north-west corner of this tile.
      * 
      * @return 
@@ -77,6 +106,8 @@ public class TileReference {
     /**
      * Returns the tile reference for the given offsets.
      * 
+     * @param xOffset
+     * @param yOffset
      * @return 
      */
     public TileReference getTileOffset(int xOffset, int yOffset) {
