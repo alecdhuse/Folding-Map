@@ -152,6 +152,7 @@ public class MapPanel extends JPanel implements KeyListener,
      */
     private void doTrace() {        
         try {
+            mapData.deselectObjects();                                        
             mapData.getActions().traceMerge(mapData, new VectorObjectList(traceMergeObjects), traceCoordinates, updateables);
             
             tracePath = null;           
@@ -438,7 +439,6 @@ public class MapPanel extends JPanel implements KeyListener,
      * 
      */
     private void init() {
-//        this.zoomLevel = 1;
         this.helper            = ResourceHelper.getInstance();
         this.allowShiftZoom    = true;
         this.mapData           = new DigitalMap();
@@ -610,7 +610,7 @@ public class MapPanel extends JPanel implements KeyListener,
                             Coordinate c = getCoordinateAtMouseLocation();
                             currentMapView.getViewPortCoordinates().add(c);
                             mapData.getCoordinateSet().put(c);
-                            traceCoordinates.forceAdd(c);                          
+                            traceCoordinates.forceAdd(c);                                                              
                         }
                         
                         //mapData.highlightObject(selection, controlPressed);
