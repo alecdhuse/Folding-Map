@@ -55,9 +55,10 @@ public class TileReference {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.x;
-        hash = 97 * hash + this.y;
-        hash = 97 * hash + this.zoom;
+        hash = 10 * hash + this.x;
+        hash = 100 * hash + this.y;
+        hash = 10000 * hash + this.zoom;
+        
         return hash;
     }
     

@@ -304,8 +304,10 @@ public class TileDownloader extends Thread {
                         tileRef = tilesToDownload.remove(0);
                         bi      = downloadTile(tileRef);      
                         
+                        /*
                         if (bi != null)
                             putTileImage(tileRef, bi);
+                        */
                     }
                 } catch (Exception e) {}
 

@@ -969,10 +969,18 @@ public class MapPanel extends JPanel implements KeyListener,
                     g2.draw(VectorObject.getPointShape(c, MapView.NO_WRAP));                
             }
             
-            if (traceCoordinates.size() > 0) {                
-                g2.setStroke(new BasicStroke(1,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-                g2.setColor(new Color(68, 68, 68, 200));
+            if (traceCoordinates.size() > 0) {      
+                //Generate race path
                 createTracePath();
+                
+                // Trace outline
+                g2.setStroke(new BasicStroke(2,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g2.setColor(Color.WHITE);
+                g2.draw(tracePath);
+                
+                // Trace inner
+                g2.setStroke(new BasicStroke(1,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g2.setColor(new Color(68, 68, 68));                
                 g2.draw(tracePath);
 
                 for (Shape s: points) {

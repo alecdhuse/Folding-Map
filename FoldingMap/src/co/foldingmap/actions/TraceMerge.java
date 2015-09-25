@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,11 +38,11 @@ import java.util.ArrayList;
  * @author Alec
  */
 public class TraceMerge extends Action {
-    private ArrayList<Updateable>           updateables;    
-    private CoordinateList<Coordinate>      coordinatesToMerge;
-    private DigitalMap                      mapData;
-    private VectorObject                    newObject;
-    private VectorObjectList<VectorObject>  objectsToMerge;
+    private final ArrayList<Updateable>             updateables;    
+    private final CoordinateList<Coordinate>        coordinatesToMerge;
+    private DigitalMap                              mapData;
+    private VectorObject                            newObject;
+    private final VectorObjectList<VectorObject>    objectsToMerge;
     
     public TraceMerge(DigitalMap mapData, 
                       VectorObjectList<VectorObject> objectsToMerge, 
