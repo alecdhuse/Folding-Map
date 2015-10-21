@@ -409,6 +409,7 @@ public class Actions {
     /**
      * Pastes KML as MapOBjects into the current DigitalMap.
      * 
+     * @param mainWindow
      * @param mapData 
      */
     public void pasteKML(MainWindow mainWindow, DigitalMap mapData) {

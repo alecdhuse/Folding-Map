@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,13 +72,12 @@ public class ObjectDetailsToolBar extends    JToolBar
     private DigitalMap              mapData;
     private ImageIcon               iconBlank, iconLinearRing, iconLineString, iconMap;
     private ImageIcon               iconMapPoint, iconMultiGeometry, iconPolygon;
-//    private JButton                 buttonObjectVisibility;
     private JComboBox               comboObjectClassType;
     private JLabel                  labelObjectDetailSpacer, labelObjectType;
     private JTextField              textObjectName;
     private RangeSlider             visibilityRange;
     private VectorObject            mapObject;
-    private MainWindow              parentWindow;
+    private final MainWindow        parentWindow;
     private PopupMenuButton         buttonFilterPoints, buttonFilterLines, buttonFilterPolygons, buttonFilterMulti;
     private ResourceHelper          helper;
     private SelectObjects           selectPoints, selectLines, selectPolygons, selectMulti;    
@@ -106,10 +105,6 @@ public class ObjectDetailsToolBar extends    JToolBar
             } else {
                 changeStyle();
             }
-//        } else if (ae.getSource() == buttonObjectVisibility) {
-//            int popupX = this.buttonObjectVisibility.getX() - (200);
-//            int popupY = (int) this.buttonObjectVisibility.getY() + this.buttonObjectVisibility.getHeight() + 60;
-//            parentWindow.showVisibilityPopup(popupX, popupY);
         } else if (ae.getSource() instanceof PopupMenuButton) {
             if (ae.getActionCommand().equalsIgnoreCase(PopupMenuButton.MENU_ACTIVATION)) {
                 //load the currently used clesses as menu options for these buttons
@@ -351,19 +346,19 @@ public class ObjectDetailsToolBar extends    JToolBar
         MapThemeManager             themeManager;        
         
         try {
+            selectedObjects = (mapData.getSelectedObjects());  
+            mapSelected = (selectedObjects.size() == 0);
+            
             //Update name, if it has changed before we update the toolbar.
             updateName();
 
             if (mapData != null) {
-                mapSelected     = false;
-                mapObject       = null;
-                selectedObjects = (mapData.getSelectedObjects());  
+                mapObject       = null;                
                 mapTheme        = mapData.getTheme();
                 themeManager    = mapData.getMapThemeManager();
 
                 if (selectedObjects.size() == 0) {
                     //No objects selected, display info about the map.
-                    mapSelected = true;
                     textObjectName.setText(mapData.getName());
                     labelObjectType.setIcon(iconMap);
                     textObjectName.setEnabled(true);
@@ -469,7 +464,6 @@ public class ObjectDetailsToolBar extends    JToolBar
                         VectorObjectList<VectorObject> vectorObjects;
                         
                         vectorObjects = new VectorObjectList<VectorObject>(selectedObjects);
-//                        buttonObjectVisibility.setEnabled(true);
                         visibilityRange.setEnabled(true);
                                 
                         if (vectorObjects.getMapPoints().size() == selectedObjects.size()) {

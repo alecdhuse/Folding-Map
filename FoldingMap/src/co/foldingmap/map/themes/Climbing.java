@@ -103,7 +103,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new PolygonStyle("Commercial Area",       new Color(222, 208, 213), ThemeConstants.LAND));  
         addStyleElement(new PolygonStyle("Country - Filled",      new Color(239, 237, 230), new Color(200, 200, 200, 128), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Default Backdrop",      new Color(166, 174, 183, 128)));
-        addStyleElement(new PolygonStyle("Forest",                new Color(135, 162, 121), new Color( 68,  68,  68, 128), ThemeConstants.LAND));
+        addStyleElement(new PolygonStyle("Forest",                new Color(135, 162, 121), new Color(183, 199, 175, 128), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Grass Field",           new Color(190, 217, 166), ThemeConstants.LAND));
         addStyleElement(new PolygonStyle("Industrial Area",       new Color(222, 208, 213), ThemeConstants.LAND));  
         addStyleElement(new PolygonStyle("Island",                new Color(239, 237, 230), new Color(239, 237, 230, 140), ThemeConstants.LAND));
