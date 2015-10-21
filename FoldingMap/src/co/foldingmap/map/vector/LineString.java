@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,8 +43,8 @@ import java.util.StringTokenizer;
  * @author Alec Dhuse
  */
 public class LineString extends VectorObject {    
-    protected boolean                    lineLeftInit, lineCenterInit, lineRightInit;    
-    protected GeneralPath                lineLeft, lineCenter, lineRight;
+    protected boolean       lineLeftInit, lineCenterInit, lineRightInit;    
+    protected GeneralPath   lineLeft, lineCenter, lineRight;
     
     /**
      * Constructor for super class.
@@ -248,7 +248,7 @@ public class LineString extends VectorObject {
         LabelAbbreviations          labelAbbreviations;  
         LineStringLabel             lineLabel;
         LineStyle                   lineStringStyle;
-        Point2D.Float              p1, p2;        
+        Point2D.Float               p1, p2;        
         String                      nameAbbr;
         StringBuffer                namePart;
         
@@ -345,10 +345,7 @@ public class LineString extends VectorObject {
         boolean     drawObject;
         float       width, widthModifier;
         LineStyle   lineStringStyle;
-        String      lineStroke;
-        
-        //Default to drawing the object.
-        drawObject = true;
+        String      lineStroke;        
         
         try {
             drawObject = this.isVisible(mapView);
@@ -401,7 +398,7 @@ public class LineString extends VectorObject {
                     
                     //draw the dashed part next          
                     if (lineStroke.equals(LineStyle.IN_DASH)) {
-                        lineStyle = new BasicStroke(lineStringStyle.getLineWidth(),  BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 8.0f, LineStyle.IN_DASHED_STYLE, (10.0f));
+                        lineStyle = new BasicStroke(lineStringStyle.getLineWidth(),  BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 8.0f, LineStyle.IN_DASHED_STYLE, (10.0f)); 
                     } else {
                         lineStyle = new BasicStroke(width,  BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.SOLID_DASHED_STYLE, (10.0f)); 
                     }
@@ -419,14 +416,19 @@ public class LineString extends VectorObject {
                         g2.draw(lineRight);                     
                 } else {                    
                     if (lineStringStyle.getLineStroke() != null) {
-                        if (lineStroke.equals(LineStyle.SOLID)) {
-                           lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-                        } else if (lineStroke.equals(LineStyle.DASHED)) {
-                           lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);                     
-                        } else if (lineStroke.equals(LineStyle.DOTTED)) {
-                           lineStyle = MapTheme.getStroke(LineStyle.DOTTED, lineStringStyle.getLineWidth());                
-                        } else if (lineStroke.equals(LineStyle.DASH_DOT)) {
-                           lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
+                        switch (lineStroke) {
+                            case LineStyle.SOLID:
+                                lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                                break;
+                            case LineStyle.DASHED:
+                                lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
+                                break;
+                            case LineStyle.DOTTED:
+                                lineStyle = MapTheme.getStroke(LineStyle.DOTTED, lineStringStyle.getLineWidth() + 0.5f);
+                                break;
+                            case LineStyle.DASH_DOT:
+                                lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
+                                break;
                         }
                     } else {
                         lineStyle = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
@@ -479,8 +481,7 @@ public class LineString extends VectorObject {
             lineStringStyle = (LineStyle) mapView.getMapTheme().getLineStyle(this.getObjectClass());
             
             if (lineStringStyle != null) {
-                outline    = lineStringStyle.isOutlined();
-                drawObject = true;
+                outline = lineStringStyle.isOutlined();
 
                 if (outline) {
                     if (lineStringStyle.scaleWidth()) {
@@ -501,14 +502,14 @@ public class LineString extends VectorObject {
                         } else if (lineStringStyle.getLineStroke().equals(LineStyle.DASHED)) {
                            lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
                         } else if (lineStringStyle.getLineStroke().equalsIgnoreCase(LineStyle.DOTTED)) {
-                            lineOutlineStroke = MapTheme.getStroke(LineStyle.DOTTED, lineStringStyle.getLineWidth());
+                            lineOutlineStroke = MapTheme.getStroke(LineStyle.DOTTED, lineStringStyle.getLineWidth() + 1.4f);
                         } else if (lineStringStyle.getLineStroke().equals(LineStyle.DASH_DOT)) {
                             lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);
                         } else {
-                            lineOutlineStroke = new BasicStroke((width),  styleCap, BasicStroke.JOIN_ROUND);
+                            lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND);
                         }
                     } else {
-                        lineOutlineStroke = new BasicStroke((width),  styleCap, BasicStroke.JOIN_ROUND);
+                        lineOutlineStroke = new BasicStroke(width,  styleCap, BasicStroke.JOIN_ROUND);
                     } 
 
                     g2.setStroke(lineOutlineStroke);

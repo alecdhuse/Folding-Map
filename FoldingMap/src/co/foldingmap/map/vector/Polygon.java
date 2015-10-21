@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Alec Dhuse
+ * Copyright (C) 2015 Alec Dhuse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -672,14 +672,6 @@ public class Polygon extends VectorObject {
             for (InnerBoundary ib: innerBoundaries)
                 ib.toXML(xmlWriter);
 
-            //Timestanps are now in nodes and this isn't needed - 2014-07-16 ASD            
-//            if (parentLayer.hasTimeSpan()) {
-//                xmlWriter.openTag ("gx:Timestamps");
-//                    for (Coordinate currentCoordinate: coordinates)
-//                        xmlWriter.writeText(currentCoordinate.getTimestamp() + " ");
-//                xmlWriter.closeTag("gx:Timestamps");
-//            }
-
              writeCustomDataFieldsAsXML(xmlWriter);
 
             xmlWriter.closeTag("Polygon");
@@ -893,11 +885,7 @@ public class Polygon extends VectorObject {
                 if (outlineStyles.size() > 1) {        
                     buildSegments = true;
                 } else if (outlineStyles.size() == 1) {     
-                    if (!outlineStyles.get(0).getBorderCondition().equalsIgnoreCase(OutlineStyle.ANY)) {
-                        buildSegments = true;
-                    } else {
-                        buildSegments = false;
-                    }
+                    buildSegments = !outlineStyles.get(0).getBorderCondition().equalsIgnoreCase(OutlineStyle.ANY);
                 } else {
                     buildSegments = false;
                 }

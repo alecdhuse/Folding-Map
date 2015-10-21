@@ -285,7 +285,7 @@ public class MapTheme {
         if (stroke.equalsIgnoreCase(ThemeConstants.DASHED)) {    
             newStroke = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, LineStyle.DASHED_STYLE, 0.0f);        
         } else if (stroke.equalsIgnoreCase(ThemeConstants.DOTTED)) {
-            newStroke = new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 2f, new float[] {1, 5}, 2f);        
+            newStroke = new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 2f, new float[] {1, 4}, 0f);        
         } else if (stroke.equalsIgnoreCase(ThemeConstants.SOLID)) {
             newStroke = new BasicStroke(width,  BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         } else {
