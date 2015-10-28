@@ -85,9 +85,7 @@ public class ObjectDetailsToolBar extends    JToolBar
     public ObjectDetailsToolBar(MainWindow  parentWindow) {
         super("Object Details",JToolBar.HORIZONTAL);
         
-        this.parentWindow = parentWindow;
-//        c
-        
+        this.parentWindow = parentWindow;       
         init();
     }
     
@@ -378,7 +376,6 @@ public class ObjectDetailsToolBar extends    JToolBar
 
                         textObjectName.setText(selectedObject.getName());
                         textObjectName.setEnabled(true);
-//                        buttonObjectVisibility.setEnabled(true);
                         visibilityRange.setEnabled(true);
                                                 
                         Visibility vis    = selectedObjects.get(0).getVisibility();
