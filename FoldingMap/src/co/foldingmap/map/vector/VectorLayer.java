@@ -294,35 +294,6 @@ public class VectorLayer extends Layer {
             System.err.println("Error in VectorLayer.drawLayer(Graphics2D, MapView) - " + e);
         }
     }
-
-//    /**
-//     * Searches in all objects to see if a coordinate with the same 
-//     * lat, long and alt exists.  If it does it is returned.
-//     * 
-//     * @param coordinateToFind
-//     * @return 
-//     */
-//    public Coordinate findCoordinate(Coordinate coordinateToFind) {
-//        Coordinate   returnCoordinate = null;
-//        LatLonAltBox currentObjectBounds;
-//        VectorObject    currentMapObject;
-//        
-//        for (int i = 0; i < objects.size(); i++) {
-//            currentMapObject    = objects.get(i);
-//            currentObjectBounds = currentMapObject.getBoundingBox();
-//            
-//            if (currentObjectBounds.contains(coordinateToFind)) {
-//                if (currentMapObject.getCoordinateList().contains(coordinateToFind))
-//                    returnCoordinate = coordinateToFind;
-//
-//                //save cpu exit loop after coordinate has been found.
-//                if (returnCoordinate != null)
-//                    break;
-//            }
-//        }
-//
-//        return returnCoordinate;
-//    }    
     
     /**
      * Returns all the Coordinates in MapObjects in this Layer.
@@ -352,27 +323,6 @@ public class VectorLayer extends Layer {
     public VectorObjectList<VectorObject> getAllObjectsWithinRange(LatLonAltBox range) {
         return objects.getAllWithinRange(range);
     }      
-    
-//    /**
-//     * Gets the regions for all objects in this layer.
-//     * Used mainly in exporting
-//     *
-//     * @return ArrayList<Region>    All Regions used in this layer
-//     */
-//    public ArrayList<Region> getAllRegions() {
-//        ArrayList<Region>   regions;
-//
-//        regions = new ArrayList<Region>();
-//
-//        for (int i = 0; i < objects.size(); i++) {
-//            VectorObject currentObject = objects.get(i);
-//
-//            if (currentObject.getRegion() != null)
-//                regions.add(currentObject.getRegion());
-//        }
-//
-//        return regions;
-//    }    
     
     /**
      * Returns the boundary that contains all the object in this layer.
@@ -428,7 +378,7 @@ public class VectorLayer extends Layer {
      * Returns all the values for a specified custom field name of objects
      * in this layer.
      *
-     * @param   String             The field name for the associated value.
+     * @param   fieldName          The field name for the associated value.
      * @return  ArrayList<String>  The value for the passed in fieldName.
      */
     public ArrayList<String> getCustomDataFieldValue(String fieldName) {        
@@ -502,7 +452,7 @@ public class VectorLayer extends Layer {
     /**
      * Returns the maximum value for a numeric data field of all object in this layer.
      *
-     * @param   String  The field name to find the maximum.
+     * @param   fieldName  The field name to find the maximum.
      * @return  double  The maximum value for the supplied field.
      */
     public double getMaximumFieldValue(String fieldName) {
@@ -552,8 +502,8 @@ public class VectorLayer extends Layer {
     /**
      * Returns the minimum value for a numeric data field of all object in this layer.
      *
-     * @param   String  The field name to find the minimum.
-     * @return  double  The minimum value for the supplied field.
+     * @param   fieldName   The field name to find the minimum.
+     * @return  double      The minimum value for the supplied field.
      */
     public double getMinimumFieldValue(String fieldName) {
         double  valueMin;
@@ -656,6 +606,7 @@ public class VectorLayer extends Layer {
      * Removes a given mapObject from the layer.  It does not change the 
      * parentLayer field of that object.
      * 
+     * @param object Object to remove.
      */
     public void removeObject(VectorObject object) {
         objects.remove(object);

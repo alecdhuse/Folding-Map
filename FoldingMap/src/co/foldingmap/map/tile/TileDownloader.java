@@ -19,7 +19,6 @@ package co.foldingmap.map.tile;
 import co.foldingmap.Logger;
 import co.foldingmap.mapImportExport.TileExporter;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;

@@ -1507,9 +1507,11 @@ public class FmXmlImporter implements FormatImporter {
                 visible = true;
             }
             
-            if (extension.equalsIgnoreCase(".MbTiles")) {
+            if (extension.toLowerCase().equalsIgnoreCase(".mbtiles")) {
                 tileSource = new MbTileSource(tileLocation);
             } else if (tileLocation.toLowerCase().startsWith("http")) {
+                tileSource = new TileServerTileSource(tileLocation, layerName);
+            } else if (tileLocation.lastIndexOf(".com") > 0) {
                 tileSource = new TileServerTileSource(tileLocation, layerName);
             } else {
                 tileSource = new DirectoriesTileSource(tileLocation);
