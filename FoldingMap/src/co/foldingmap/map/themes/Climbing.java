@@ -87,6 +87,7 @@ public class Climbing extends MapTheme {
         addStyleElement(new LineStyle("Route",                           new Color(105, 168, 238, 128), 1.0f, LineStyle.SOLID,  true));
         addStyleElement(new LineStyle("Track",                           new Color(68, 68, 68, 128),    1.0f, LineStyle.SOLID,  true));
         addStyleElement(new LineStyle("Trail - Improved",                Color.WHITE,                   new Color(68, 68, 68, 100), 1.2f, LineStyle.DOTTED, cityRoadStandard));
+        addStyleElement(new LineStyle("Trail - Steps",                   new Color(231, 230, 225),      new Color(68, 68, 68, 100), 1.2f, LineStyle.DOTTED, cityRoadStandard));
         addStyleElement(new LineStyle("Trail - Unimproved",              Color.WHITE,                   new Color(68, 68, 68, 100), 0.8f, LineStyle.DOTTED, cityRoadStandard));
         addStyleElement(new LineStyle("Trail - Water Crossing",          new Color(161, 132, 179),      new Color(68, 68, 68, 100), 1.2f, LineStyle.DOTTED, cityRoadStandard));
         addStyleElement(new LineStyle("Territorial Boundary",            new Color(161, 132, 179),      1.5f, LineStyle.DASHED, false));            
